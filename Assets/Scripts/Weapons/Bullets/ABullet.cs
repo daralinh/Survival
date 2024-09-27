@@ -88,7 +88,7 @@ public abstract class ABullet : MonoBehaviour
             AHpManager hpComponent = _collision.gameObject.GetComponents<Component>().FirstOrDefault(c => c is AHpManager) as AHpManager;
             if (hpComponent != null)
             {
-                hpComponent.TakeDMG(dmg, fromWeapon.transform.position);
+                hpComponent.TakeDMG(dmg, fromWeapon.transform.position, EEffectApplied.None);
             }
         }
     }

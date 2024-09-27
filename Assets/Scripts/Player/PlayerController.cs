@@ -153,7 +153,7 @@ public class PlayerController : Singleton<PlayerController>
     }
 
     // Take DMG State
-    public void TakeDMGHandler(Vector2 sourceDMG)
+    public void TakeDMGHandler(Vector2 sourceDMG, EEffectApplied eEffectApplied)
     {
         ChangeStateToTakeDMGState();
     }
