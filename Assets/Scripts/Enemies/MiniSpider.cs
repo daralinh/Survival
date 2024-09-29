@@ -62,6 +62,10 @@ public class MiniSpider : AEnemy
             AEnemyBullet _spiderSilk = listEnemyBullet[0];
             _spiderSilk.StartShooting(moveDir);
         }
+        else
+        {
+            PlayerController.Instance.HpManager.TakeDMG(dmg, transform.position);
+        }
 
         base.ExitAttackState();
     }

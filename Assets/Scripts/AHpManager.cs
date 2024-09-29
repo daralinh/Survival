@@ -14,7 +14,9 @@ public abstract class AHpManager : MonoBehaviour
         flashSprite = GetComponent<FlashSprite>();
     }
 
-    public abstract void TakeDMG(float dmg, Vector2 sourceDMG, EEffectApplied effectApplied);
+    public abstract void TakeDMG(float dmg, Vector2 sourceDMG);
+
+    public abstract void TakeEffect(AEffect aEffect);
 
     public void FlashSprite()
     {

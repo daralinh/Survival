@@ -10,6 +10,7 @@ using UnityEngine;
 
 public abstract class AEnemy : MonoBehaviour
 {
+    [SerializeField] protected float dmg;
     [SerializeField] protected float originSpeed;
     [SerializeField] protected GameObject deathVFXPrefab;
     [SerializeField] protected float attackSpeed;
@@ -31,6 +32,8 @@ public abstract class AEnemy : MonoBehaviour
     protected Animator animator;
     protected Rigidbody2D rb2D;
     protected CapsuleCollider2D capsuleCollider2D;
+
+    public float DMG => dmg;
 
     protected virtual void Awake()
     {
@@ -86,6 +89,11 @@ public abstract class AEnemy : MonoBehaviour
             spriteRenderer.flipX = false;
             isFacingLeft = false;
         }
+    }
+
+    public void ChangeSpeed(float newSpeed)
+    {
+        currentSpeed = newSpeed;
     }
 
     // Move State

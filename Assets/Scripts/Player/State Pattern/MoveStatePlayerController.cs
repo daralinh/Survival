@@ -2,8 +2,7 @@ public class MoveStatePlayerController : IStatePlayerController
 {
     public void EnterState(PlayerController playerController)
     {
-        playerController.ChangeSpeedForMoveState();
-        playerController.SetTriggerAnimation(EAnimation.Idle);
+        playerController.EnterMoveState();
     }
 
     public void ExitState(PlayerController playerController)

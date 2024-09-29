@@ -6,6 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(CapsuleCollider2D))]
 [RequireComponent(typeof(PlayerHpManager))]
+[RequireComponent(typeof(PlayerEffectManager))]
 
 public class PlayerController : Singleton<PlayerController>
 {
@@ -18,6 +19,7 @@ public class PlayerController : Singleton<PlayerController>
     private Vector2 moveDir;
     private bool isDashing;
     private bool isFacingLeft;
+    private bool canChangeSpeed;
 
     IStatePlayerController currentState;
     MoveStatePlayerController moveState = new MoveStatePlayerController();
@@ -29,8 +31,10 @@ public class PlayerController : Singleton<PlayerController>
     private Animator animator;
     private CapsuleCollider2D capsuleCollider2D;
     private PlayerHpManager hpManager;
+    private PlayerEffectManager effectManager;
 
     public bool IsFacingLeft => isFacingLeft;
+    public PlayerHpManager HpManager => hpManager;
 
     protected override void Awake()
     {
@@ -42,6 +46,7 @@ public class PlayerController : Singleton<PlayerController>
         animator = GetComponent<Animator>();
         capsuleCollider2D = GetComponent<CapsuleCollider2D>();
         hpManager = GetComponent<PlayerHpManager>();
+        effectManager = GetComponent<PlayerEffectManager>();
 
         spriteRenderer.spriteSortPoint = SpriteSortPoint.Pivot;
         rb2D.freezeRotation = true;
@@ -49,14 +54,11 @@ public class PlayerController : Singleton<PlayerController>
         rb2D.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
         capsuleCollider2D.isTrigger = true;
         trailRenderer.emitting = false;
-    }
 
-    private void Start()
-    {
         currentState = moveState;
         currentState.EnterState(this);
-
         isDashing = false;
+        canChangeSpeed = true;
     }
 
     void Update()
@@ -72,11 +74,6 @@ public class PlayerController : Singleton<PlayerController>
     public void SetTriggerAnimation(EAnimation _name)
     {
         animator.SetTrigger(_name.ToString());
-    }
-
-    public void SetBoolAnimation(EAnimation _name, bool _value)
-    {
-        animator.SetBool(_name.ToString(), _value);
     }
 
     public void FlipSpriteFollowMouse()
@@ -96,18 +93,38 @@ public class PlayerController : Singleton<PlayerController>
         }
     }
 
-    // Move State
-    public void ChangeStateToMoveState()
+    public void ReduceSpeedByPercent(float _valuePercent)
     {
-        currentState = moveState;
-        currentState.EnterState(this);
+        currentSpeed = Mathf.Max(0, currentSpeed - (currentSpeed * _valuePercent / 100));
     }
 
-    public void ChangeSpeedForMoveState()
+    public void BackToOriginSpeed()
     {
         currentSpeed = originMoveSpeed;
     }
 
+    public void SetCanChangeSpeed(bool _value)
+    {
+        canChangeSpeed = _value;
+    }
+
+    // Move State
+    public void ChangeStateToMoveState()
+    {
+        if (canChangeSpeed)
+        {
+            currentSpeed = originMoveSpeed;
+        }
+
+        currentState.EnterState(this);
+    }
+
+    public void EnterMoveState()
+    {
+        currentSpeed = originMoveSpeed;
+        animator.SetBool(EAnimation.Run.ToString(), true);
+    }
+    
     public void GetInputMove()
     {
         moveDir.x = Input.GetAxisRaw("Horizontal");
@@ -115,12 +132,12 @@ public class PlayerController : Singleton<PlayerController>
 
         if (moveDir != Vector2.zero)
         {
-            SetTriggerAnimation(EAnimation.Run);
+            animator.SetTrigger(EAnimation.Run.ToString());
             GetInputDash();
         }
         else
         {
-            SetTriggerAnimation(EAnimation.Idle);
+            animator.SetTrigger(EAnimation.Idle.ToString());
         }
     }
 
@@ -153,7 +170,7 @@ public class PlayerController : Singleton<PlayerController>
     }
 
     // Take DMG State
-    public void TakeDMGHandler(Vector2 sourceDMG, EEffectApplied eEffectApplied)
+    public void TakeDMGHandler(Vector2 _sourceDMG)
     {
         ChangeStateToTakeDMGState();
     }
@@ -166,12 +183,17 @@ public class PlayerController : Singleton<PlayerController>
 
     public void EnterTakeDMGState()
     {
-        animator.SetTrigger(EAnimation.TakeDMG.ToString());
         hpManager.FlashSprite();
     }
 
     public void ExitTakeDMGState()
     {
-        ChangeSpeedForMoveState();
+        ChangeStateToMoveState();
+    }
+
+    // Take Effect
+    public void TakeEffect(AEffect _effect)
+    {
+        effectManager.ActiveEffect(_effect);
     }
 }

@@ -83,7 +83,7 @@ public abstract class AEnemyBullet : MonoBehaviour
             AHpManager hpComponent = _collision.gameObject.GetComponents<Component>().FirstOrDefault(c => c is AHpManager) as AHpManager;
             if (hpComponent != null)
             {
-                hpComponent.TakeDMG(dmg, fromEnemy.transform.position);
+                hpComponent.TakeDMG(dmg, fromEnemy.transform.position, EEffectApplied.None);
             }
         }
     }

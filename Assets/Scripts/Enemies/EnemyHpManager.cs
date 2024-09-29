@@ -10,7 +10,7 @@ public class EnemyHpManager : AHpManager
         enemy = GetComponent<AEnemy>();
     }
 
-    public override void TakeDMG(float dmg, Vector2 sourceDMG, EEffectApplied effectApplied)
+    public override void TakeDMG(float dmg, Vector2 sourceDMG)
     {
         Debug.Log("enemy take dmg  " + enemy.name);
         currentHp = Mathf.Max(currentHp - dmg, 0);
@@ -23,5 +23,9 @@ public class EnemyHpManager : AHpManager
         {
             enemy.ChangeStateToDeathState();
         }
+    }
+
+    public override void TakeEffect(AEffect aEffect)
+    {
     }
 }

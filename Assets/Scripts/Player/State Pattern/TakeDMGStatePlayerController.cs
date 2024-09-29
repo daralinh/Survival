@@ -7,7 +7,7 @@ public class TakeDMGStatePlayerController : IStatePlayerController
 
     public void ExitState(PlayerController playerController)
     {
-        playerController.ChangeSpeedForMoveState();
+        playerController.ExitTakeDMGState();
     }
 
     public void FixedUpdate(PlayerController playerController)

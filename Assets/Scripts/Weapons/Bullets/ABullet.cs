@@ -10,6 +10,7 @@ public abstract class ABullet : MonoBehaviour
     [SerializeField] protected float originSpeed;
     [SerializeField] protected float timeToHide;
     [SerializeField] protected TrailRenderer trailRenderer;
+    [SerializeField] protected EEffectApplied effectApplied;
     protected float speed;
     protected Vector2 moveDir;
     protected AWeapon fromWeapon;
@@ -88,7 +89,7 @@ public abstract class ABullet : MonoBehaviour
             AHpManager hpComponent = _collision.gameObject.GetComponents<Component>().FirstOrDefault(c => c is AHpManager) as AHpManager;
             if (hpComponent != null)
             {
-                hpComponent.TakeDMG(dmg, fromWeapon.transform.position, EEffectApplied.None);
+                hpComponent.TakeDMG(dmg, fromWeapon.transform.position, effectApplied);
             }
         }
     }
