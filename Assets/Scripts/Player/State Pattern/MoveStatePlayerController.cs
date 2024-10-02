@@ -11,12 +11,11 @@ public class MoveStatePlayerController : IStatePlayerController
 
     public void FixedUpdate(PlayerController playerController)
     {
-        playerController.MoveFollowDirection();
+        playerController.FixedUpdateMoveState();
     }
 
     public void Update(PlayerController playerController)
     {
-        playerController.GetInputMove();
-        playerController.FlipSpriteFollowMouse();
+        playerController.UpdateMoveState();
     }
 }

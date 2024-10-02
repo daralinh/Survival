@@ -20,6 +20,7 @@ public class PlayerController : Singleton<PlayerController>
     private bool isDashing;
     private bool isFacingLeft;
     private bool canChangeSpeed;
+    private Coroutine coroutineTakeDMG;
 
     IStatePlayerController currentState;
     MoveStatePlayerController moveState = new MoveStatePlayerController();
@@ -40,6 +41,7 @@ public class PlayerController : Singleton<PlayerController>
     {
         base.Awake();
 
+        gameObject.layer = LayerMask.NameToLayer(ELayer.Player.ToString());
         tag = ETag.Player.ToString();
         rb2D = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -55,10 +57,11 @@ public class PlayerController : Singleton<PlayerController>
         capsuleCollider2D.isTrigger = true;
         trailRenderer.emitting = false;
 
-        currentState = moveState;
-        currentState.EnterState(this);
         isDashing = false;
         canChangeSpeed = true;
+
+        currentState = moveState;
+        currentState.EnterState(this);
     }
 
     void Update()
@@ -69,11 +72,6 @@ public class PlayerController : Singleton<PlayerController>
     private void FixedUpdate()
     {
         currentState.FixedUpdate(this);
-    }
-
-    public void SetTriggerAnimation(EAnimation _name)
-    {
-        animator.SetTrigger(_name.ToString());
     }
 
     public void FlipSpriteFollowMouse()
@@ -111,18 +109,29 @@ public class PlayerController : Singleton<PlayerController>
     // Move State
     public void ChangeStateToMoveState()
     {
-        if (canChangeSpeed)
-        {
-            currentSpeed = originMoveSpeed;
-        }
-
+        currentState = moveState;
         currentState.EnterState(this);
     }
 
     public void EnterMoveState()
     {
-        currentSpeed = originMoveSpeed;
         animator.SetBool(EAnimation.Run.ToString(), true);
+
+        if (canChangeSpeed)
+        {
+            currentSpeed = originMoveSpeed;
+        }
+    }
+
+    public void UpdateMoveState()
+    {
+        GetInputMove();
+        FlipSpriteFollowMouse();
+    }
+
+    public void FixedUpdateMoveState()
+    {
+        MoveFollowDirection();
     }
     
     public void GetInputMove()
@@ -177,23 +186,33 @@ public class PlayerController : Singleton<PlayerController>
 
     public void ChangeStateToTakeDMGState()
     {
-        currentState = takeDMGState;
-        currentState.EnterState(this);
+        if (currentState is TakeDMGStateEnemy)
+        {
+            Debug.Log("State take dmg");
+            StopCoroutine(coroutineTakeDMG);
+        }
+        else
+        {
+            currentState = takeDMGState;
+            currentState.EnterState(this);
+        }
     }
 
     public void EnterTakeDMGState()
     {
-        hpManager.FlashSprite();
+        animator.SetBool(EAnimation.Run.ToString(), false);
+        animator.SetTrigger(EAnimation.Idle.ToString());
+        coroutineTakeDMG = StartCoroutine(CoroutineTakeDMG());
+    }
+
+    private IEnumerator CoroutineTakeDMG()
+    {
+        yield return new WaitForSeconds(0.1f);
+        currentState.ExitState(this);
     }
 
     public void ExitTakeDMGState()
     {
         ChangeStateToMoveState();
-    }
-
-    // Take Effect
-    public void TakeEffect(AEffect _effect)
-    {
-        effectManager.ActiveEffect(_effect);
     }
 }

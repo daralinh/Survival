@@ -12,8 +12,7 @@ public class EnemyHpManager : AHpManager
 
     public override void TakeDMG(float dmg, Vector2 sourceDMG)
     {
-        Debug.Log("enemy take dmg  " + enemy.name);
-        currentHp = Mathf.Max(currentHp - dmg, 0);
+        base.TakeDMG(dmg, sourceDMG);
         
         if (currentHp > 0)
         {

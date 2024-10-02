@@ -7,6 +7,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(CapsuleCollider2D))]
 [RequireComponent(typeof(EnemyHpManager))]
+[RequireComponent(typeof(EnemyEffectManager))]
 
 public abstract class AEnemy : MonoBehaviour
 {
@@ -20,9 +21,9 @@ public abstract class AEnemy : MonoBehaviour
     protected bool isFacingLeft;
     protected EnemyHpManager hpManager;
     protected GameObject deathVFX;
-    protected bool canAttack;
+    protected float countAttackTime;
 
-    IStateEnemy currentState;
+    protected IStateEnemy currentState;
     MoveStateEnemy moveState = new MoveStateEnemy();
     AttackStateEnemy attackState = new AttackStateEnemy();
     TakeDMGStateEnemy takeDMGState = new TakeDMGStateEnemy();
@@ -37,7 +38,8 @@ public abstract class AEnemy : MonoBehaviour
 
     protected virtual void Awake()
     {
-        tag = "Enemy";
+        gameObject.layer = LayerMask.NameToLayer(ELayer.Enemy.ToString());
+        tag = ETag.Enemy.ToString();
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         rb2D = GetComponent<Rigidbody2D>();
@@ -55,7 +57,6 @@ public abstract class AEnemy : MonoBehaviour
         currentState.EnterState(this);
         deathVFX = Instantiate(deathVFXPrefab, transform.position, Quaternion.identity);
         deathVFX.SetActive(false);
-        canAttack = true;
     }
 
     protected virtual void Update()
@@ -67,10 +68,6 @@ public abstract class AEnemy : MonoBehaviour
     {
         currentState.FixedUpdate(this);
     }
-
-    public abstract void AddOldEnemyBullet(AEnemyBullet _enemyBullet);
-
-    protected abstract void SpawnNewBullet();
 
     public void ChoosePlayerDirection()
     {
@@ -106,7 +103,7 @@ public abstract class AEnemy : MonoBehaviour
     public virtual void EnterMoveState()
     {
         currentSpeed = originSpeed;
-        animator.SetBool(EAnimation.Run.ToString(), true);
+        animator.SetTrigger(EAnimation.Run.ToString());
     }
 
     public virtual void ExitMoveState()
@@ -128,7 +125,9 @@ public abstract class AEnemy : MonoBehaviour
 
     public virtual void CheckAttackRange()
     {
-        if (canAttack && Vector2.Distance(transform.position, PlayerController.Instance.transform.position) <= attackRange)
+        countAttackTime += Time.fixedDeltaTime;
+
+        if (countAttackTime >= 1 / attackSpeed && Vector2.Distance(transform.position, PlayerController.Instance.transform.position) <= attackRange)
         {
             ChangeStateToAttack();
         }
@@ -137,42 +136,28 @@ public abstract class AEnemy : MonoBehaviour
     // Attack State
     public void ChangeStateToAttack()
     {
-        if (!canAttack)
-        {
-            ChangeStateToMoveState();
-            return;
-        }
-
-        canAttack = false;
         currentState = attackState;
         currentState.EnterState(this);
     }
 
     public virtual void EnterAttackState()
     {
-        animator.SetBool(EAnimation.Run.ToString(), false);
+        countAttackTime = 0;
         animator.SetTrigger(EAnimation.Attack.ToString());
     }
 
     public virtual void ExitAttackState()
     {
-        Debug.Log("Attack to Move");
-        StartCoroutine(WaitCoolDownAttack());
         ChangeStateToMoveState();
     }
 
     public virtual void UpdateAttackState()
     {
+        FlipSpriteRenderFollowPlayer();
     }
 
     public void FixedUpdateAttackState()
     {
-    }
-
-    protected IEnumerator WaitCoolDownAttack()
-    {
-        yield return new WaitForSeconds(1/attackSpeed);
-        canAttack = true;
     }
 
     // Take DMG State
@@ -189,8 +174,6 @@ public abstract class AEnemy : MonoBehaviour
 
     public virtual void EnterTakeDMGState()
     {
-        currentSpeed = 0;
-        animator.SetBool(EAnimation.Run.ToString(), false);
         animator.SetTrigger(EAnimation.TakeDMG.ToString());
         hpManager.FlashSprite();
     }
@@ -217,8 +200,6 @@ public abstract class AEnemy : MonoBehaviour
 
     public virtual void EnterDeathState()
     {
-        currentSpeed = 0;
-        animator.SetBool(EAnimation.Run.ToString(), false);
         animator.SetTrigger(EAnimation.Death.ToString());
         hpManager.FlashSprite();
     }
@@ -239,7 +220,18 @@ public abstract class AEnemy : MonoBehaviour
 
     public virtual void DeathEvent()
     {
+        currentState.ExitState(this);
+    }
+
+    public virtual void DeathVFXEvent()
+    {
         deathVFX.transform.position = transform.position;
         deathVFX.SetActive(true);
+    }
+
+    protected virtual void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, attackRange);
     }
 }

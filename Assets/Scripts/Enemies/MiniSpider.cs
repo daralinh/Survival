@@ -3,45 +3,27 @@ using UnityEngine;
 
 public class MiniSpider : AEnemy
 {
-    [SerializeField] private AEnemyBullet silkPrefab;
     [SerializeField] private float skillRange;
-    protected List<AEnemyBullet> listEnemyBullet;
     private int canUseSkill;
 
     protected override void Awake()
     {
         base.Awake();
-        listEnemyBullet = new List<AEnemyBullet>();
         canUseSkill = 0;
-        SpawnNewBullet();
-    }
-
-    protected override void SpawnNewBullet()
-    {
-        AEnemyBullet _spiderSilk = Instantiate(silkPrefab, transform.position, Quaternion.identity);
-        _spiderSilk.gameObject.SetActive(false);
-        _spiderSilk.SetFromEnemy(this);
-        listEnemyBullet.Add(_spiderSilk);
-    }
-
-    public override void AddOldEnemyBullet(AEnemyBullet _enemyBullet)
-    {
-        if (_enemyBullet is SpiderSilk && listEnemyBullet.Count == 1 && !listEnemyBullet.Contains(_enemyBullet))
-        {
-            listEnemyBullet.Add(_enemyBullet);
-        }
     }
 
     // Attack State
     public override void CheckAttackRange()
     {
+        countAttackTime += Time.fixedDeltaTime;
+
         if (canUseSkill == 0 && Vector2.Distance(transform.position, PlayerController.Instance.transform.position) <= skillRange)
         {
             UseSkill();
             return;
         }
 
-        if (canAttack && Vector2.Distance(transform.position, PlayerController.Instance.transform.position) <= attackRange)
+        if (countAttackTime >= 1 / attackSpeed && Vector2.Distance(transform.position, PlayerController.Instance.transform.position) <= attackRange)
         {
             ChangeStateToAttack();
         }
@@ -49,8 +31,6 @@ public class MiniSpider : AEnemy
 
     public override void EnterAttackState()
     {
-        ChoosePlayerDirection();
-        FlipSpriteRenderFollowPlayer();
         base.EnterAttackState();
     }
 
@@ -59,8 +39,7 @@ public class MiniSpider : AEnemy
         if (canUseSkill == 1)
         {
             canUseSkill++;
-            AEnemyBullet _spiderSilk = listEnemyBullet[0];
-            _spiderSilk.StartShooting(moveDir);
+            PoolingBullet.Instance.ShootSilk(transform, PlayerController.Instance.transform.position, ELayer.Player);
         }
         else
         {
@@ -74,5 +53,11 @@ public class MiniSpider : AEnemy
     {
         canUseSkill++;
         ChangeStateToAttack();
+    }
+
+    protected override void OnDrawGizmosSelected()
+    {
+        base.OnDrawGizmosSelected();
+        Gizmos.DrawWireSphere(transform.position, skillRange);
     }
 }

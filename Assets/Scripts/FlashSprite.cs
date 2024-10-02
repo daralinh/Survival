@@ -8,22 +8,29 @@ public class FlashSprite : MonoBehaviour
 
     private SpriteRenderer spriteRenderer;
     private Material originMaterial;
+    private bool isFlashing;
 
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         originMaterial = spriteRenderer.material;
+        isFlashing = false;
     }
 
     public void Flash()
     {
-        StartCoroutine(Handler());
+        if (!isFlashing)
+        {
+            StartCoroutine(Handler());
+        }
     }
 
     private IEnumerator Handler()
     {
+        isFlashing = true;
         spriteRenderer.material = whiteMaterial;
         yield return new WaitForSeconds(timeFlashSprite);
         spriteRenderer.material = originMaterial;
+        isFlashing = false;
     }
 }

@@ -5,12 +5,12 @@ using UnityEngine;
 [RequireComponent(typeof(SpriteRenderer))]
 public abstract class AWeapon : MonoBehaviour
 {
-    [SerializeField] protected ABullet bulletPrefab;
     [SerializeField] protected float numberBulletCanShootIn1Second;
-    protected List<ABullet> listBullet;
+    [SerializeField] protected ELayer targetLayer;
     protected float timeShoot;
     protected Vector3 aimDirection;
     protected bool isShooting;
+    protected Vector2 mousePointPosition;
 
     protected SpriteRenderer spriteRenderer;
 
@@ -18,7 +18,6 @@ public abstract class AWeapon : MonoBehaviour
     {
         tag = ETag.Weapon.ToString();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        listBullet = new List<ABullet>();
 
         spriteRenderer.spriteSortPoint = SpriteSortPoint.Pivot;
         spriteRenderer.sortingOrder = 1;
@@ -40,16 +39,7 @@ public abstract class AWeapon : MonoBehaviour
     protected virtual IEnumerator Shooting()
     {
         isShooting = true;
-
-        if (listBullet.Count == 0)
-        {
-            SpawnNewBullet();
-        }
-
-        ABullet _bullet = listBullet[0];
-        listBullet.RemoveAt(0);
-        _bullet.gameObject.SetActive(true); // Make sure bullet is active
-        _bullet.StartShooting(GetDirectionFollowMouse());
+        PoolingBullet.Instance.ShootAk47Bullet(transform, mousePointPosition, targetLayer);
 
         yield return new WaitForSeconds(timeShoot);
         isShooting = false;
@@ -65,30 +55,12 @@ public abstract class AWeapon : MonoBehaviour
         return (Vector2)aimDirection;
     }
 
-    protected void SpawnNewBullet()
-    {
-        ABullet newBullet = Instantiate(bulletPrefab, transform.position, transform.rotation);
-        newBullet.SetFromWeapon(this);
-        newBullet.gameObject.SetActive(false);
-
-        listBullet.Add(newBullet);
-    }
-
-    public void AddOldBullet(ABullet oldbullet)
-    {
-        if (!listBullet.Contains(oldbullet))
-        {
-            listBullet.Add(oldbullet);
-        }
-
-        oldbullet.gameObject.SetActive(false);
-    }
-
     protected void FlipAndRotateSpriteFollowMouse()
     {
         // A(x,y) - Player Position, B(x1,y1) - Mouse Position, C(x1,y) 
         Vector3 a = transform.position;
         Vector3 b = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePointPosition = (Vector2)b;
         Vector3 c = new Vector3(b.x, a.y, 0);
         a.z = 0;
         b.z = 0;

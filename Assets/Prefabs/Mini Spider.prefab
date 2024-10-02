@@ -16,6 +16,8 @@ GameObject:
   - component: {fileID: 5911792930484314952}
   - component: {fileID: 8608462249778853024}
   - component: {fileID: 6255093356099734173}
+  - component: {fileID: 1408032893070165108}
+  - component: {fileID: 7297997444527639201}
   m_Layer: 0
   m_Name: Mini Spider
   m_TagString: Untagged
@@ -185,11 +187,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01051a8505364684684b956550c7076b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  originSpeed: 1.2
+  dmg: 0
+  originSpeed: 1
   deathVFXPrefab: {fileID: 6052173709657897346, guid: 9004094d53d04804d8b6f6b5373796d4, type: 3}
   attackSpeed: 0.5
   attackRange: 0.35
-  silkPrefab: {fileID: 3092817192601143982, guid: 087f2a717c7c3f84eaf138ed254a1719, type: 3}
   skillRange: 2.6
 --- !u!114 &8608462249778853024
 MonoBehaviour:
@@ -218,3 +220,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   originHp: 100
+--- !u!114 &1408032893070165108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5601180864612437611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8533f8df573aa6246b4a81e46d883dc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7297997444527639201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5601180864612437611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6db63f478a0fb6b4cb8579c7d2ead29e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

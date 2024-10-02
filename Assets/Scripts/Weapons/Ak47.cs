@@ -17,17 +17,8 @@ public class Ak47 : AWeapon
     protected override IEnumerator Shooting()
     {
         isShooting = true;
-
-        if (listBullet.Count == 0)
-        {
-            SpawnNewBullet();
-        }
-
         animator.SetBool(EAnimation.Shoot.ToString(), true);
-        ABullet _bullet = listBullet[0];
-        listBullet.RemoveAt(0);
-        _bullet.StartShooting(GetDirectionFollowMouse());
-
+        PoolingBullet.Instance.ShootAk47Bullet(transform, mousePointPosition, targetLayer);
         yield return new WaitForSeconds(timeShoot);
         animator.SetBool(EAnimation.Shoot.ToString(), false);
         isShooting = false;

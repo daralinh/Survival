@@ -1,6 +1,5 @@
 public enum EEffectApplied
 {
-    None,
-    Paralysis,
+    Bind,
     Slow,
 }

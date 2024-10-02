@@ -4,5 +4,5 @@ public enum ETag
     Enemy,
     Weapon,
     WeaponBullet,
-    EnemyBullet
+    GreenExplosion
 }
