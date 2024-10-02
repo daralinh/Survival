@@ -53,11 +53,14 @@ public abstract class AEnemy : MonoBehaviour
         capsuleCollider2D.isTrigger = true;
 
         isFacingLeft = false;
-        currentState = moveState;
-        currentState.EnterState(this);
         deathVFX = Instantiate(deathVFXPrefab, transform.position, Quaternion.identity);
         deathVFX.SetActive(false);
-        countAttackTime = 1/attackSpeed;
+    }
+
+    protected virtual void Start()
+    {
+        gameObject.SetActive(false);
+        Born(transform.position);
     }
 
     protected virtual void Update()
@@ -68,6 +71,15 @@ public abstract class AEnemy : MonoBehaviour
     protected virtual void FixedUpdate()
     {
         currentState.FixedUpdate(this);
+    }
+
+    public virtual void Born(Vector2 _position)
+    {
+        currentState = moveState;
+        currentState.EnterState(this);
+        transform.position = _position;
+        countAttackTime = 1 / attackSpeed;
+        gameObject.SetActive(true);
     }
 
     public void ChoosePlayerDirection()
