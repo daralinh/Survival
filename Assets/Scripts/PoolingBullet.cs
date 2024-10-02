@@ -6,11 +6,15 @@ public class PoolingBullet : Singleton<PoolingBullet>
 {
     [SerializeField] Ak47Bullet ak47BulletPrefab;
     [SerializeField] Silk silkPrefab;
-    [SerializeField] Explosion greenExplostionPrefab;
+    [SerializeField] GreenExplosion greenExplostionPrefab;
+    [SerializeField] RedExplosion redExplostionPrefab;
+    [SerializeField] Burn burnPrefab;
 
     protected List<Ak47Bullet> listAk47Bullet;
     protected List<Silk> listSilk;
-    protected List<Explosion> listGreenExplostion;
+    protected List<GreenExplosion> listGreenExplostion;
+    protected List<RedExplosion> listRedExplostion;
+    protected List<Burn> listBurn;
 
     protected override void Awake()
     {
@@ -18,7 +22,9 @@ public class PoolingBullet : Singleton<PoolingBullet>
 
         listAk47Bullet = new List<Ak47Bullet>();
         listSilk = new List<Silk>();
-        listGreenExplostion = new List<Explosion>();
+        listGreenExplostion = new List<GreenExplosion>();
+        listRedExplostion = new List<RedExplosion>();
+        listBurn = new List<Burn>();
     }
 
     public void ShootAk47Bullet(Transform source, Vector2 targetPostion, ELayer targetLayer)
@@ -51,13 +57,39 @@ public class PoolingBullet : Singleton<PoolingBullet>
     {
         if (listGreenExplostion.Count == 0)
         {
-            Explosion _newGreenExplosion = Instantiate(greenExplostionPrefab, source.position, source.rotation);
+            GreenExplosion _newGreenExplosion = Instantiate(greenExplostionPrefab, source.position, source.rotation);
             listGreenExplostion.Add(_newGreenExplosion);
         }
 
-        Explosion _greenExplosion = listGreenExplostion[0];
+        GreenExplosion _greenExplosion = listGreenExplostion[0];
         listGreenExplostion.RemoveAt(0);
         _greenExplosion.StartShooting(source, Vector2.zero ,targetLayer);
+    }
+
+    public void ShootRedExplosion(Transform source, ELayer targetLayer)
+    {
+        if (listRedExplostion.Count == 0)
+        {
+            RedExplosion _newRedExplosion = Instantiate(redExplostionPrefab,source.position, source.rotation);
+            listRedExplostion.Add(_newRedExplosion);
+        }
+
+        RedExplosion _redExplosion = listRedExplostion[0];
+        listRedExplostion.RemoveAt(0);
+        _redExplosion.StartShooting(source , Vector2.zero ,targetLayer);
+    }
+
+    public void ShootBurn(GameObject gameObject)
+    {
+        if (listBurn.Count == 0)
+        {
+            Burn _newBurn = Instantiate(burnPrefab, gameObject.transform.position, gameObject.transform.rotation);
+            listBurn.Add(_newBurn);
+        }
+
+        Burn _burn = listBurn[0];
+        listBurn.RemoveAt(0);
+        _burn.StartShooting(gameObject);
     }
 
     public void BackToPool(ABullet _oldBullet)
@@ -70,20 +102,14 @@ public class PoolingBullet : Singleton<PoolingBullet>
             case Silk _oldsilk:
                 listSilk.Add(_oldsilk);
                 break;
-            case Explosion _oldExplosionBullet:
-                ExplosionClassification(_oldExplosionBullet);
+            case GreenExplosion _oldGreenExplosionBullet:
+                listGreenExplostion.Add(_oldGreenExplosionBullet);
                 break;
-            default:
+            case RedExplosion _oldRedExplosionBullet:
+                listRedExplostion.Add(_oldRedExplosionBullet);
                 break;
-        }
-    }
-
-    private void ExplosionClassification(Explosion _explosion)
-    {
-        switch (_explosion.tag)
-        {
-            case string tag when tag == ETag.GreenExplosion.ToString():
-                listGreenExplostion.Add(_explosion);
+            case Burn _oldBurn:
+                listBurn.Add(_oldBurn);
                 break;
             default:
                 break;

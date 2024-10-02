@@ -2,16 +2,15 @@ using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
 
-public class Explosion : ABullet
+public class GreenExplosion : ABullet
 {
     [SerializeField] private float explosionRadius;
     private Animator animator;
 
     protected override void Awake()
     {
-        tag = ETag.GreenExplosion.ToString();
-        base.Awake();
         animator = GetComponent<Animator>();
+        base.Awake();
         capsuleCollider.enabled = false;
     }
 
@@ -43,6 +42,7 @@ public class Explosion : ABullet
 
     public void ShootEvent()
     {
+        animator.SetTrigger(EAnimation.Idle.ToString());
         BackToPool();
     }
 

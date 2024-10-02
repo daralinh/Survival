@@ -14,7 +14,7 @@ public class PumpkinDude : AEnemy
     public override void EnterDeathState()
     {
         animator.SetTrigger(EAnimation.Idle.ToString());
-        PoolingBullet.Instance.ShootGreenExplosion(transform, ELayer.Player);
+        PoolingBullet.Instance.ShootRedExplosion(transform, ELayer.Player);
         currentState.ExitState(this);
     }
 

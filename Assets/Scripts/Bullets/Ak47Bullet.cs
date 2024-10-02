@@ -12,7 +12,6 @@ public class Ak47Bullet : ABullet
 
     public override void StartShooting(Transform source, Vector2 targetPosition, ELayer targetLayer)
     {
-        Debug.Log("shoot");
         base.StartShooting(source, targetPosition, targetLayer);
 
         trailRenderer.emitting = true;

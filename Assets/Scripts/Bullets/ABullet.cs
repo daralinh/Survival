@@ -23,7 +23,7 @@ public abstract class ABullet : MonoBehaviour
 
     protected virtual void Awake()
     {
-        tag = ETag.WeaponBullet.ToString();
+        tag = ETag.Bullet.ToString();
         spriteRenderer = GetComponent<SpriteRenderer>();
         rb2D = GetComponent<Rigidbody2D>();
         capsuleCollider = GetComponent<CapsuleCollider2D>();
@@ -39,6 +39,8 @@ public abstract class ABullet : MonoBehaviour
         moveDir = Vector2.zero;
         countTimeToHide = 0;
         isShooting = false;
+
+        gameObject.SetActive(false);
     }
 
     protected virtual void FixedUpdate()
