@@ -16,7 +16,6 @@ public abstract class AWeapon : MonoBehaviour
 
     protected virtual void Awake()
     {
-        tag = ETag.Weapon.ToString();
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         spriteRenderer.spriteSortPoint = SpriteSortPoint.Pivot;

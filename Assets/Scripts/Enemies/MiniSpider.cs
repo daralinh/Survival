@@ -8,6 +8,7 @@ public class MiniSpider : AEnemy
 
     protected override void Awake()
     {
+        tag = ETag.MiniSpider.ToString();
         base.Awake();
         canUseSkill = 0;
     }
@@ -15,7 +16,7 @@ public class MiniSpider : AEnemy
     // Attack State
     public override void CheckAttackRange()
     {
-        countAttackTime += Time.fixedDeltaTime;
+        countAttackTime += Time.deltaTime;
 
         if (canUseSkill == 0 && Vector2.Distance(transform.position, PlayerController.Instance.transform.position) <= skillRange)
         {

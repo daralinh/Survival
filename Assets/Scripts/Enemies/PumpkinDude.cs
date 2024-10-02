@@ -1,5 +1,11 @@
 public class PumpkinDude : AEnemy
 {
+    protected override void Awake()
+    {
+        tag = ETag.PumpkinDude.ToString();
+        base.Awake();
+    }
+
     public override void EnterAttackState()
     {
         animator.SetTrigger(EAnimation.Run.ToString());

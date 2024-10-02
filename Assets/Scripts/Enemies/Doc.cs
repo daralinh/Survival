@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class Doc : AEnemy
 {
+    protected override void Awake()
+    {
+        tag = ETag.Doc.ToString();
+        base.Awake();
+    }
     public override void EnterAttackState()
     {
         animator.SetTrigger(EAnimation.Run.ToString());

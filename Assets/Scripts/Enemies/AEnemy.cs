@@ -57,6 +57,7 @@ public abstract class AEnemy : MonoBehaviour
         currentState.EnterState(this);
         deathVFX = Instantiate(deathVFXPrefab, transform.position, Quaternion.identity);
         deathVFX.SetActive(false);
+        countAttackTime = 1/attackSpeed;
     }
 
     protected virtual void Update()
@@ -125,9 +126,9 @@ public abstract class AEnemy : MonoBehaviour
 
     public virtual void CheckAttackRange()
     {
-        countAttackTime += Time.fixedDeltaTime;
+        countAttackTime += Time.deltaTime;
 
-        if (countAttackTime >= 1 / attackSpeed && Vector2.Distance(transform.position, PlayerController.Instance.transform.position) <= attackRange)
+        if (countAttackTime >= 1/attackSpeed && Vector2.Distance(transform.position, PlayerController.Instance.transform.position) <= attackRange)
         {
             ChangeStateToAttack();
         }

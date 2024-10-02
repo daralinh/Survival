@@ -4,7 +4,7 @@ public class SlowEffect : AEffect
 
     public SlowEffect(float _reduceSpeedPercent, float _activeTime)
     {
-        EffectName = EEffectApplied.Slow;
+        EffectName = ETag.SlowEffect;
         ValueReduceSpeedPercent = _reduceSpeedPercent;
         ActiveTime = _activeTime;
     }

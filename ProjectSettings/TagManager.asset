@@ -6,9 +6,20 @@ TagManager:
   tags:
   - Enemy
   - Weapon
-  - WeaponBullet
-  - EnemyBullet
+  - Bullet
+  - Ak47Bullet
+  - Burn
   - GreenExplosion
+  - RedExplosion
+  - Silk
+  - Ak47
+  - BindEffect
+  - SlowEffect
+  - MiniSpider
+  - Doc
+  - Bat
+  - PumpkinDude
+  - Witch
   layers:
   - Default
   - TransparentFX

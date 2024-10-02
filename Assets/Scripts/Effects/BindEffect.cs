@@ -2,7 +2,7 @@ public class BindEffect : AEffect
 {
     public BindEffect(float _activeTime)
     {
-        EffectName = EEffectApplied.Bind;
+        EffectName = ETag.BindEffect;
         ActiveTime = _activeTime;
     }
 }

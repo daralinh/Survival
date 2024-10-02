@@ -23,7 +23,6 @@ public abstract class ABullet : MonoBehaviour
 
     protected virtual void Awake()
     {
-        tag = ETag.Bullet.ToString();
         spriteRenderer = GetComponent<SpriteRenderer>();
         rb2D = GetComponent<Rigidbody2D>();
         capsuleCollider = GetComponent<CapsuleCollider2D>();

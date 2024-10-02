@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class KnockBack : MonoBehaviour
 {
+    [SerializeField] private float knockBackTime;
     private Rigidbody2D rb2D;
     private bool canKnockBack;
 
@@ -25,7 +26,7 @@ public class KnockBack : MonoBehaviour
 
     private IEnumerator Handler()
     {
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(knockBackTime);
         rb2D.velocity = Vector2.zero;
         canKnockBack = true;
     }
