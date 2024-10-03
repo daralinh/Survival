@@ -479,6 +479,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1132121205}
+  - component: {fileID: 1132121206}
   m_Layer: 0
   m_Name: Pooling Enemy
   m_TagString: Untagged
@@ -501,6 +502,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1132121206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1132121204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7c58c9442807ab44811d7f0a07299ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  witchPrefab: {fileID: 2544933040989089637, guid: 38ddda429c317c7479da49f6376d1149, type: 3}
+  miniSpiderPrefab: {fileID: 5911792930484314952, guid: 85d4ba5dab8ce9c419d0f76a6302d8ad, type: 3}
+  pumpkinDudePrefab: {fileID: 8321080755405597118, guid: e0e6d0613d69a8144b890db8477e5945, type: 3}
+  docPrefab: {fileID: 2573919228100808730, guid: 15a3b0ace13e8d6489677cd3dd71df55, type: 3}
+  batPrefab: {fileID: 834677333001829513, guid: 7fe59cb509d5ea9458211894022dbb64, type: 3}
 --- !u!4 &1396157862 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7492354509225905521, guid: 9384b1deed24da94b9b07900636a41e0, type: 3}

@@ -201,6 +201,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6db63f478a0fb6b4cb8579c7d2ead29e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  knockBackTime: 0.1
 --- !u!114 &2551082461023934735
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -243,3 +244,4 @@ MonoBehaviour:
   deathVFXPrefab: {fileID: 6052173709657897346, guid: 83ac86136f5d8394c8d0481036897e8d, type: 3}
   attackSpeed: 1
   attackRange: 0.4
+  timeToStopWhenTakeDMG: 0.1

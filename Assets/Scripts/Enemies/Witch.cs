@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Witch : AEnemy
@@ -19,6 +20,8 @@ public class Witch : AEnemy
         }
     }
 
+
+    // Attack State
     public override void ExitAttackState()
     {
         if (Vector2.Distance(transform.position, PlayerController.Instance.transform.position) <= attackRange)

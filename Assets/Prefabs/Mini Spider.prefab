@@ -187,7 +187,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01051a8505364684684b956550c7076b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dmg: 0
+  dmg: 10
   originSpeed: 0.85
   deathVFXPrefab: {fileID: 6052173709657897346, guid: 9004094d53d04804d8b6f6b5373796d4, type: 3}
   attackSpeed: 0.5
@@ -244,3 +244,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6db63f478a0fb6b4cb8579c7d2ead29e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  knockBackTime: 0.1

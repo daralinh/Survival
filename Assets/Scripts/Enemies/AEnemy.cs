@@ -19,7 +19,6 @@ public abstract class AEnemy : MonoBehaviour
     protected float currentSpeed;
     protected Vector2 moveDir;
     protected bool isFacingLeft;
-    protected EnemyHpManager hpManager;
     protected GameObject deathVFX;
     protected float countAttackTime;
 
@@ -33,13 +32,15 @@ public abstract class AEnemy : MonoBehaviour
     protected Animator animator;
     protected Rigidbody2D rb2D;
     protected CapsuleCollider2D capsuleCollider2D;
+    protected EnemyHpManager hpManager;
+
 
     public float DMG => dmg;
 
     protected virtual void Awake()
     {
         gameObject.layer = LayerMask.NameToLayer(ELayer.Enemy.ToString());
-        tag = ETag.Enemy.ToString();
+
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         rb2D = GetComponent<Rigidbody2D>();
@@ -75,11 +76,12 @@ public abstract class AEnemy : MonoBehaviour
 
     public virtual void Born(Vector2 _position)
     {
-        currentState = moveState;
-        currentState.EnterState(this);
         transform.position = _position;
         countAttackTime = 1 / attackSpeed;
+        currentState = moveState;
+
         gameObject.SetActive(true);
+        currentState.EnterState(this);
     }
 
     public void ChoosePlayerDirection()
