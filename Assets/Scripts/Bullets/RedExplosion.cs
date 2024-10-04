@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 
 public class RedExplosion : ABullet
@@ -5,11 +6,12 @@ public class RedExplosion : ABullet
     [SerializeField] private float explosionRadius;
     private Animator animator;
 
-    protected override void Awake()
+    protected override void Born()
     {
+        tag = ETag.RedExplosion.ToString();
         animator = GetComponent<Animator>();
-        base.Awake();
         capsuleCollider.enabled = false;
+        base.Born();
     }
 
     protected override void FixedUpdate()
@@ -29,7 +31,8 @@ public class RedExplosion : ABullet
 
         foreach (Collider2D _object in objectsHit)
         {
-            AHpManager hpManager = _object.GetComponent<AHpManager>();
+            AHpManager hpManager
+                = _object.gameObject.GetComponents<Component>().FirstOrDefault(c => c is AHpManager) as AHpManager;
 
             if (hpManager != null)
             {

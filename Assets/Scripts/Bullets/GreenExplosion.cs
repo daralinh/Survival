@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
@@ -5,13 +6,22 @@ using UnityEngine;
 public class GreenExplosion : ABullet
 {
     [SerializeField] private float explosionRadius;
+    [Header("-- slow effect --")]
+    [SerializeField] private float timeToSlow;
+    [SerializeField] private float percentSpeedReduction;
+
+    private SlowEffect slowEffect;
+
     private Animator animator;
 
-    protected override void Awake()
+    protected override void Born()
     {
+        tag = ETag.GreenExplosion.ToString();
         animator = GetComponent<Animator>();
-        base.Awake();
         capsuleCollider.enabled = false;
+        slowEffect = new SlowEffect(percentSpeedReduction, timeToSlow);
+        capsuleCollider.enabled = false;
+        base.Born();
     }
 
     protected override void FixedUpdate()
@@ -31,11 +41,12 @@ public class GreenExplosion : ABullet
 
         foreach (Collider2D _object in objectsHit)
         {
-            AHpManager hpManager = _object.GetComponent<AHpManager>();
-
+            AHpManager hpManager
+                            = _object.gameObject.GetComponents<Component>().FirstOrDefault(c => c is AHpManager) as AHpManager;
             if (hpManager != null)
             {
                 hpManager.TakeDMG(dmg, transform.position);
+                hpManager.TakeEffect(slowEffect);
             }
         }
     }
@@ -43,6 +54,7 @@ public class GreenExplosion : ABullet
     public void ShootEvent()
     {
         animator.SetTrigger(EAnimation.Idle.ToString());
+        gameObject.SetActive(false);
         BackToPool();
     }
 

@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MiniSpider : AEnemy
@@ -10,7 +9,12 @@ public class MiniSpider : AEnemy
     {
         tag = ETag.MiniSpider.ToString();
         base.Awake();
+    }
+
+    public override void Born(Vector2 _position)
+    {
         canUseSkill = 0;
+        base.Born(_position);
     }
 
     // Attack State

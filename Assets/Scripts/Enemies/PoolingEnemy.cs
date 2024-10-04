@@ -1,5 +1,7 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PoolingEnemy : Singleton<PoolingEnemy>
 {
@@ -9,21 +11,42 @@ public class PoolingEnemy : Singleton<PoolingEnemy>
     [SerializeField] private Doc docPrefab;
     [SerializeField] private Bat batPrefab;
 
-    private List<Witch> witchList;
-    private List<MiniSpider> miniSpiderList;
-    private List<PumpkinDude> pumpkinDudeList;
-    private List<Doc> docList;
-    private List<Bat> batList;
+    private List<Witch> witchList = new List<Witch>();
+    private List<MiniSpider> miniSpiderList = new List<MiniSpider>();
+    private List<PumpkinDude> pumpkinDudeList = new List<PumpkinDude>();
+    private List<Doc> docList = new List<Doc>();
+    private List<Bat> batList = new List<Bat>();
 
     protected override void Awake()
     {
         base.Awake();
+    }
 
-        witchList = new List<Witch>();
-        miniSpiderList = new List<MiniSpider>();
-        pumpkinDudeList = new List<PumpkinDude>();
-        docList = new List<Doc>();
-        batList = new List<Bat>();
+    private void Start()
+    {
+        AutoSpawnEnemy();
+    }
+
+    private void AutoSpawnEnemy()
+    {
+        StartCoroutine(Handler());
+    }
+
+    private IEnumerator Handler()
+    {
+        while (true)
+        {
+            SpawnEnemy(ETag.Bat, transform.position);
+            yield return new WaitForSeconds(1);
+            SpawnEnemy(ETag.MiniSpider, transform.position);
+            yield return new WaitForSeconds(1);
+            SpawnEnemy(ETag.Doc, transform.position);
+            yield return new WaitForSeconds(1);
+            SpawnEnemy(ETag.PumpkinDude, transform.position);
+            yield return new WaitForSeconds(1);
+            SpawnEnemy(ETag.Witch, transform.position);
+            yield return new WaitForSeconds(1);
+        }
     }
 
     public void SpawnEnemy(ETag _nameEnemy, Vector2 _position)
@@ -99,19 +122,34 @@ public class PoolingEnemy : Singleton<PoolingEnemy>
         switch (oldEnemy)
         {
             case Witch _witch:
-                witchList.Add(_witch);
+                if (!witchList.Contains(_witch))
+                {
+                    witchList.Add(_witch);
+                }
                 break;
             case MiniSpider _miniSpider:
-                miniSpiderList.Add(_miniSpider);
+                if (!miniSpiderList.Contains(_miniSpider))
+                {
+                    miniSpiderList.Add(_miniSpider);
+                }
                 break;
             case PumpkinDude _pumpkinDude:
-                pumpkinDudeList.Add(_pumpkinDude);
+                if (!pumpkinDudeList.Contains(_pumpkinDude))
+                {
+                    pumpkinDudeList.Add(_pumpkinDude);
+                }
                 break;
             case Doc _doc:
-                docList.Add(_doc);
+                if (!docList.Contains(_doc))
+                {
+                    docList.Add(_doc);
+                }
                 break;
             case Bat _bat:
-                batList.Add(_bat);
+                if (!batList.Contains(_bat))
+                {
+                    batList.Add(_bat);
+                }
                 break;
             default:
                 break;

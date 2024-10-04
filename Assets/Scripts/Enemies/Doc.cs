@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Doc : AEnemy
@@ -11,13 +10,17 @@ public class Doc : AEnemy
     {
         tag = ETag.Doc.ToString();
         base.Awake();
+    }
+
+    public override void Born(Vector2 _position)
+    {
         coroutineTakeDMG = null;
+        base.Born(_position);
     }
 
     // Attack State
     public override void EnterAttackState()
     {
-        animator.SetTrigger(EAnimation.Run.ToString());
         currentState.ExitState(this);
     }
 
@@ -29,7 +32,7 @@ public class Doc : AEnemy
     // TakeDMG State
     public override void EnterTakeDMGState()
     {
-        base.EnterTakeDMGState();
+        hpManager.FlashSprite();
 
         if (coroutineTakeDMG != null)
         {

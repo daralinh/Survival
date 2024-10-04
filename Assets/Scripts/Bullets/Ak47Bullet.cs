@@ -3,11 +3,12 @@ using UnityEngine;
 public class Ak47Bullet : ABullet
 {
     [SerializeField] protected TrailRenderer trailRenderer;
-
-    protected override void Awake()
+    
+    protected override void Born()
     {
-        base.Awake();
+        tag = ETag.Ak47Bullet.ToString();
         trailRenderer.emitting = false;
+        base.Born();
     }
 
     public override void StartShooting(Transform source, Vector2 targetPosition, ELayer targetLayer)

@@ -37,6 +37,7 @@ public class PlayerEffectManager : AEffectManager
 
     private IEnumerator CoroutineSlowEffect(SlowEffect _slowEffect)
     {
+        Debug.Log("slow in " + _slowEffect.ActiveTime + "giay");
         PlayerController.Instance.SetCanChangeSpeed(false);
         PlayerController.Instance.ReduceSpeedByPercent(_slowEffect.ValueReduceSpeedPercent);
         yield return new WaitForSeconds(_slowEffect.ActiveTime);
@@ -46,6 +47,7 @@ public class PlayerEffectManager : AEffectManager
 
     private void EndSlowEffect()
     {
+        Debug.Log("End Slow");
         PlayerController.Instance.SetCanChangeSpeed(true);
         PlayerController.Instance.BackToOriginSpeed();
         isApplingSlowEffect = false;

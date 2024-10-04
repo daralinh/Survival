@@ -8,6 +8,9 @@ public enum ETag
     GreenExplosion,
     RedExplosion,
     Silk,
+    Lightning,
+    FireBall,
+    FireStorm,
 
     //Weapon,
     Ak47,
@@ -17,7 +20,6 @@ public enum ETag
     SlowEffect,
 
     // Enemy
-    Enemy,
     MiniSpider,
     Doc,
     Bat,

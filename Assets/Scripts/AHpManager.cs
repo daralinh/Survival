@@ -21,7 +21,18 @@ public abstract class AHpManager : MonoBehaviour
 
     public virtual void TakeDMG(float dmg, Vector2 sourceDMG)
     {
+        if (currentHp == 0)
+        {
+            return;
+        }
+
         currentHp -= dmg;
+    }
+
+    public void HealFullHp()
+    {
+        currentHp = originHp;
+        flashSprite.BackToOriginMaterial();
     }
 
     public abstract void TakeEffect(AEffect aEffect);

@@ -9,6 +9,7 @@ public class FlashSprite : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Material originMaterial;
     private bool isFlashing;
+    private Coroutine coroutine;
 
     private void Awake()
     {
@@ -17,11 +18,21 @@ public class FlashSprite : MonoBehaviour
         isFlashing = false;
     }
 
+    public void BackToOriginMaterial()
+    {
+        spriteRenderer.material = originMaterial;
+
+        if (coroutine != null)
+        {
+            StopCoroutine(coroutine);
+        }
+    }
+
     public void Flash()
     {
         if (!isFlashing)
         {
-            StartCoroutine(Handler());
+            coroutine = StartCoroutine(Handler());
         }
     }
 

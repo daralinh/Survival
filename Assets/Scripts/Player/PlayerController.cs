@@ -37,6 +37,8 @@ public class PlayerController : Singleton<PlayerController>
     public bool IsFacingLeft => isFacingLeft;
     public PlayerHpManager HpManager => hpManager;
 
+    private float oldSpeed;
+
     protected override void Awake()
     {
         base.Awake();
@@ -67,6 +69,12 @@ public class PlayerController : Singleton<PlayerController>
     void Update()
     {
         currentState.Update(this);
+
+        if (oldSpeed != currentSpeed)
+        {
+            Debug.Log(oldSpeed + " " + currentSpeed);
+            oldSpeed = currentSpeed;
+        }
     }
 
     private void FixedUpdate()

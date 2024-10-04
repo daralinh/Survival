@@ -23,6 +23,7 @@ public abstract class ABullet : MonoBehaviour
 
     protected virtual void Awake()
     {
+        gameObject.layer = LayerMask.NameToLayer(ELayer.Bullet.ToString());
         spriteRenderer = GetComponent<SpriteRenderer>();
         rb2D = GetComponent<Rigidbody2D>();
         capsuleCollider = GetComponent<CapsuleCollider2D>();
@@ -39,6 +40,11 @@ public abstract class ABullet : MonoBehaviour
         countTimeToHide = 0;
         isShooting = false;
 
+        Born();
+    }
+
+    protected virtual void Born()
+    {
         gameObject.SetActive(false);
     }
 
@@ -58,12 +64,12 @@ public abstract class ABullet : MonoBehaviour
         }
     }
 
-    public virtual void StartShooting(Transform source, Vector2 targetPosition, ELayer _targetLayer)
+    public virtual void StartShooting(Transform _source, Vector2 _targetPosition, ELayer _targetLayer)
     {
-        sourceTransform = source;
-        gameObject.transform.position = source.position;
-        gameObject.transform.rotation = source.rotation;
-        moveDir = (targetPosition - rb2D.position).normalized;
+        sourceTransform = _source;
+        gameObject.transform.position = _source.position;
+        gameObject.transform.rotation = _source.rotation;
+        moveDir = (_targetPosition - rb2D.position).normalized;
         targetLayer = _targetLayer;
         isShooting = true;
         gameObject.SetActive(true);
@@ -73,19 +79,55 @@ public abstract class ABullet : MonoBehaviour
     {
         gameObject.SetActive(false);
         countTimeToHide = 0;
+        transform.rotation = Quaternion.identity;
         PoolingBullet.Instance.BackToPool(this);
     }
 
-    protected virtual void OnTriggerEnter2D(Collider2D collision2D)
+    protected virtual void OnTriggerEnter2D(Collider2D _collision2D)
     {
-        if (collision2D.gameObject.layer == LayerMask.NameToLayer(targetLayer.ToString()))
+        if (_collision2D.gameObject.layer == LayerMask.NameToLayer(targetLayer.ToString()))
         {
-            AHpManager hpComponent = collision2D.gameObject.GetComponents<Component>().FirstOrDefault(c => c is AHpManager) as AHpManager;
-           
-            if (hpComponent != null)
+            AHpManager _hpComponent
+                = _collision2D.gameObject.GetComponents<Component>().FirstOrDefault(c => c is AHpManager) as AHpManager;
+
+            if (_hpComponent != null)
             {
-                hpComponent.TakeDMG(dmg, sourceTransform.position);
+                _hpComponent.TakeDMG(dmg, transform.position);
             }
+        }
+    }
+
+    protected void FlipFollowTarget(Vector2 _targetPosition)
+    {
+        if (_targetPosition.x < transform.position.x)
+        {
+            transform.rotation = Quaternion.Euler(0, -180, 0);
+        }
+        else
+        {
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
+    }
+
+    protected void FlipAndRotateFollowTarget(Vector2 _targetPosition)
+    {
+        Vector2 a = transform.position;
+        Vector2 b = _targetPosition;
+        Vector2 c = new Vector2(b.x, a.y);
+        float _angle = Vector2.Angle(b - a, c - a);
+
+        if (b.y < a.y)
+        {
+            _angle = -_angle;
+        }
+
+        if (_targetPosition.x < transform.position.x)
+        {
+            transform.rotation = Quaternion.Euler(0, -180, _angle);
+        }
+        else
+        {
+            transform.rotation = Quaternion.Euler(0, 0, _angle);
         }
     }
 }

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PumpkinDude : AEnemy
@@ -14,7 +15,6 @@ public class PumpkinDude : AEnemy
     // Attack
     public override void EnterAttackState()
     {
-        animator.SetTrigger(EAnimation.Run.ToString());
         currentState.ExitState(this);
     }
 
@@ -26,7 +26,7 @@ public class PumpkinDude : AEnemy
     // TakeDMG State
     public override void EnterTakeDMGState()
     {
-        base.EnterTakeDMGState();
+        hpManager.FlashSprite();
 
         if (coroutineTakeDMG != null)
         {

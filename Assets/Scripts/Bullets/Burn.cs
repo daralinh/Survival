@@ -12,13 +12,14 @@ public class Burn : ABullet
 
     private Animator animator;
 
-    protected override void Awake()
+    protected override void Born()
     {
+        tag = ETag.Burn.ToString();
         animator = GetComponent<Animator>();
-        base.Awake();
         capsuleCollider.enabled = false;
         rb2D.isKinematic = true;
         countBurnTime = 0;
+        base.Born();
     }
 
     protected override void FixedUpdate()

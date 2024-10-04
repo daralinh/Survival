@@ -186,4 +186,6 @@ MonoBehaviour:
   dmg: 30
   originSpeed: 0
   timeToHide: 0
-  explosionRadius: 0.75
+  explosionRadius: 0.55
+  timeToSlow: 1.75
+  percentSpeedReduction: 25

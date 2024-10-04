@@ -7,14 +7,17 @@ using UnityEngine;
 
 public class Silk : ABullet
 {
+    [Header("-- bind effect --")]
     [SerializeField] private float bindTime;
     private Animator animator;
     public AEffect EffectOfBullet { get; protected set; }
-    protected override void Awake()
+    
+    protected override void Born()
     {
-        base.Awake();
-        EffectOfBullet = new BindEffect(bindTime);
+        tag = ETag.Silk.ToString();
         animator = GetComponent<Animator>();
+        EffectOfBullet = new BindEffect(bindTime);
+        base.Born();
     }
 
     public void StopMoveEvent()
@@ -26,6 +29,7 @@ public class Silk : ABullet
     {
         speed = originSpeed;
         base.StartShooting(source, targetPosition, _targetLayer);
+        FlipFollowTarget(targetPosition);
         animator.SetBool(EAnimation.Shoot.ToString(), true);
     }
 

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
@@ -11,6 +9,7 @@ using UnityEngine;
 
 public abstract class AEnemy : MonoBehaviour
 {
+    private static int id = 0;
     [SerializeField] protected float dmg;
     [SerializeField] protected float originSpeed;
     [SerializeField] protected GameObject deathVFXPrefab;
@@ -34,11 +33,12 @@ public abstract class AEnemy : MonoBehaviour
     protected CapsuleCollider2D capsuleCollider2D;
     protected EnemyHpManager hpManager;
 
-
+    public int ID { get; private set; }
     public float DMG => dmg;
 
     protected virtual void Awake()
     {
+        ID = id++;
         gameObject.layer = LayerMask.NameToLayer(ELayer.Enemy.ToString());
 
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -56,12 +56,18 @@ public abstract class AEnemy : MonoBehaviour
         isFacingLeft = false;
         deathVFX = Instantiate(deathVFXPrefab, transform.position, Quaternion.identity);
         deathVFX.SetActive(false);
+        gameObject.SetActive(false);
     }
 
-    protected virtual void Start()
+    public virtual void Born(Vector2 _position)
     {
-        gameObject.SetActive(false);
-        Born(transform.position);
+        transform.position = _position;
+        countAttackTime = 1 / attackSpeed;
+        currentState = moveState;
+
+        gameObject.SetActive(true);
+        hpManager.HealFullHp();
+        currentState.EnterState(this);
     }
 
     protected virtual void Update()
@@ -72,16 +78,6 @@ public abstract class AEnemy : MonoBehaviour
     protected virtual void FixedUpdate()
     {
         currentState.FixedUpdate(this);
-    }
-
-    public virtual void Born(Vector2 _position)
-    {
-        transform.position = _position;
-        countAttackTime = 1 / attackSpeed;
-        currentState = moveState;
-
-        gameObject.SetActive(true);
-        currentState.EnterState(this);
     }
 
     public void ChoosePlayerDirection()
@@ -221,7 +217,9 @@ public abstract class AEnemy : MonoBehaviour
 
     public virtual void ExitDeathState()
     {
+        animator.SetTrigger(EAnimation.Idle.ToString());
         gameObject.SetActive(false);
+        PoolingEnemy.Instance.BackToPool(this);
         deathVFX.SetActive(false);
     }
 

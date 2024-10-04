@@ -12,8 +12,6 @@ public class PlayerHpManager : AHpManager
     {
         base.TakeDMG(dmg, sourceDMG);
 
-        Debug.Log("take dmg");
-
         knockBack.GetKnockBack(sourceDMG, 0.5f);
         flashSprite.Flash();
 
