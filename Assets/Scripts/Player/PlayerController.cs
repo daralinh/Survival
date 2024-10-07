@@ -56,7 +56,6 @@ public class PlayerController : Singleton<PlayerController>
         rb2D.freezeRotation = true;
         rb2D.gravityScale = 0;
         rb2D.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
-        capsuleCollider2D.isTrigger = true;
         trailRenderer.emitting = false;
 
         isDashing = false;

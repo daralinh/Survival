@@ -3,6 +3,8 @@ public enum ETag
     Player,
 
     // Bullet
+    Kunai,
+    FireSpot,
     Ak47Bullet,
     Burn,
     GreenExplosion,
@@ -20,9 +22,15 @@ public enum ETag
     SlowEffect,
 
     // Enemy
+    RatfolkAxe,
+    BanditNecromancer,
+    Minotaur,
+    PinkSnake,
     MiniSpider,
     Doc,
     Bat,
     PumpkinDude,
     Witch,
+    GiantFly,
+    Dummy
 }

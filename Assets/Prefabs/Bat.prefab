@@ -172,8 +172,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.01114496, y: 0.0599126}
-  m_Size: {x: 0.5222903, y: 0.37517655}
+  m_Offset: {x: 0, y: 0.03}
+  m_Size: {x: 0.4796362, y: 0.37517846}
   m_Direction: 1
 --- !u!114 &300655336457176914
 MonoBehaviour:
@@ -241,6 +241,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dmg: 10
   originSpeed: 1
-  deathVFXPrefab: {fileID: 6052173709657897346, guid: 8e6a8d04ebc0b36478ae1b37dab03c94, type: 3}
   attackSpeed: 0.5
-  attackRange: 0.25
+  attackRange: 0.24

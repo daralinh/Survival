@@ -168,7 +168,7 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0022928757, y: 0.032097045}
+  m_Offset: {x: 0, y: 0.22}
   m_Size: {x: 1.6967783, y: 0.9081063}
   m_Direction: 1
 --- !u!114 &6192515923626194511
@@ -186,6 +186,6 @@ MonoBehaviour:
   dmg: 35
   originSpeed: 0
   timeToHide: 0
-  explosionRadius: 0.78
+  explosionRadius: 0.86
   timeToSlow: 1.5
   percentSpeedReduction: 30

@@ -189,7 +189,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dmg: 10
   originSpeed: 0.85
-  deathVFXPrefab: {fileID: 6052173709657897346, guid: 9004094d53d04804d8b6f6b5373796d4, type: 3}
   attackSpeed: 0.5
   attackRange: 0.35
   skillRange: 2.6
@@ -219,7 +218,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4983cec17b2e48545ac3d802d7914142, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  originHp: 100
+  originHp: 25
 --- !u!114 &1408032893070165108
 MonoBehaviour:
   m_ObjectHideFlags: 0

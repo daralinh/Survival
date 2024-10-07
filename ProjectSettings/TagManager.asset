@@ -20,6 +20,15 @@ TagManager:
   - Bat
   - PumpkinDude
   - Witch
+  - Lightning
+  - FireBall
+  - FireStorm
+  - GiantFly
+  - Dummy
+  - PinkSnake
+  - Minotaur
+  - Cacodaemon
+  - FireSpot
   layers:
   - Default
   - TransparentFX
@@ -27,10 +36,10 @@ TagManager:
   - 
   - Water
   - UI
-  - Player
   - Enemy
-  - EnemyBullet
-  - PlayerBullet
+  - Player
+  - Bullet
+  - 
   - 
   - 
   - 

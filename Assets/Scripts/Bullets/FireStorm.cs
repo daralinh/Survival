@@ -2,17 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FireStorm : MonoBehaviour
+[RequireComponent(typeof(Animator))]
+
+public class FireStorm : ABullet
 {
-    // Start is called before the first frame update
-    void Start()
+    protected Animator animator;
+
+    protected override void Awake()
     {
-        
+        animator = GetComponent<Animator>();
+        base.Awake();
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void StartShooting(Transform _source, Vector2 _targetPosition, ELayer _targetLayer)
     {
-        
+        sourceTransform = _source;
+        gameObject.transform.position = _source.position;
+        FlipFollowTarget(_targetPosition);
+        moveDir = (_targetPosition - rb2D.position).normalized;
+        targetLayer = _targetLayer;
+        isShooting = true;
+        gameObject.SetActive(true);
+        animator.SetTrigger(EAnimation.Shoot.ToString());
+    }
+
+    protected override void BackToPool()
+    {
+        animator.SetTrigger(EAnimation.Idle.ToString());
+        base.BackToPool();
     }
 }

@@ -13,9 +13,11 @@ public class FlashSprite : MonoBehaviour
 
     private void Awake()
     {
+        timeFlashSprite = Mathf.Max(timeFlashSprite, 0.1f);
         spriteRenderer = GetComponent<SpriteRenderer>();
         originMaterial = spriteRenderer.material;
         isFlashing = false;
+        coroutine = null;
     }
 
     public void BackToOriginMaterial()

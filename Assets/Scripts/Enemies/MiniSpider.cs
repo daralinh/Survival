@@ -18,17 +18,15 @@ public class MiniSpider : AEnemy
     }
 
     // Attack State
-    public override void CheckAttackRange()
+    protected override void CheckAttackRange()
     {
-        countAttackTime += Time.deltaTime;
-
-        if (canUseSkill == 0 && Vector2.Distance(transform.position, PlayerController.Instance.transform.position) <= skillRange)
+        if (canUseSkill == 0 && Vector2.Distance(capsuleCollider2D.bounds.center, PlayerController.Instance.transform.position) <= skillRange)
         {
             UseSkill();
             return;
         }
 
-        if (countAttackTime >= 1 / attackSpeed && Vector2.Distance(transform.position, PlayerController.Instance.transform.position) <= attackRange)
+        if (countAttackTime >= 1 / attackSpeed && Vector2.Distance(capsuleCollider2D.bounds.center, PlayerController.Instance.transform.position) <= attackRange)
         {
             ChangeStateToAttack();
         }
@@ -63,6 +61,6 @@ public class MiniSpider : AEnemy
     protected override void OnDrawGizmosSelected()
     {
         base.OnDrawGizmosSelected();
-        Gizmos.DrawWireSphere(transform.position, skillRange);
+        Gizmos.DrawWireSphere(capsuleCollider2D.bounds.center, skillRange);
     }
 }

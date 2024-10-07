@@ -10,9 +10,17 @@ public class Witch : AEnemy
         base.Awake();
     }
 
-    public override void CheckAttackRange()
+    protected override void CheckAttackRange()
     {
-        countAttackTime += Time.deltaTime;
+        if (Vector2.Distance(capsuleCollider2D.bounds.center, PlayerController.Instance.transform.position) <= 0.2)
+        {
+            currentSpeed = 0;
+        }
+        else
+        {
+            currentSpeed = originSpeed;
+        }
+
         if (countAttackTime >= 1 / attackSpeed)
         {
             ChangeStateToAttack();

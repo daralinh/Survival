@@ -15,6 +15,10 @@ public abstract class ASpell : MonoBehaviour
     {
         coroutine = null;
         countNumberShootInPerAttack = 0;
+    }
+
+    protected virtual void Start()
+    {
         ActiveSpell();
     }
 

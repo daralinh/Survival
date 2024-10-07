@@ -74,6 +74,7 @@ public class Lightning : ABullet
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, explosionRadius);
+        capsuleCollider = GetComponent<CapsuleCollider2D>();
+        Gizmos.DrawWireSphere(capsuleCollider.bounds.center, explosionRadius);
     }
 }

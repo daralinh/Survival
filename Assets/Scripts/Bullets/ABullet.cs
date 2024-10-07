@@ -41,7 +41,7 @@ public abstract class ABullet : MonoBehaviour
         isShooting = false;
 
         Born();
-    }
+    } 
 
     protected virtual void Born()
     {

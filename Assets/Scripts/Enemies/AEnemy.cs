@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
@@ -9,23 +11,21 @@ using UnityEngine;
 
 public abstract class AEnemy : MonoBehaviour
 {
-    private static int id = 0;
+    protected static int id = 0;
     [SerializeField] protected float dmg;
     [SerializeField] protected float originSpeed;
-    [SerializeField] protected GameObject deathVFXPrefab;
     [SerializeField] protected float attackSpeed;
     [SerializeField] protected float attackRange;
     protected float currentSpeed;
     protected Vector2 moveDir;
     protected bool isFacingLeft;
-    protected GameObject deathVFX;
     protected float countAttackTime;
 
     protected IStateEnemy currentState;
-    MoveStateEnemy moveState = new MoveStateEnemy();
-    AttackStateEnemy attackState = new AttackStateEnemy();
-    TakeDMGStateEnemy takeDMGState = new TakeDMGStateEnemy();
-    DeathStateEnemy deathState = new DeathStateEnemy();
+    protected MoveStateEnemy moveState = new MoveStateEnemy();
+    protected AttackStateEnemy attackState = new AttackStateEnemy();
+    protected TakeDMGStateEnemy takeDMGState = new TakeDMGStateEnemy();
+    protected DeathStateEnemy deathState = new DeathStateEnemy();
 
     protected SpriteRenderer spriteRenderer;
     protected Animator animator;
@@ -33,7 +33,7 @@ public abstract class AEnemy : MonoBehaviour
     protected CapsuleCollider2D capsuleCollider2D;
     protected EnemyHpManager hpManager;
 
-    public int ID { get; private set; }
+    public int ID { get; protected set; }
     public float DMG => dmg;
 
     protected virtual void Awake()
@@ -53,9 +53,9 @@ public abstract class AEnemy : MonoBehaviour
         rb2D.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
         capsuleCollider2D.isTrigger = true;
 
+        attackRange = Mathf.Max(0.2f, attackRange);
+        moveDir = Vector2.zero;
         isFacingLeft = false;
-        deathVFX = Instantiate(deathVFXPrefab, transform.position, Quaternion.identity);
-        deathVFX.SetActive(false);
         gameObject.SetActive(false);
     }
 
@@ -72,6 +72,7 @@ public abstract class AEnemy : MonoBehaviour
 
     protected virtual void Update()
     {
+        countAttackTime += Time.deltaTime;
         currentState.Update(this);
     }
 
@@ -82,7 +83,7 @@ public abstract class AEnemy : MonoBehaviour
 
     public void ChoosePlayerDirection()
     {
-        moveDir = ((Vector2)(PlayerController.Instance.transform.position - transform.position)).normalized;
+        moveDir = (PlayerController.Instance.transform.position - transform.position).normalized;
     }
 
     public void FlipSpriteRenderFollowPlayer()
@@ -104,6 +105,11 @@ public abstract class AEnemy : MonoBehaviour
         currentSpeed = newSpeed;
     }
 
+    protected void MoveFollowDirection()
+    {
+        rb2D.MovePosition(rb2D.position + moveDir * currentSpeed * Time.fixedDeltaTime);
+    }
+
     // Move State
     public virtual void ChangeStateToMoveState()
     {
@@ -119,7 +125,6 @@ public abstract class AEnemy : MonoBehaviour
 
     public virtual void ExitMoveState()
     {
-        animator.SetBool(EAnimation.Run.ToString(), false);
     }
 
     public virtual void UpdateMoveState()
@@ -131,14 +136,21 @@ public abstract class AEnemy : MonoBehaviour
 
     public virtual void FixedUpdateMoveState()
     {
-        rb2D.MovePosition(rb2D.position + moveDir * currentSpeed * Time.fixedDeltaTime);
+        MoveFollowDirection();
     }
 
-    public virtual void CheckAttackRange()
+    protected virtual void CheckAttackRange()
     {
-        countAttackTime += Time.deltaTime;
+        if (Vector2.Distance(capsuleCollider2D.bounds.center, PlayerController.Instance.transform.position) <= 0.2)
+        {
+            currentSpeed = 0;
+        }
+        else
+        {
+            currentSpeed = originSpeed;
+        }
 
-        if (countAttackTime >= 1/attackSpeed && Vector2.Distance(transform.position, PlayerController.Instance.transform.position) <= attackRange)
+        if (countAttackTime >= 1 / attackSpeed && Vector2.Distance(capsuleCollider2D.bounds.center, PlayerController.Instance.transform.position) <= attackRange)
         {
             ChangeStateToAttack();
         }
@@ -164,10 +176,9 @@ public abstract class AEnemy : MonoBehaviour
 
     public virtual void UpdateAttackState()
     {
-        FlipSpriteRenderFollowPlayer();
     }
 
-    public void FixedUpdateAttackState()
+    public virtual void FixedUpdateAttackState()
     {
     }
 
@@ -220,7 +231,6 @@ public abstract class AEnemy : MonoBehaviour
         animator.SetTrigger(EAnimation.Idle.ToString());
         gameObject.SetActive(false);
         PoolingEnemy.Instance.BackToPool(this);
-        deathVFX.SetActive(false);
     }
 
     public virtual void UpdateDeathState()
@@ -236,15 +246,10 @@ public abstract class AEnemy : MonoBehaviour
         currentState.ExitState(this);
     }
 
-    public virtual void DeathVFXEvent()
-    {
-        deathVFX.transform.position = transform.position;
-        deathVFX.SetActive(true);
-    }
-
     protected virtual void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, attackRange);
+        capsuleCollider2D = GetComponent<CapsuleCollider2D>();
+        Gizmos.DrawWireSphere(capsuleCollider2D.bounds.center, attackRange);
     }
 }

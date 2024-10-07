@@ -14,6 +14,7 @@ public abstract class AHpManager : MonoBehaviour
 
     protected virtual void Awake()
     {
+        originHp = Mathf.Max(1, originHp);
         currentHp = originHp;
         flashSprite = GetComponent<FlashSprite>();
         knockBack = GetComponent<KnockBack>();
