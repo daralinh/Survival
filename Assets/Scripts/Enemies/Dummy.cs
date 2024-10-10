@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class Dummy : AEnemy
 {
+    private float timeToDeath;
+    private float countTimeToDeath;
+
     protected override void Awake()
     {
         ID = id++;
@@ -33,11 +36,35 @@ public class Dummy : AEnemy
 
     public override void Born(Vector2 _position)
     {
+        timeToDeath = SpawnEnemyAroundPlayer.Instance.timeToDummyDeath;
+        countTimeToDeath = 0;
+
         base.Born(_position);
+        if (_position.x < transform.position.x)
+        {
+            transform.rotation = Quaternion.Euler(0, -180, 0);
+        }
+        else
+        {
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
     }
 
     protected override void OnDrawGizmosSelected()
     {
+    }
+
+    protected override void Update()
+    {
+        countTimeToDeath += Time.deltaTime;
+
+        if (countTimeToDeath >= timeToDeath)
+        {
+            ChangeStateToDeathState();
+            return;
+        }
+
+        base.Update();
     }
 
     // Move State

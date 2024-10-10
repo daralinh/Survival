@@ -3,9 +3,9 @@ public enum ETag
     Player,
 
     // Bullet
+    BulletCCannon,
     Kunai,
     FireSpot,
-    Ak47Bullet,
     Burn,
     GreenExplosion,
     RedExplosion,
@@ -13,9 +13,6 @@ public enum ETag
     Lightning,
     FireBall,
     FireStorm,
-
-    //Weapon,
-    Ak47,
 
     //Effect
     BindEffect,

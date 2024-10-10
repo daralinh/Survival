@@ -53,5 +53,6 @@ public class PumpkinDude : AEnemy
     public override void ExitDeathState()
     {
         gameObject.SetActive(false);
+        PoolingEnemy.Instance.BackToPool(this);
     }
 }

@@ -59,5 +59,6 @@ public class Doc : AEnemy
     public override void ExitDeathState()
     {
         gameObject.SetActive(false);
+        PoolingEnemy.Instance.BackToPool(this);
     }
 }

@@ -241,6 +241,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dmg: 10
   originSpeed: 0.5
-  deathVFXPrefab: {fileID: 6052173709657897346, guid: c07d3695adb5aa146b14cf6977a84135, type: 3}
-  attackSpeed: 0.25
+  attackSpeed: 0.15
   attackRange: 0.5

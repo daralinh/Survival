@@ -98,7 +98,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 731395149, guid: 737ab9173c7faea4cafee1d3dfd5fb18, type: 3}
+  m_Sprite: {fileID: 1685426115, guid: 103331f810da0e7438dafd5a840c7e13, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -168,7 +168,7 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.39}
+  m_Offset: {x: 0, y: 0}
   m_Size: {x: 1.4596733, y: 0.48599407}
   m_Direction: 1
 --- !u!114 &4955542662359427097
@@ -186,5 +186,5 @@ MonoBehaviour:
   dmg: 15
   originSpeed: 0
   timeToHide: 3
-  explosionRadius: 0.62
+  explosionRadius: 0.85
   attackSpeed: 0.75

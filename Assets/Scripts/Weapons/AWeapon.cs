@@ -37,7 +37,7 @@ public abstract class AWeapon : MonoBehaviour
     protected virtual IEnumerator Shooting()
     {
         isShooting = true;
-        PoolingBullet.Instance.ShootAk47Bullet(transform, mousePointPosition, targetLayer);
+        PoolingBullet.Instance.ShootBulletCCannon(transform, mousePointPosition, targetLayer);
 
         yield return new WaitForSeconds(timeShoot);
         isShooting = false;

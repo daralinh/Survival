@@ -240,7 +240,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dmg: 0
-  originSpeed: 0.75
+  originSpeed: 0.8
   attackSpeed: 1
   attackRange: 0.4
   timeToStopWhenTakeDMG: 0.1

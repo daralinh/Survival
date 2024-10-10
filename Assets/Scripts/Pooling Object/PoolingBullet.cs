@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PoolingBullet : Singleton<PoolingBullet>
 {
-    [SerializeField] Ak47Bullet ak47BulletPrefab;
+    [SerializeField] BulletCCannon bulletCCannonPrefab;
     [SerializeField] Silk silkPrefab;
     [SerializeField] GreenExplosion greenExplostionPrefab;
     [SerializeField] RedExplosion redExplostionPrefab;
@@ -14,7 +14,7 @@ public class PoolingBullet : Singleton<PoolingBullet>
     [SerializeField] FireSpot fireSpotPrefab;
     [SerializeField] KunaiBullet kunaiBulletPrefab;
 
-    protected List<Ak47Bullet> aK47Bulletlist = new List<Ak47Bullet>();
+    protected List<BulletCCannon> bulletCCannonlist = new List<BulletCCannon>();
     protected List<Silk> silkList = new List<Silk>();
     protected List<GreenExplosion> greenExplostionList = new List<GreenExplosion>();
     protected List<RedExplosion> redExplosionList = new List<RedExplosion>();
@@ -41,8 +41,8 @@ public class PoolingBullet : Singleton<PoolingBullet>
                 fireSpotList.Add(_oldFireSpot);
                 break;
 
-            case Ak47Bullet _oldAk47Bullet:
-                aK47Bulletlist.Add(_oldAk47Bullet);
+            case BulletCCannon _oldBulletCCannon:
+                bulletCCannonlist.Add(_oldBulletCCannon);
                 break;
 
             case Silk _oldsilk:
@@ -113,16 +113,16 @@ public class PoolingBullet : Singleton<PoolingBullet>
         _fireStorm.StartShooting(source, targetPosition, targetLayer);
     }
 
-    public void ShootAk47Bullet(Transform source, Vector2 targetPostion, ELayer targetLayer)
+    public void ShootBulletCCannon(Transform source, Vector2 targetPostion, ELayer targetLayer)
     {
-        if (aK47Bulletlist.Count == 0)
+        if (bulletCCannonlist.Count == 0)
         {
-            Ak47Bullet _newbullet = Instantiate(ak47BulletPrefab, source.position, source.rotation);
-            aK47Bulletlist.Add(_newbullet);
+            BulletCCannon _newbullet = Instantiate(bulletCCannonPrefab, source.position, source.rotation);
+            bulletCCannonlist.Add(_newbullet);
         }
 
-        Ak47Bullet _bullet = aK47Bulletlist[0];
-        aK47Bulletlist.RemoveAt(0);
+        BulletCCannon _bullet = bulletCCannonlist[0];
+        bulletCCannonlist.RemoveAt(0);
         _bullet.StartShooting(source, targetPostion, targetLayer);
     }
 

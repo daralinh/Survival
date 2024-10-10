@@ -7,7 +7,6 @@ TagManager:
   - Enemy
   - Weapon
   - Bullet
-  - Ak47Bullet
   - Burn
   - GreenExplosion
   - RedExplosion
@@ -29,6 +28,7 @@ TagManager:
   - Minotaur
   - Cacodaemon
   - FireSpot
+  - BulletCCannon
   layers:
   - Default
   - TransparentFX

@@ -27,12 +27,29 @@ public abstract class AHpManager : MonoBehaviour
             return;
         }
 
-        currentHp -= dmg;
+        currentHp = Mathf.Max(0, currentHp - dmg);
+    }
+
+    public bool IsFullHp()
+    {
+        return (currentHp == originHp) ? true : false;
+    }
+
+    public void BuffOriginHp(float _valueToBuff)
+    {
+        originHp = Mathf.Max(_valueToBuff + originHp, originHp);
+        Heal(_valueToBuff);
     }
 
     public void HealFullHp()
     {
         currentHp = originHp;
+        flashSprite.BackToOriginMaterial();
+    }
+
+    public void Heal(float _valueToHeal)
+    {
+        currentHp = Mathf.Min(currentHp + _valueToHeal, originHp);
         flashSprite.BackToOriginMaterial();
     }
 

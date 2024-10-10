@@ -12,6 +12,7 @@ public class PoolingEnemy : Singleton<PoolingEnemy>
     [SerializeField] private PinkSnake pinkSnakePrefab;
     [SerializeField] private Minotaur minotaurPrefab;
     [SerializeField] private BanditNecromancer banditNecromancerPrefab;
+    [SerializeField] private Dummy dummyPrefab;
 
     private List<Witch> witchList = new List<Witch>();
     private List<MiniSpider> miniSpiderList = new List<MiniSpider>();
@@ -21,43 +22,11 @@ public class PoolingEnemy : Singleton<PoolingEnemy>
     private List<PinkSnake> pinkSnakesList = new List<PinkSnake>();
     private List<Minotaur> minotaurList = new List<Minotaur>();
     private List<BanditNecromancer> banditNecromancerList = new List<BanditNecromancer>();
+    private List<Dummy> dummyList = new List<Dummy>();
 
     protected override void Awake()
     {
         base.Awake();
-    }
-
-    private void Start()
-    {
-        //AutoSpawnEnemy();
-    }
-
-    private void AutoSpawnEnemy()
-    {
-        StartCoroutine(Handler());
-    }
-
-    private IEnumerator Handler()
-    {
-        while (true)
-        {
-            SpawnEnemy(ETag.Bat, transform.position);
-            yield return new WaitForSeconds(1);
-            SpawnEnemy(ETag.MiniSpider, transform.position);
-            yield return new WaitForSeconds(1);
-            SpawnEnemy(ETag.Doc, transform.position);
-            yield return new WaitForSeconds(1);
-            SpawnEnemy(ETag.PumpkinDude, transform.position);
-            yield return new WaitForSeconds(1);
-            SpawnEnemy(ETag.Witch, transform.position);
-            yield return new WaitForSeconds(1);
-            SpawnEnemy(ETag.PinkSnake, transform.position);
-            yield return new WaitForSeconds(1);
-            SpawnEnemy(ETag.Minotaur, transform.position);
-            yield return new WaitForSeconds(1);
-            SpawnEnemy(ETag.BanditNecromancer, transform.position);
-            yield return new WaitForSeconds(1);
-        }
     }
 
     public void SpawnEnemy(ETag _nameEnemy, Vector2 _position)
@@ -65,11 +34,18 @@ public class PoolingEnemy : Singleton<PoolingEnemy>
         switch (_nameEnemy)
         {
             case ETag.BanditNecromancer:
-                if (banditNecromancerList.Count == 0)
-                {
+               if (SpawnEnemyAroundPlayer.Instance.CurrentNumberBanditNecromancer >= LevelManager.Instance.GetMaxNumberEnemy(_nameEnemy))
+               {
+                    return;
+               }
+
+                SpawnEnemyAroundPlayer.Instance.CurrentNumberBanditNecromancer++;
+
+               if (banditNecromancerList.Count == 0)
+               {
                     BanditNecromancer _newBanditNecromancer = Instantiate(banditNecromancerPrefab, _position, Quaternion.identity);
                     banditNecromancerList.Add(_newBanditNecromancer);
-                }
+               }
 
                 BanditNecromancer _banditNecromancer = banditNecromancerList[0];
                 banditNecromancerList.RemoveAt(0);
@@ -77,6 +53,13 @@ public class PoolingEnemy : Singleton<PoolingEnemy>
                 break;
 
             case ETag.Minotaur:
+                if (SpawnEnemyAroundPlayer.Instance.CurrentNumberMinotaur >= LevelManager.Instance.GetMaxNumberEnemy(_nameEnemy))
+                {
+                    return;
+                }
+
+                SpawnEnemyAroundPlayer.Instance.CurrentNumberMinotaur++;
+
                 if (minotaurList.Count == 0)
                 {
                     Minotaur _newMinotaur = Instantiate(minotaurPrefab, _position, Quaternion.identity);
@@ -89,6 +72,13 @@ public class PoolingEnemy : Singleton<PoolingEnemy>
                 break;
 
             case ETag.PinkSnake:
+                if (SpawnEnemyAroundPlayer.Instance.CurrentNumberPinkSnake >= LevelManager.Instance.GetMaxNumberEnemy(_nameEnemy))
+                {
+                    return;
+                }
+
+                SpawnEnemyAroundPlayer.Instance.CurrentNumberPinkSnake++;
+
                 if (pinkSnakesList.Count == 0)
                 {
                     PinkSnake _newPinkSnake = Instantiate(pinkSnakePrefab, _position, Quaternion.identity);
@@ -101,6 +91,13 @@ public class PoolingEnemy : Singleton<PoolingEnemy>
                 break;
 
             case ETag.Bat:
+                if (SpawnEnemyAroundPlayer.Instance.CurrentNumberBat >= LevelManager.Instance.GetMaxNumberEnemy(_nameEnemy))
+                {
+                    return;
+                }
+
+                SpawnEnemyAroundPlayer.Instance.CurrentNumberBat++;
+
                 if (batList.Count == 0)
                 {
                     Bat _newBat = Instantiate(batPrefab, _position, Quaternion.identity);
@@ -113,6 +110,13 @@ public class PoolingEnemy : Singleton<PoolingEnemy>
                 break;
 
             case ETag.MiniSpider:
+                if (SpawnEnemyAroundPlayer.Instance.CurrentNumberMiniSpider >= LevelManager.Instance.GetMaxNumberEnemy(_nameEnemy))
+                {
+                    return;
+                }
+
+                SpawnEnemyAroundPlayer.Instance.CurrentNumberMiniSpider++;
+
                 if (miniSpiderList.Count == 0)
                 {
                     MiniSpider _newMiniSpider = Instantiate(miniSpiderPrefab, _position, Quaternion.identity);
@@ -125,6 +129,13 @@ public class PoolingEnemy : Singleton<PoolingEnemy>
                 break;
 
             case ETag.PumpkinDude:
+                if (SpawnEnemyAroundPlayer.Instance.CurrentNumberPumpkinDude >= LevelManager.Instance.GetMaxNumberEnemy(_nameEnemy))
+                {
+                    return;
+                }
+
+                SpawnEnemyAroundPlayer.Instance.CurrentNumberPumpkinDude++;
+
                 if (pumpkinDudeList.Count == 0)
                 {
                     PumpkinDude _newPumpkinDude = Instantiate(pumpkinDudePrefab, _position, Quaternion.identity);
@@ -137,6 +148,13 @@ public class PoolingEnemy : Singleton<PoolingEnemy>
                 break;
 
             case ETag.Doc:
+                if (SpawnEnemyAroundPlayer.Instance.CurrentNumberDoc >= LevelManager.Instance.GetMaxNumberEnemy(_nameEnemy))
+                {
+                    return;
+                }
+
+                SpawnEnemyAroundPlayer.Instance.CurrentNumberDoc++;
+
                 if (docList.Count == 0)
                 {
                     Doc _newDoc = Instantiate(docPrefab, _position, Quaternion.identity);
@@ -149,6 +167,13 @@ public class PoolingEnemy : Singleton<PoolingEnemy>
                 break;
 
             case ETag.Witch:
+                if (SpawnEnemyAroundPlayer.Instance.CurrentNumberWitch >= LevelManager.Instance.GetMaxNumberEnemy(_nameEnemy))
+                {
+                    return;
+                }
+
+                SpawnEnemyAroundPlayer.Instance.CurrentNumberWitch++;
+
                 if (witchList.Count == 0)
                 {
                     Witch _newWitch = Instantiate(witchPrefab, _position, Quaternion.identity);
@@ -159,6 +184,19 @@ public class PoolingEnemy : Singleton<PoolingEnemy>
                 witchList.RemoveAt(0);
                 _witch.Born(_position);
                 break;
+
+            case ETag.Dummy:
+                if (dummyList.Count == 0)
+                {
+                    Dummy _newDummy = Instantiate(dummyPrefab, _position, Quaternion.identity);
+                    dummyList.Add(_newDummy);
+                }
+
+                Dummy _dummy = dummyList[0];
+                dummyList.RemoveAt(0);
+                _dummy.Born(_position);
+                break;
+
             default:
                 break;
         }
@@ -166,11 +204,30 @@ public class PoolingEnemy : Singleton<PoolingEnemy>
 
     public void BackToPool(AEnemy oldEnemy)
     {
+        if (PlayerController.Instance.HpManager.IsFullHp())
+        {
+            PoolingItem.Instance.SpawnBlueGem(oldEnemy.transform.position);
+        }
+        else
+        {
+            int randomValue = Random.Range(0, 10);
+
+            if (randomValue < 3)
+            {
+                PoolingItem.Instance.SpawnBloodBottle(oldEnemy.transform.position);
+            }
+            else
+            {
+                PoolingItem.Instance.SpawnBlueGem(oldEnemy.transform.position);
+            }
+        }
+
         switch (oldEnemy)
         {
             case Minotaur _minotaur:
                 if (!minotaurList.Contains(_minotaur))
                 {
+                    SpawnEnemyAroundPlayer.Instance.CurrentNumberMinotaur--;
                     minotaurList.Add(_minotaur);
                 }
                 break;
@@ -178,6 +235,7 @@ public class PoolingEnemy : Singleton<PoolingEnemy>
             case PinkSnake _pinkSnake:
                 if (!pinkSnakesList.Contains(_pinkSnake))
                 {
+                    SpawnEnemyAroundPlayer.Instance.CurrentNumberPinkSnake--;
                     pinkSnakesList.Add(_pinkSnake);
                 }
                 break;
@@ -185,6 +243,7 @@ public class PoolingEnemy : Singleton<PoolingEnemy>
             case Witch _witch:
                 if (!witchList.Contains(_witch))
                 {
+                    SpawnEnemyAroundPlayer.Instance.CurrentNumberWitch--;
                     witchList.Add(_witch);
                 }
                 break;
@@ -192,6 +251,7 @@ public class PoolingEnemy : Singleton<PoolingEnemy>
             case MiniSpider _miniSpider:
                 if (!miniSpiderList.Contains(_miniSpider))
                 {
+                    SpawnEnemyAroundPlayer.Instance.CurrentNumberMiniSpider--;
                     miniSpiderList.Add(_miniSpider);
                 }
                 break;
@@ -199,6 +259,7 @@ public class PoolingEnemy : Singleton<PoolingEnemy>
             case PumpkinDude _pumpkinDude:
                 if (!pumpkinDudeList.Contains(_pumpkinDude))
                 {
+                    SpawnEnemyAroundPlayer.Instance.CurrentNumberPumpkinDude--;
                     pumpkinDudeList.Add(_pumpkinDude);
                 }
                 break;
@@ -206,6 +267,7 @@ public class PoolingEnemy : Singleton<PoolingEnemy>
             case Doc _doc:
                 if (!docList.Contains(_doc))
                 {
+                    SpawnEnemyAroundPlayer.Instance.CurrentNumberDoc--;
                     docList.Add(_doc);
                 }
                 break;
@@ -213,6 +275,7 @@ public class PoolingEnemy : Singleton<PoolingEnemy>
             case Bat _bat:
                 if (!batList.Contains(_bat))
                 {
+                    SpawnEnemyAroundPlayer.Instance.CurrentNumberBat--;
                     batList.Add(_bat);
                 }
                 break;

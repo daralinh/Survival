@@ -241,10 +241,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dmg: 20
-  originSpeed: 0.5
+  originSpeed: 1
   attackSpeed: 0.25
-  attackRange: 0.5
-  speedWhenAttack: 2
+  attackRange: 0.6
+  speedWhenAttack: 1.75
   trailRenderer: {fileID: 7842103836280366044, guid: 5e601ef31600cce49b44a287367247f0, type: 3}
 --- !u!1001 &7860047164109665030
 PrefabInstance:
