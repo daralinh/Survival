@@ -7,5 +7,6 @@ public enum EAnimation
     TakeDMG,
     Death,
     Skill1,
-    Skill2
+    Skill2,
+    Open
 }

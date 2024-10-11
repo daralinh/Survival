@@ -29,5 +29,10 @@ public enum ETag
     PumpkinDude,
     Witch,
     GiantFly,
-    Dummy
+    Dummy,
+
+    //Chest
+    NormalChest,
+    GoldChest,
+    SpecialChest,
 }

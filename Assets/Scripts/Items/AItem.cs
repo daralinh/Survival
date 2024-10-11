@@ -46,18 +46,12 @@ public abstract class AItem : MonoBehaviour
     public virtual void Born(Vector2 _position)
     {
         transform.position = _position;
-        if (transform.position.x < PlayerController.Instance.transform.position.x)
-        {
-            transform.rotation = Quaternion.Euler(0, -180, 0);
-        }
-        else
-        {
-            transform.rotation = Quaternion.Euler(0, 0, 0);
-        }
+
+        transform.rotation = (transform.position.x < PlayerController.Instance.transform.position.x) ?
+            Quaternion.Euler(0, -180, 0) : Quaternion.Euler(0, 0, 0);
 
         isMoving = false;
         gameObject.SetActive(true);
-        animator.SetTrigger(EAnimation.Idle.ToString());
         WaitToMove();
     }
 
@@ -75,9 +69,9 @@ public abstract class AItem : MonoBehaviour
         }
     }
 
-    protected virtual void OnTriggerEnter2D(Collider2D collision)
+    protected virtual void OnTriggerEnter2D(Collider2D collision2D)
     {
-        if (collision.CompareTag("Player"))
+        if (collision2D.CompareTag("Player"))
         {
             MoveToPlayer();
             return;
@@ -99,6 +93,7 @@ public abstract class AItem : MonoBehaviour
     protected virtual void BackToBool()
     {
         isMoving = false;
+        animator.SetTrigger(EAnimation.Idle.ToString());
         gameObject.SetActive(false);
         PoolingItem.Instance.BackToPool(this);
         UpgradeManager.Instance.TakeExp(exp);

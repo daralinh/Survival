@@ -11,7 +11,6 @@ public abstract class ABar : MonoBehaviour
     protected virtual void Awake()
     {
         slider.value = 0;
-        slider.maxValue = 1;
     }
 
     public virtual void SetMaxValue(int _maxValue)

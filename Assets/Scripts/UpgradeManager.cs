@@ -14,11 +14,14 @@ public class UpgradeManager : Singleton<UpgradeManager>
         expbar.SetMaxValue(expToUpgrade);
         currentExp = 0;
         expbar.SetCurrentValue(0);
+       // Debug.Log($"{expbar.slider.value}/{expbar.slider.maxValue}");
     }
 
     public void TakeExp(int _valueExp)
     {
         currentExp += _valueExp;
+
+        //Debug.Log($"{expbar.slider.value}/{expbar.slider.maxValue}");
 
         if (currentExp >= expToUpgrade)
         {

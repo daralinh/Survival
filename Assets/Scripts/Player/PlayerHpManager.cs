@@ -12,6 +12,13 @@ public class PlayerHpManager : AHpManager
         healthBar.SetCurrentValue((int)currentHp);
     }
 
+    public override void BuffOriginHp(float _valueToBuff)
+    {
+        originHp = Mathf.Max(_valueToBuff + originHp, originHp);
+        healthBar.SetMaxValue((int)originHp);
+        Heal(_valueToBuff);
+    }
+
     public override void HealFullHp()
     {
         base.HealFullHp();

@@ -11,7 +11,6 @@ TagManager:
   - GreenExplosion
   - RedExplosion
   - Silk
-  - Ak47
   - BindEffect
   - SlowEffect
   - MiniSpider
@@ -29,6 +28,8 @@ TagManager:
   - Cacodaemon
   - FireSpot
   - BulletCCannon
+  - NormalChest
+  - GoldChest
   layers:
   - Default
   - TransparentFX

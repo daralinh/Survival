@@ -204,23 +204,7 @@ public class PoolingEnemy : Singleton<PoolingEnemy>
 
     public void BackToPool(AEnemy oldEnemy)
     {
-        if (PlayerController.Instance.HpManager.IsFullHp())
-        {
-            PoolingItem.Instance.SpawnBlueGem(oldEnemy.transform.position);
-        }
-        else
-        {
-            int randomValue = Random.Range(0, 10);
-
-            if (randomValue < 3)
-            {
-                PoolingItem.Instance.SpawnBloodBottle(oldEnemy.transform.position);
-            }
-            else
-            {
-                PoolingItem.Instance.SpawnBlueGem(oldEnemy.transform.position);
-            }
-        }
+        PoolingItem.Instance.DropItem(oldEnemy.transform.position);
 
         switch (oldEnemy)
         {

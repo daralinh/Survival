@@ -71,7 +71,7 @@ public class PlayerController : Singleton<PlayerController>
 
         if (oldSpeed != currentSpeed)
         {
-            Debug.Log(oldSpeed + " " + currentSpeed);
+           // Debug.Log(oldSpeed + " " + currentSpeed);
             oldSpeed = currentSpeed;
         }
     }
