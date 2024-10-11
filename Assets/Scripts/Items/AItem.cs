@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
@@ -9,6 +10,7 @@ public abstract class AItem : MonoBehaviour
 {
     protected static int id = 0;
 
+    [SerializeField] protected int exp;
     [SerializeField] protected float speed;
     protected Vector2 moveDir;
 
@@ -20,6 +22,7 @@ public abstract class AItem : MonoBehaviour
     protected bool isMoving;
 
     public int ID { get; protected set; }
+    public int Exp => exp; 
 
     protected virtual void Awake()
     {
@@ -55,7 +58,7 @@ public abstract class AItem : MonoBehaviour
         isMoving = false;
         gameObject.SetActive(true);
         animator.SetTrigger(EAnimation.Idle.ToString());
-        circleCollider2D.enabled = true;
+        WaitToMove();
     }
 
     protected virtual void FixedUpdate()
@@ -98,5 +101,17 @@ public abstract class AItem : MonoBehaviour
         isMoving = false;
         gameObject.SetActive(false);
         PoolingItem.Instance.BackToPool(this);
+        UpgradeManager.Instance.TakeExp(exp);
+    }
+
+    protected virtual void WaitToMove()
+    {
+        StartCoroutine(WaitHandler());
+    }
+
+    protected IEnumerator WaitHandler()
+    {
+        yield return new WaitForSeconds(0.25f);
+        circleCollider2D.enabled = true;
     }
 }

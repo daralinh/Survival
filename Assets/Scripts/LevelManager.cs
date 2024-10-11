@@ -86,6 +86,7 @@ public class LevelManager : Singleton<LevelManager>
     public void LevelUp()
     {
         currentLv = Math.Min(++currentLv, 8);
+        UpgradeManager.Instance.Upgrade();
     }
 
     public int GetMaxNumberEnemy(ETag nameEnemy)
