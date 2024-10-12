@@ -5,8 +5,8 @@
         SpellManager.Instance.AddLightningSpell();
     }
 
-    public override void ShowText()
+    public override string GetContent()
     {
-        text.text = "Trang bị thêm Light Spell, sau vài giây sẽ bắn ra 1 tia sét về phía kẻ địch";
+        return "Trang bị thêm Light Spell, sau vài giây sẽ bắn ra 1 tia sét về phía kẻ địch";
     }
 }

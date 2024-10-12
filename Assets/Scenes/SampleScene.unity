@@ -693,7 +693,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 303024652}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 11500000, guid: cc91ed62dd36fea47af7c5be955f9fb9, type: 3}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &303024652
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2095,6 +2107,8 @@ MonoBehaviour:
   speedSlide: 0.1
   leftButton: {fileID: 303024651}
   rightButton: {fileID: 1700312116}
+  leftText: {fileID: 1789948203}
+  rightText: {fileID: 334694584}
 --- !u!114 &1220911758
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2874,7 +2888,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1700312117}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 11500000, guid: cc91ed62dd36fea47af7c5be955f9fb9, type: 3}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1700312117
 MonoBehaviour:
   m_ObjectHideFlags: 0

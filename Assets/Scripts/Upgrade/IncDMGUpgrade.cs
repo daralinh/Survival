@@ -5,8 +5,8 @@
         UpgradeManager.Instance.BuffDMG += 7;
     }
 
-    public override void ShowText()
+    public override string GetContent()
     {
-        text.text = "Tăng 7 sát thương từ đòn đánh";
+        return "Tăng 7 sát thương từ đòn đánh";
     }
 }

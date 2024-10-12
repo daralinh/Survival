@@ -13,16 +13,33 @@ public class MagicBook : MonoBehaviour
     public float speedSlide;
     public Button leftButton;
     public Button rightButton;
+    public Text leftText;
+    public Text rightText;
 
-    public List<AUpgrade> upgradeList;
-    public List<AUpgrade> specialUpgradeList;
+    public List<AUpgrade> normalUpgradeList = new List<AUpgrade>();
+    public List<AUpgrade> specialUpgradeList = new List<AUpgrade>();
 
     private bool isBlue;
+    private AUpgrade leftUpgrade;
+    private AUpgrade rightUpgrade;
 
     private void Awake()
     {
         isBlue = true;
         rectTransform = image.GetComponent<RectTransform>();
+
+        normalUpgradeList.Add(new IncAttackSpeedUpgrade());
+        normalUpgradeList.Add(new IncDMGUpgrade());
+        normalUpgradeList.Add(new IncOriginHpUpgrade());
+        normalUpgradeList.Add(new IncRateDropChestUpgrade());
+
+        specialUpgradeList.Add(new AddFireBallSpellUpgrade());
+        specialUpgradeList.Add(new AddLightningSpellUpgrade());
+        specialUpgradeList.Add(new DecCoolDownSpellUpgrade());
+    }
+
+    private void Start()
+    {
         HideButton();
         gameObject.SetActive(false);
     }
@@ -45,15 +62,40 @@ public class MagicBook : MonoBehaviour
     {
         if (isBlue)
         {
-            
+            FisherYatesShufflerAlgorithm.Shuffle(normalUpgradeList);
+            leftUpgrade = normalUpgradeList[0];
+            rightUpgrade = normalUpgradeList[1];
         }
         else
         {
-
+            FisherYatesShufflerAlgorithm.Shuffle(specialUpgradeList);
+            leftUpgrade = specialUpgradeList[0];
+            rightUpgrade = specialUpgradeList[1];
         }
 
         leftButton.gameObject.SetActive(true);
         rightButton.gameObject.SetActive(true);
+
+        foreach (AUpgrade _upgrade in normalUpgradeList)
+        {
+            Debug.Log(_upgrade.GetContent());
+        }
+
+        leftText.text = leftUpgrade.GetContent();
+        rightText.text = rightUpgrade.GetContent();
+        Debug.Log(leftText.text + " " + rightText.text);
+    }
+
+    private void ClickOnLeft()
+    {
+        leftUpgrade.Active();
+        CloseBook();
+    }
+
+    private void ClickOnRight()
+    {
+        rightUpgrade.Active();
+        CloseBook();
     }
 
     private void HideButton()

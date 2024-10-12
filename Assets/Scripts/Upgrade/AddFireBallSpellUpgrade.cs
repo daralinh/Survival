@@ -5,8 +5,8 @@
         SpellManager.Instance.AddFireBallSpell();
     }
 
-    public override void ShowText()
+    public override string GetContent()
     {
-        text.text = "Trang bị thêm FireBall Spell, sau vài giây sẽ tự động bắn ra những quả cầu lửa";
+        return "Trang bị thêm FireBall Spell, sau vài giây sẽ tự động bắn ra những quả cầu lửa";
     }
 }

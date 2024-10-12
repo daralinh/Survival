@@ -5,8 +5,8 @@
         UpgradeManager.Instance.DecCoolDownSpell += 1f;
     }
 
-    public override void ShowText()
+    public override string GetContent()
     {
-        text.text = "Giảm thời gian hồi tất cả spell đi 1 giây";
+        return "Giảm thời gian hồi tất cả spell đi 1 giây";
     }
 }

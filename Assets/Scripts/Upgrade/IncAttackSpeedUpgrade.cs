@@ -5,8 +5,8 @@
         UpgradeManager.Instance.BuffAttackSpeed += 0.1f;
     }
 
-    public override void ShowText()
+    public override string GetContent()
     {
-        text.text = "Tăng 10% tốc độ đánh";
+        return "Tăng 10% tốc độ đánh";
     }
 }

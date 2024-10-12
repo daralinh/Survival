@@ -1,12 +1,12 @@
-public class IncRateDropChestUpgrade : AUpgrade
+﻿public class IncRateDropChestUpgrade : AUpgrade
 {
     public override void Active()
     {
         PoolingItem.Instance.RateDropChest += 5;
     }
 
-    public override void ShowText()
+    public override string GetContent()
     {
-        throw new System.NotImplementedException();
+        return "Tăng rate drop chest";
     }
 }

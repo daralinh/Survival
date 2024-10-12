@@ -5,8 +5,8 @@
         PlayerController.Instance.HpManager.BuffOriginHp(30);
     }
 
-    public override void ShowText()
+    public override string GetContent()
     {
-        text.text = "Tăng vĩnh viễn 30 máu";
+        return "Tăng vĩnh viễn 30 máu";
     }
 }
