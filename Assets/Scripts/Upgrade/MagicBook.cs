@@ -86,13 +86,13 @@ public class MagicBook : MonoBehaviour
         Debug.Log(leftText.text + " " + rightText.text);
     }
 
-    private void ClickOnLeft()
+    public void ClickOnLeft()
     {
         leftUpgrade.Active();
         CloseBook();
     }
 
-    private void ClickOnRight()
+    public void ClickOnRight()
     {
         rightUpgrade.Active();
         CloseBook();

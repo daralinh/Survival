@@ -694,13 +694,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11500000, guid: cc91ed62dd36fea47af7c5be955f9fb9, type: 3}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 1220911757}
+        m_TargetAssemblyTypeName: MagicBook, Assembly-CSharp
+        m_MethodName: ClickOnLeft
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -2381,6 +2381,55 @@ MonoBehaviour:
   timeToDummyDeath: 10
   numberOfObjects: 50
   radiusOfSpawnDummy: 5.5
+--- !u!1 &1505116564
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1505116566}
+  - component: {fileID: 1505116565}
+  m_Layer: 0
+  m_Name: Spell Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1505116565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1505116564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a3d1f23a97d8154797977da1a501eb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fireBallSpellPrefab: {fileID: 3589174658183924141, guid: e6f7e575ab4431b47915447d5fc7ff14, type: 3}
+  fireStormSpellPrefab: {fileID: 7306461970519340295, guid: 00b921eb4f02ac443bca79a22245a3e3, type: 3}
+  fireStepSpellPrefab: {fileID: 4654902305960196846, guid: e88478ab92cd2b0448c17f4f1044bded, type: 3}
+  kunaiSpellPrefab: {fileID: 8388323664024543826, guid: e2c4d9607ca33b84686f38535507d16b, type: 3}
+  lightningSpellPrefab: {fileID: 6648716065967723821, guid: e6a3e86b52f1e0346bda9e1e26d47921, type: 3}
+--- !u!4 &1505116566
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1505116564}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 832.79694, y: 488.1771, z: 2.3928385}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1550226028
 GameObject:
   m_ObjectHideFlags: 0
@@ -2889,13 +2938,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11500000, guid: cc91ed62dd36fea47af7c5be955f9fb9, type: 3}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 1220911757}
+        m_TargetAssemblyTypeName: MagicBook, Assembly-CSharp
+        m_MethodName: ClickOnRight
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -3557,3 +3606,4 @@ SceneRoots:
   - {fileID: 1957602481}
   - {fileID: 24355933}
   - {fileID: 1417369211}
+  - {fileID: 1505116566}
