@@ -295,6 +295,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7842103836280366044, guid: 5e601ef31600cce49b44a287367247f0, type: 3}
+      propertyPath: m_Time
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7842103836280366044, guid: 5e601ef31600cce49b44a287367247f0, type: 3}
       propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].time
       value: 0
       objectReference: {fileID: 0}
@@ -304,7 +308,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7842103836280366044, guid: 5e601ef31600cce49b44a287367247f0, type: 3}
       propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
-      value: 0.4897232
+      value: 0.53923035
       objectReference: {fileID: 0}
     - target: {fileID: 7842103836280366044, guid: 5e601ef31600cce49b44a287367247f0, type: 3}
       propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[1].value

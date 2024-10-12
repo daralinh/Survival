@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PoolingItem : Singleton<PoolingItem>
 {
+    public int RateDropChest;
     [SerializeField] private BlueGem blueGemPrefab;
     [SerializeField] private BloodBottle bloodBottlePrefab;
     [SerializeField] private PurpleMedicine purpleMedicinePrefab;
@@ -90,7 +91,7 @@ public class PoolingItem : Singleton<PoolingItem>
     {
         int randomValueToDropChest = Random.Range(1, 100);
 
-        if (randomValueToDropChest < 6)
+        if (randomValueToDropChest <= RateDropChest)
         {
             PoolingChest.Instance.DropChest(_positionToDrop);
             return;

@@ -2,11 +2,16 @@ using UnityEngine;
 
 public class UpgradeManager : Singleton<UpgradeManager>
 {
+    [Header("--- Exp ---")]
     [SerializeField] private int expToUpgrade;
     [SerializeField] private int step;
+    [Header("--- buff ---")]
+    public float BuffDMG;
+    public float BuffAttackSpeed;
+    public float DecCoolDownSpell;
     
     public ExpBar expbar;
-    public SpellBook spellBook;
+    public MagicBook magicBook;
 
     private int currentExp;
     private int countToOpenBook;
@@ -23,9 +28,7 @@ public class UpgradeManager : Singleton<UpgradeManager>
     public void TakeExp(int _valueExp)
     {
         currentExp += _valueExp;
-
         //Debug.Log($"{expbar.slider.value}/{expbar.slider.maxValue}");
-
         if (currentExp >= expToUpgrade)
         {
             currentExp -= expToUpgrade;
@@ -44,11 +47,11 @@ public class UpgradeManager : Singleton<UpgradeManager>
 
         if (++countToOpenBook % 3 == 0)
         {
-            spellBook.OpenRedBook();
+            magicBook.OpenRedBook();
         }
         else
         {
-            spellBook.OpenBlueBook();
+            magicBook.OpenBlueBook();
         }
     }
 }

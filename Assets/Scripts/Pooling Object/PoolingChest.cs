@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PoolingChest : Singleton<PoolingChest>
 {
+    [SerializeField] private int rateDropGoldChest;
     [SerializeField] private NormalChest normalChestPrefab;
     [SerializeField] private GoldChest goldChestPrefab;
 
@@ -68,7 +69,7 @@ public class PoolingChest : Singleton<PoolingChest>
     {
         int randomValue = Random.Range(1, 100);
         
-        if (randomValue < 6)
+        if (randomValue < rateDropGoldChest)
         {
             SpawnGoldChest(_positionToDrop);
             return;
