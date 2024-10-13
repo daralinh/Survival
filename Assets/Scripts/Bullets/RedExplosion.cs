@@ -36,7 +36,7 @@ public class RedExplosion : ABullet
 
             if (hpManager != null)
             {
-                hpManager.TakeDMG(dmg, transform.position);
+                hpManager.TakeDMG((targetLayer == ELayer.Enemy) ? dmg + UpgradeManager.Instance.BuffDMG : dmg, transform.position);
                 PoolingBullet.Instance.ShootBurn(hpManager.gameObject);
             }
         }

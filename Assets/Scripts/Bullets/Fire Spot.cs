@@ -25,6 +25,7 @@ public class FireSpot : ABullet
     {
         countToAttack = 1 / attackSpeed;
         base.Born();
+        spriteRenderer.sortingOrder = 0;
     }
 
     protected void Update()
@@ -70,7 +71,7 @@ public class FireSpot : ABullet
 
             if (hpManager != null)
             {
-                hpManager.TakeDMG(dmg + UpgradeManager.Instance.BuffDMG, transform.position);
+                hpManager.TakeDMG(+UpgradeManager.Instance.BuffDMG, transform.position);
                 //PoolingBullet.Instance.ShootBurn(hpManager.gameObject);
             }
         }

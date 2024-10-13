@@ -4,23 +4,23 @@ using UnityEngine;
 [RequireComponent(typeof(SpriteRenderer))]
 public abstract class AWeapon : MonoBehaviour
 {
-    [SerializeField] protected float numberBulletCanShootIn1Second;
+    [SerializeField] protected float attackSpeed;
     [SerializeField] protected ELayer targetLayer;
-    protected float timeShoot;
     protected Vector3 aimDirection;
     protected bool isShooting;
     protected Vector2 mousePointPosition;
 
     protected SpriteRenderer spriteRenderer;
 
+    public float AttackSpeed => 1 / (attackSpeed + UpgradeManager.Instance.BuffAttackSpeed);
+
     protected virtual void Awake()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer = GetComponent<SpriteRenderer>(); 
 
         spriteRenderer.spriteSortPoint = SpriteSortPoint.Pivot;
         spriteRenderer.sortingOrder = 1;
 
-        timeShoot = 1 / numberBulletCanShootIn1Second;
         isShooting = false;
     }
 
@@ -39,7 +39,7 @@ public abstract class AWeapon : MonoBehaviour
         isShooting = true;
         PoolingBullet.Instance.ShootBulletCCannon(transform, mousePointPosition, targetLayer);
 
-        yield return new WaitForSeconds(timeShoot);
+        yield return new WaitForSeconds(AttackSpeed);
         isShooting = false;
     }
 

@@ -19,7 +19,7 @@ public class Cannon : AWeapon
         isShooting = true;
         animator.SetBool(EAnimation.Shoot.ToString(), true);
         PoolingBullet.Instance.ShootBulletCCannon(transform, mousePointPosition, targetLayer);
-        yield return new WaitForSeconds(timeShoot);
+        yield return new WaitForSeconds(AttackSpeed);
         animator.SetBool(EAnimation.Shoot.ToString(), false);
         isShooting = false;
     }

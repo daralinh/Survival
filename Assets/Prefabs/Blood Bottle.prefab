@@ -185,4 +185,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   exp: 5
   speed: 3.5
+  displayTime: 60
   valueHpToHeal: 30

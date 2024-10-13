@@ -119,7 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99a4b27326029da45ada826ce61fb903, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberBulletCanShootIn1Second: 4
+  attackSpeed: 1.75
   targetLayer: 1
   recoilStrength: 0.1
   maxRecoilAngle: 5

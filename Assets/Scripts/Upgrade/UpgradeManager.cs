@@ -15,6 +15,7 @@ public class UpgradeManager : Singleton<UpgradeManager>
 
     private int currentExp;
     private int countToOpenBook;
+
     protected override void Awake()
     {
         base.Awake();

@@ -38,7 +38,7 @@ public class LevelManager : Singleton<LevelManager>
         {
             SpawnEnemyAroundPlayer.Instance.SpawnDummy();
             currentLv++;
-            Debug.Log(currentLv);
+           // Debug.Log(currentLv);
             countTimeToUpLv = 0;
         }
     }

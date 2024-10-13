@@ -12,6 +12,7 @@ public abstract class AItem : MonoBehaviour
 
     [SerializeField] protected int exp;
     [SerializeField] protected float speed;
+    [SerializeField] protected float displayTime;
     protected Vector2 moveDir;
 
     protected SpriteRenderer spriteRenderer;
@@ -20,6 +21,7 @@ public abstract class AItem : MonoBehaviour
     protected Animator animator;
 
     protected bool isMoving;
+    protected float countDisplayTime;
 
     public int ID { get; protected set; }
     public int Exp => exp; 
@@ -45,6 +47,7 @@ public abstract class AItem : MonoBehaviour
 
     public virtual void Born(Vector2 _position)
     {
+        countDisplayTime = 0;
         transform.position = _position;
 
         transform.rotation = (transform.position.x < PlayerController.Instance.transform.position.x) ?
@@ -66,6 +69,15 @@ public abstract class AItem : MonoBehaviour
         if (Vector2.Distance(PlayerController.Instance.transform.position, transform.position) <= 0.2)
         {
             BackToBool();
+        }
+
+        countDisplayTime += Time.fixedDeltaTime;
+        if (countDisplayTime >= displayTime)
+        {
+            isMoving = false;
+            animator.SetTrigger(EAnimation.Idle.ToString());
+            gameObject.SetActive(false);
+            PoolingItem.Instance.BackToPool(this);
         }
     }
 

@@ -45,7 +45,7 @@ public class GreenExplosion : ABullet
                             = _object.gameObject.GetComponents<Component>().FirstOrDefault(c => c is AHpManager) as AHpManager;
             if (hpManager != null)
             {
-                hpManager.TakeDMG(dmg, transform.position);
+                hpManager.TakeDMG((targetLayer == ELayer.Enemy) ? dmg + UpgradeManager.Instance.BuffDMG : dmg, transform.position);
                 hpManager.TakeEffect(slowEffect);
             }
         }

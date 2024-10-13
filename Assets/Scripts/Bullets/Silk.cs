@@ -48,7 +48,7 @@ public class Silk : ABullet
 
             if (hpComponent != null)
             {
-                hpComponent.TakeDMG(dmg, sourceTransform.position);
+                hpComponent.TakeDMG((targetLayer == ELayer.Enemy) ? dmg + UpgradeManager.Instance.BuffDMG : dmg, sourceTransform.position);
                 hpComponent.TakeEffect(EffectOfBullet);
                 StopMoveEvent();
             }

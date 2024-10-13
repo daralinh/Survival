@@ -92,7 +92,7 @@ public abstract class ABullet : MonoBehaviour
 
             if (_hpComponent != null)
             {
-                _hpComponent.TakeDMG(dmg + UpgradeManager.Instance.BuffDMG, transform.position);
+                _hpComponent.TakeDMG((targetLayer == ELayer.Enemy) ? dmg + UpgradeManager.Instance.BuffDMG : dmg, transform.position);
             }
         }
     }

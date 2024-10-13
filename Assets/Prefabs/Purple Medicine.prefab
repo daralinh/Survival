@@ -185,4 +185,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   exp: 15
   speed: 3.5
+  displayTime: 60
   hpToBuff: 20

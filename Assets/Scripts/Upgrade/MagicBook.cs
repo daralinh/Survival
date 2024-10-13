@@ -34,6 +34,9 @@ public class MagicBook : MonoBehaviour
         normalUpgradeList.Add(new IncRateDropChestUpgrade());
 
         specialUpgradeList.Add(new AddFireBallSpellUpgrade());
+        specialUpgradeList.Add(new AddFireStepSpellUpgrade());
+        specialUpgradeList.Add(new AddFireStormSpellUpgrade());
+        specialUpgradeList.Add(new AddKunaiSpellUpgrade());
         specialUpgradeList.Add(new AddLightningSpellUpgrade());
         specialUpgradeList.Add(new DecCoolDownSpellUpgrade());
     }
@@ -76,14 +79,9 @@ public class MagicBook : MonoBehaviour
         leftButton.gameObject.SetActive(true);
         rightButton.gameObject.SetActive(true);
 
-        foreach (AUpgrade _upgrade in normalUpgradeList)
-        {
-            Debug.Log(_upgrade.GetContent());
-        }
-
         leftText.text = leftUpgrade.GetContent();
         rightText.text = rightUpgrade.GetContent();
-        Debug.Log(leftText.text + " " + rightText.text);
+        //Debug.Log(leftText.text + " " + rightText.text);
     }
 
     public void ClickOnLeft()

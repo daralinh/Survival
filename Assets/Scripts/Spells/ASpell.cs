@@ -5,39 +5,32 @@ using UnityEngine;
 public abstract class ASpell : MonoBehaviour
 {
     [SerializeField] protected float attackRange;
-    [SerializeField] protected float attackSpeed;
+    [SerializeField] protected float coolDown;
     [SerializeField] protected float numberShootInPerAttack;
-    protected int countNumberShootInPerAttack;
 
-    protected Coroutine coroutine;
+    protected int countNumberShootInPerAttack = 0;
+
+    public float CoolDown => Mathf.Max(1.5f, coolDown - UpgradeManager.Instance.DecCoolDownSpell);
 
     protected virtual void Awake()
     {
-        coroutine = null;
-        countNumberShootInPerAttack = 0;
-    }
-
-    protected virtual void Start()
-    {
-        ActiveSpell();
+        gameObject.SetActive(false);
     }
 
     public virtual void ActiveSpell()
     {
-        if (coroutine != null)
-        {
-            StopCoroutine(coroutine);
-        }
+        gameObject.SetActive(true);
 
-        coroutine = StartCoroutine(CoroutineHandler());
+        StartCoroutine(CoroutineHandler());
     }
 
     protected virtual IEnumerator CoroutineHandler()
     {
         while (true)
         {
+            //Debug.Log(name + " " + Time.time.ToString());
             Handler();
-            yield return new WaitForSeconds(1 / attackSpeed);
+            yield return new WaitForSeconds(CoolDown);
         }
     }
 
