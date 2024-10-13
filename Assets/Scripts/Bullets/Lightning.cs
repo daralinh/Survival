@@ -54,7 +54,7 @@ public class Lightning : ABullet
                 = _object.gameObject.GetComponents<Component>().FirstOrDefault(c => c is AHpManager) as AHpManager;
             if (hpManager != null)
             {
-                hpManager.TakeDMG(dmg, transform.position);
+                hpManager.TakeDMG(dmg + UpgradeManager.Instance.BuffDMG, transform.position);
                 //PoolingBullet.Instance.ShootBurn(hpManager.gameObject);
             }
         }

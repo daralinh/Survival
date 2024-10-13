@@ -70,7 +70,7 @@ public class FireSpot : ABullet
 
             if (hpManager != null)
             {
-                hpManager.TakeDMG(dmg, transform.position);
+                hpManager.TakeDMG(dmg + UpgradeManager.Instance.BuffDMG, transform.position);
                 //PoolingBullet.Instance.ShootBurn(hpManager.gameObject);
             }
         }

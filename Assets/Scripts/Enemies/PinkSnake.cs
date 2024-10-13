@@ -5,7 +5,6 @@ using UnityEngine;
 public class PinkSnake : AEnemy
 {
     [SerializeField] protected float speedWhenAttack;
-    [SerializeField] protected TrailRenderer trailRenderer;
     private bool isAttacking;
 
     protected override void Awake()
@@ -17,7 +16,6 @@ public class PinkSnake : AEnemy
     public override void Born(Vector2 _position)
     {
         isAttacking = false;
-        trailRenderer.emitting = false;
         base.Born(_position);
     }
 
@@ -25,7 +23,6 @@ public class PinkSnake : AEnemy
     {
         base.EnterAttackState();
         isAttacking = true;
-        trailRenderer.emitting = true;
         currentSpeed = speedWhenAttack;
     }
 
@@ -40,8 +37,6 @@ public class PinkSnake : AEnemy
 
     public override void ExitAttackState()
     {
-        trailRenderer.emitting = false;
-        trailRenderer.Clear();
         isAttacking = false;
         base.ExitAttackState();
     }

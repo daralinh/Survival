@@ -88,12 +88,14 @@ public class MagicBook : MonoBehaviour
 
     public void ClickOnLeft()
     {
+        HideButton();
         leftUpgrade.Active();
         CloseBook();
     }
 
     public void ClickOnRight()
     {
+        HideButton();
         rightUpgrade.Active();
         CloseBook();
     }

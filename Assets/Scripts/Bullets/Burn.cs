@@ -33,7 +33,7 @@ public class Burn : ABullet
             {
                 countBurnTime = 0;
                 AHpManager hpManager = target.GetComponent<AHpManager>();
-                hpManager.TakeDMG(dmg, transform.position);
+                hpManager.TakeDMG(dmg + UpgradeManager.Instance.BuffDMG, transform.position);
             }
 
             if (countTimeToHide > timeToHide)
