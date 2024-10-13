@@ -22,6 +22,7 @@ public class MagicBook : MonoBehaviour
     private bool isBlue;
     private AUpgrade leftUpgrade;
     private AUpgrade rightUpgrade;
+    private float originalTimeScale;
 
     private void Awake()
     {
@@ -49,6 +50,9 @@ public class MagicBook : MonoBehaviour
 
     public void OpenBlueBook()
     {
+        CursorManager.Instance.SetCursor2();
+        originalTimeScale = Time.timeScale;
+        Time.timeScale = 0;
         isBlue = true;
         gameObject.SetActive(true);
         StartCoroutine(PlayOpenBlueAnimUIHanlder());
@@ -56,6 +60,9 @@ public class MagicBook : MonoBehaviour
 
     public void OpenRedBook()
     {
+        CursorManager.Instance.SetCursor2();
+        originalTimeScale = Time.timeScale;
+        Time.timeScale = 0;
         isBlue = false;
         gameObject.SetActive(true);
         StartCoroutine(PlayOpenRedAnimUIHanlder());
@@ -86,6 +93,7 @@ public class MagicBook : MonoBehaviour
 
     public void ClickOnLeft()
     {
+        Time.timeScale = originalTimeScale;
         HideButton();
         leftUpgrade.Active();
         CloseBook();
@@ -93,6 +101,7 @@ public class MagicBook : MonoBehaviour
 
     public void ClickOnRight()
     {
+        Time.timeScale = originalTimeScale;
         HideButton();
         rightUpgrade.Active();
         CloseBook();
@@ -114,6 +123,8 @@ public class MagicBook : MonoBehaviour
         {
             StartCoroutine(PlayCloseRedAnimUIHanlder());
         }
+
+        CursorManager.Instance.SetCursor1();
     }
 
     IEnumerator PlayOpenBlueAnimUIHanlder()
@@ -122,7 +133,7 @@ public class MagicBook : MonoBehaviour
         {
             SetPivotBySprite(_sprite);
             image.sprite = _sprite;
-            yield return new WaitForSeconds(speedSlide);
+            yield return new WaitForSecondsRealtime(speedSlide);
         }
 
         ShowButton();
@@ -134,7 +145,7 @@ public class MagicBook : MonoBehaviour
         {
             SetPivotBySprite(_sprite);
             image.sprite = _sprite;
-            yield return new WaitForSeconds(speedSlide);
+            yield return new WaitForSecondsRealtime(speedSlide);
         }
 
         ShowButton();
@@ -146,7 +157,7 @@ public class MagicBook : MonoBehaviour
         {
             SetPivotBySprite(blueSpriteArray[i]);
             image.sprite = blueSpriteArray[i];
-            yield return new WaitForSeconds(speedSlide);
+            yield return new WaitForSecondsRealtime(speedSlide);
         }
 
         HideButton();
@@ -159,7 +170,7 @@ public class MagicBook : MonoBehaviour
         {
             SetPivotBySprite(redSpriteArray[i]);
             image.sprite = redSpriteArray[i];
-            yield return new WaitForSeconds(speedSlide);
+            yield return new WaitForSecondsRealtime(speedSlide);
         }
 
         HideButton();

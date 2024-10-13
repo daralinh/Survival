@@ -23,6 +23,7 @@ public class UpgradeManager : Singleton<UpgradeManager>
         currentExp = 0;
         expbar.SetCurrentValue(0);
         countToOpenBook = 0;
+        CursorManager.Instance.SetCursor1();
        // Debug.Log($"{expbar.slider.value}/{expbar.slider.maxValue}");
     }
 

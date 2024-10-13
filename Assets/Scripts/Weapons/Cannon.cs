@@ -4,8 +4,6 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class Cannon : AWeapon
 {
-    [SerializeField] private float recoilStrength;
-    [SerializeField] private float maxRecoilAngle;
     private Animator animator;
 
     protected override void Awake()
@@ -29,11 +27,6 @@ public class Cannon : AWeapon
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePosition.z = 0;
 
-        aimDirection = (mousePosition - transform.position).normalized;
-
-        float randomAngle = Random.Range(-maxRecoilAngle, maxRecoilAngle);
-        aimDirection = Quaternion.Euler(0, 0, randomAngle) * aimDirection;
-
-        return (Vector2)aimDirection;
+        return (mousePosition - transform.position).normalized;
     }
 }

@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class KunaiBullet : ABullet
@@ -23,6 +22,21 @@ public class KunaiBullet : ABullet
         isShooting = true;
         gameObject.SetActive(true);
         trailRenderer.emitting = true;
+    }
+
+    protected override void OnTriggerEnter2D(Collider2D _collision2D)
+    {
+        if (_collision2D.gameObject.layer == LayerMask.NameToLayer(targetLayer.ToString()))
+        {
+            AHpManager _hpComponent
+                = _collision2D.gameObject.GetComponents<Component>().FirstOrDefault(c => c is AHpManager) as AHpManager;
+
+            if (_hpComponent != null)
+            {
+                _hpComponent.TakeDMG((targetLayer == ELayer.Enemy) ? dmg + UpgradeManager.Instance.BuffDMG : dmg, transform.position);
+                BackToPool();
+            }
+        }
     }
 
     protected override void BackToPool()
