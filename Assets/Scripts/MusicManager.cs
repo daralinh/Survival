@@ -1,20 +1,19 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class MusicManager : Singleton<MusicManager>
 {
     public Sound[] MusicSounds, SFXSounds;
     public AudioSource MusicSource, SFXSource, MagicBookSoundSource, SpawnDummySource;
-    public AudioSource FireBallSource, LightningSource;
+    public AudioSource AudioSourcePrefab;
 
     public float coolDownPlaySFX;
-    public float coolDownFireBall;
-    public float coolDownLightningStrike;
 
     private float lastTimePlaySFX;
-    private float lastTimeFireBall;
-    private float lastTimeLightningStrike;
-    
+    private Queue<AudioSource> BulletAudioSourceQueue = new Queue<AudioSource>();
+
     protected override void Awake()
     {
         base.Awake();
@@ -58,27 +57,24 @@ public class MusicManager : Singleton<MusicManager>
         SpawnDummySource.Play();
     }
 
-    public void PlayFireBallSource(EMusic nameSound)
+    public void PlayBulletSFX(EMusic nameSound)
     {
-        if (Time.time - lastTimeFireBall < coolDownFireBall)
+        if (BulletAudioSourceQueue.Count == 0)
         {
-            return;
+            BulletAudioSourceQueue.Enqueue(Instantiate(AudioSourcePrefab, transform.position ,Quaternion.identity));
         }
 
-        Sound _sound = Array.Find(SFXSounds, x => x.nameSound == nameSound.ToString());
-        FireBallSource.clip = _sound.clip;
-        FireBallSource.Play();
+        AudioSource _audioSource = BulletAudioSourceQueue.Dequeue();
+        _audioSource.clip = Array.Find(SFXSounds, x => x.nameSound == nameSound.ToString()).clip;
+        _audioSource.Play();
+        StartCoroutine(ReturnToPool(_audioSource));
     }
 
-    public void PlayLightningSource(EMusic nameSound)
+    private IEnumerator ReturnToPool(AudioSource _audioSource)
     {
-        if (Time.time - lastTimeLightningStrike < coolDownLightningStrike)
-        {
-            return;
-        }
-
-        Sound _sound = Array.Find(SFXSounds, x => x.nameSound == nameSound.ToString());
-        LightningSource.clip = _sound.clip;
-        LightningSource.Play();
+        yield return new WaitForSeconds(_audioSource.clip.length);
+        _audioSource.Stop();
+        _audioSource.clip = null;
+        BulletAudioSourceQueue.Enqueue(_audioSource);
     }
 }

@@ -99,6 +99,7 @@ public class SpawnEnemyAroundPlayer : Singleton<SpawnEnemyAroundPlayer>
         MusicManager.Instance.PlaySpawnDummySource(EMusic.MarchingDummy);
         yield return new WaitForSeconds(58f);
         MusicManager.Instance.SpawnDummySource.Stop();
+        MusicManager.Instance.SpawnDummySource.clip = null;
     }
 
     private void OnDrawGizmosSelected()

@@ -8,8 +8,8 @@ public class PoolingChest : Singleton<PoolingChest>
     [SerializeField] private NormalChest normalChestPrefab;
     [SerializeField] private GoldChest goldChestPrefab;
 
-    private List<NormalChest> normalChestList = new List<NormalChest>();
-    private List<GoldChest> goldChestList = new List<GoldChest>();
+    private Queue<NormalChest> normalChestQueue = new Queue<NormalChest>();
+    private Queue<GoldChest> goldChestQueue = new Queue<GoldChest>();
 
     protected override void Awake()
     {
@@ -18,28 +18,24 @@ public class PoolingChest : Singleton<PoolingChest>
 
     public void SpawnNormalChest(Vector2 _positionToSpawn)
     {
-        if (normalChestList.Count == 0)
+        if (normalChestQueue.Count == 0)
         {
             NormalChest _newNormalChest = Instantiate(normalChestPrefab, _positionToSpawn, Quaternion.identity);
-            normalChestList.Add(_newNormalChest);
+            normalChestQueue.Enqueue(_newNormalChest);
         }
 
-        NormalChest normalChest = normalChestList[0];
-        normalChestList.RemoveAt(0);
-        normalChest.Born(_positionToSpawn);
+        normalChestQueue.Dequeue().Born(_positionToSpawn);
     }
 
     public void SpawnGoldChest(Vector2 _positionToSpawn)
     {
-        if (normalChestList.Count == 0)
+        if (normalChestQueue.Count == 0)
         {
             NormalChest _newNormalChest = Instantiate(normalChestPrefab, _positionToSpawn, Quaternion.identity);
-            normalChestList.Add(_newNormalChest);
+            normalChestQueue.Enqueue(_newNormalChest);
         }
 
-        NormalChest normalChest = normalChestList[0];
-        normalChestList.RemoveAt(0);
-        normalChest.Born(_positionToSpawn);
+        normalChestQueue.Dequeue().Born(_positionToSpawn);
     }
 
     public void BackToBool(AChest oldChest)
@@ -47,16 +43,16 @@ public class PoolingChest : Singleton<PoolingChest>
         switch (oldChest)
         {
             case NormalChest normalChest:
-                if (!normalChestList.Contains(normalChest))
+                if (!normalChestQueue.Contains(normalChest))
                 {
-                    normalChestList.Add(normalChest);
+                    normalChestQueue.Enqueue(normalChest);
                 }
 
                 return;
             case GoldChest goldChest:
-                if (!goldChestList.Contains(goldChest))
+                if (!goldChestQueue.Contains(goldChest))
                 {
-                    goldChestList.Add(goldChest);
+                    goldChestQueue.Enqueue(goldChest);
                 }
 
                 return;

@@ -9,9 +9,9 @@ public class PoolingItem : Singleton<PoolingItem>
     [SerializeField] private BloodBottle bloodBottlePrefab;
     [SerializeField] private PurpleMedicine purpleMedicinePrefab;
 
-    private List<BlueGem> blueGemList = new List<BlueGem>();
-    private List<BloodBottle> bloodBottleList = new List<BloodBottle>();
-    private List<PurpleMedicine> purpleMedicineList = new List<PurpleMedicine>();
+    private Queue<BlueGem> blueGemQueue = new Queue<BlueGem>();
+    private Queue<BloodBottle> bloodBottleQueue = new Queue<BloodBottle>();
+    private Queue<PurpleMedicine> purpleMedicineQueue = new Queue<PurpleMedicine>();
 
     protected override void Awake()
     {
@@ -20,41 +20,35 @@ public class PoolingItem : Singleton<PoolingItem>
 
     public void SpawnBlueGem(Vector2 _positionToSpawn)
     {
-        if (blueGemList.Count == 0)
+        if (blueGemQueue.Count == 0)
         {
             BlueGem _newBlueGem = Instantiate(blueGemPrefab, _positionToSpawn, Quaternion.identity);
-            blueGemList.Add(_newBlueGem);
+            blueGemQueue.Enqueue(_newBlueGem);
         }
 
-        BlueGem _blueGem = blueGemList[0];
-        blueGemList.RemoveAt(0);
-        _blueGem.Born(_positionToSpawn);
+        blueGemQueue.Dequeue().Born(_positionToSpawn);
     }
 
     public void SpawnBloodBottle(Vector2 _positionToSpawn)
     {
-        if (bloodBottleList.Count == 0)
+        if (bloodBottleQueue.Count == 0)
         {
             BloodBottle _newBloodBottle = Instantiate(bloodBottlePrefab, _positionToSpawn, Quaternion.identity);
-            bloodBottleList.Add(_newBloodBottle);
+            bloodBottleQueue.Enqueue(_newBloodBottle);
         }
 
-        BloodBottle _bloodBottle = bloodBottleList[0];
-        bloodBottleList.RemoveAt(0);
-        _bloodBottle.Born(_positionToSpawn);
+        bloodBottleQueue.Dequeue().Born(_positionToSpawn);
     }
 
     public void SpawnPurpleMedicine(Vector2 _positionToSpawn)
     {
-        if (purpleMedicineList.Count == 0)
+        if (purpleMedicineQueue.Count == 0)
         {
             PurpleMedicine _newPurpleMedicine = Instantiate(purpleMedicinePrefab, _positionToSpawn, Quaternion.identity);
-            purpleMedicineList.Add(_newPurpleMedicine);
+            purpleMedicineQueue.Enqueue(_newPurpleMedicine);
         }
 
-        PurpleMedicine _purpleMedicine = purpleMedicineList[0];
-        purpleMedicineList.RemoveAt(0);
-        _purpleMedicine.Born(_positionToSpawn);
+        purpleMedicineQueue.Dequeue().Born(_positionToSpawn);
     }
 
     public void BackToPool(AItem _item)
@@ -62,23 +56,23 @@ public class PoolingItem : Singleton<PoolingItem>
         switch (_item)
         {
             case BlueGem _blueGem:
-                if (!(blueGemList.Contains(_blueGem)))
+                if (!(blueGemQueue.Contains(_blueGem)))
                 {
-                    blueGemList.Add(_blueGem);
+                    blueGemQueue.Enqueue(_blueGem);
                 }
                 return;
 
             case BloodBottle _bloodBottle:
-                if (!bloodBottleList.Contains(_bloodBottle))
+                if (!bloodBottleQueue.Contains(_bloodBottle))
                 {
-                    bloodBottleList.Add(_bloodBottle);
+                    bloodBottleQueue.Enqueue(_bloodBottle);
                 }
                 return;
 
             case PurpleMedicine _purpleMedicine:
-                if (!purpleMedicineList.Contains(_purpleMedicine))
+                if (!purpleMedicineQueue.Contains(_purpleMedicine))
                 {
-                    purpleMedicineList.Add(_purpleMedicine);
+                    purpleMedicineQueue.Enqueue(_purpleMedicine);
                 }
                 return;
 

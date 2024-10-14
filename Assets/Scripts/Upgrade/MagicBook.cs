@@ -56,6 +56,7 @@ public class MagicBook : MonoBehaviour
         Time.timeScale = 0;
         isBlue = true;
         gameObject.SetActive(true);
+        image.sprite = blueSpriteArray[0];
         StartCoroutine(PlayOpenBlueAnimUIHanlder());
     }
 
@@ -67,6 +68,7 @@ public class MagicBook : MonoBehaviour
         Time.timeScale = 0;
         isBlue = false;
         gameObject.SetActive(true);
+        image.sprite = redSpriteArray[0];
         StartCoroutine(PlayOpenRedAnimUIHanlder());
     }
 

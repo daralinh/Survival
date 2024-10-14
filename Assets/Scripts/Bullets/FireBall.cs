@@ -23,7 +23,7 @@ public class FireBall : ABullet
         isShooting = true;
         gameObject.SetActive(true);
         animator.SetTrigger(EAnimation.Shoot.ToString());
-        MusicManager.Instance.PlayFireBallSource(EMusic.FireBall);
+        MusicManager.Instance.PlayBulletSFX(EMusic.FireBall);
     }
 
     protected override void BackToPool()
