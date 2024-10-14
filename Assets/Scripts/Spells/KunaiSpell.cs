@@ -14,7 +14,7 @@ public class KunaiSpell : ASpell
 
         foreach (Collider2D _object in objectsHit)
         {
-            Debug.Log("Shoot");
+            //Debug.Log("Shoot");
             PoolingBullet.Instance.ShootKunai(transform, _object.transform.position, ELayer.Enemy);
 
             if (++countNumberShootInPerAttack == numberShootInPerAttack)

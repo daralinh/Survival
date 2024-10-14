@@ -102,7 +102,7 @@ public class PoolingBullet : Singleton<PoolingBullet>
 
     public void ShootFireStorm(Transform source, Vector2 targetPosition, ELayer targetLayer)
     {
-        if (fireBallList.Count == 0)
+        if (fireStormList.Count == 0)
         {
             FireStorm _newFireStorm = Instantiate(fireStormPrefab, source.position, Quaternion.identity);
             fireStormList.Add(_newFireStorm);

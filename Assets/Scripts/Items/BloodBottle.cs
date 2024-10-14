@@ -8,6 +8,7 @@ public class BloodBottle : AItem
 
     protected override void BackToBool()
     {
+        MusicManager.Instance.PlaySFX(EMusic.GetBottle);
         PlayerController.Instance.HpManager.Heal(valueHpToHeal);
         base.BackToBool();
     }

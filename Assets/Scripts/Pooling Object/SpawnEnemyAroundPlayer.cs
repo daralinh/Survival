@@ -78,6 +78,7 @@ public class SpawnEnemyAroundPlayer : Singleton<SpawnEnemyAroundPlayer>
 
     private IEnumerator SpawnDummyCoroutine()
     {
+        MusicManager.Instance.PlaySpawnDummySource(EMusic.SpawnDummy);
         float _angleStep = 360 / numberOfObjects;
         Vector2 _positionToSpawnDummy = PlayerController.Instance.transform.position;
 
@@ -94,6 +95,10 @@ public class SpawnEnemyAroundPlayer : Singleton<SpawnEnemyAroundPlayer>
 
             yield return new WaitForSeconds(0.05f);
         }
+
+        MusicManager.Instance.PlaySpawnDummySource(EMusic.MarchingDummy);
+        yield return new WaitForSeconds(58f);
+        MusicManager.Instance.SpawnDummySource.Stop();
     }
 
     private void OnDrawGizmosSelected()

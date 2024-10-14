@@ -12,6 +12,7 @@ public class BlueGem : AItem
 
     protected override void BackToBool()
     {
+        MusicManager.Instance.PlaySFX(EMusic.GetGem);
         trailRenderer.emitting = false;
         trailRenderer.Clear();
         base.BackToBool();

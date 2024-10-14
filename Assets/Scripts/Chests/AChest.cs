@@ -47,7 +47,6 @@ public abstract class AChest : MonoBehaviour
 
     protected virtual void OpenChest()
     {
-        Debug.Log("1");
         animator.SetTrigger(EAnimation.Open.ToString());
         circleCollider2D.enabled = false;
     }

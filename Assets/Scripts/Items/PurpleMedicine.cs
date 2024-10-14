@@ -8,6 +8,7 @@ public class PurpleMedicine : AItem
 
     protected override void BackToBool()
     {
+        MusicManager.Instance.PlaySFX(EMusic.GetBottle);
         PlayerController.Instance.HpManager.BuffOriginHp(hpToBuff);
         base.BackToBool();
     }

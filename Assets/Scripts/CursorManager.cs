@@ -7,12 +7,11 @@ public class CursorManager : Singleton<CursorManager>
 
     public void SetCursor1()
     {
-        Cursor.SetCursor(mouseIcon1, new Vector2(mouseIcon1.height / 2, mouseIcon1.width / 2), CursorMode.Auto);
-        //Debug.Log();
+        Cursor.SetCursor(mouseIcon1, new Vector2(mouseIcon1.height / 2, mouseIcon1.width / 2), CursorMode.ForceSoftware);
     }
 
     public void SetCursor2()
     {
-        Cursor.SetCursor(mouseIcon1, Vector2.zero, CursorMode.Auto);
+        Cursor.SetCursor(mouseIcon1, Vector2.zero, CursorMode.ForceSoftware);
     }
 }

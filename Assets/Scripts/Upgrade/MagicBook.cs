@@ -51,6 +51,7 @@ public class MagicBook : MonoBehaviour
     public void OpenBlueBook()
     {
         CursorManager.Instance.SetCursor2();
+        MusicManager.Instance.PlayMagicBookSound(EMusic.OpenBlueBook);
         originalTimeScale = Time.timeScale;
         Time.timeScale = 0;
         isBlue = true;
@@ -61,6 +62,7 @@ public class MagicBook : MonoBehaviour
     public void OpenRedBook()
     {
         CursorManager.Instance.SetCursor2();
+        MusicManager.Instance.PlayMagicBookSound(EMusic.OpenRedBook);
         originalTimeScale = Time.timeScale;
         Time.timeScale = 0;
         isBlue = false;
@@ -115,6 +117,9 @@ public class MagicBook : MonoBehaviour
 
     public void CloseBook()
     {
+        HideButton();
+        MusicManager.Instance.PlayMagicBookSound(EMusic.CloseBook);
+
         if (isBlue)
         {
             StartCoroutine(PlayCloseBlueAnimUIHanlder());
@@ -129,6 +134,8 @@ public class MagicBook : MonoBehaviour
 
     IEnumerator PlayOpenBlueAnimUIHanlder()
     {
+        yield return new WaitForSecondsRealtime(0.5f);
+
         foreach (Sprite _sprite in blueSpriteArray)
         {
             SetPivotBySprite(_sprite);
@@ -141,6 +148,8 @@ public class MagicBook : MonoBehaviour
 
     IEnumerator PlayOpenRedAnimUIHanlder()
     {
+        yield return new WaitForSecondsRealtime(0.5f);
+
         foreach (Sprite _sprite in redSpriteArray)
         {
             SetPivotBySprite(_sprite);
@@ -160,8 +169,8 @@ public class MagicBook : MonoBehaviour
             yield return new WaitForSecondsRealtime(speedSlide);
         }
 
-        HideButton();
         gameObject.SetActive(false);
+        yield return new WaitForSecondsRealtime(1f);
     }
 
     IEnumerator PlayCloseRedAnimUIHanlder()
@@ -173,8 +182,8 @@ public class MagicBook : MonoBehaviour
             yield return new WaitForSecondsRealtime(speedSlide);
         }
 
-        HideButton();
         gameObject.SetActive(false);
+        yield return new WaitForSecondsRealtime(1f);
     }
 
     private void SetPivotBySprite(Sprite _sprite)
