@@ -97,7 +97,8 @@ public class SpawnEnemyAroundPlayer : Singleton<SpawnEnemyAroundPlayer>
         }
 
         MusicManager.Instance.PlaySpawnDummySource(EMusic.MarchingDummy);
-        yield return new WaitForSeconds(58f);
+        yield return new WaitForSeconds(timeToDummyDeath - 1.5f);
+        MusicManager.Instance.SpawnDummySource.loop = false;
         MusicManager.Instance.SpawnDummySource.Stop();
         MusicManager.Instance.SpawnDummySource.clip = null;
     }

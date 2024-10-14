@@ -1264,7 +1264,7 @@ GameObject:
   - component: {fileID: 538952552}
   - component: {fileID: 538952553}
   m_Layer: 0
-  m_Name: SpawnDummySource
+  m_Name: Spawn Dummy Source
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2837,12 +2837,24 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 1537610386c23214e81f6d73d43c8015, type: 3}
   - nameSound: LightningStrike
     clip: {fileID: 8300000, guid: 91adb583c3d920e47b948e2eb79d121b, type: 3}
+  - nameSound: Kunai
+    clip: {fileID: 8300000, guid: 0fb7479af080bc144a61aaeb64d9803b, type: 3}
+  - nameSound: BornFire
+    clip: {fileID: 8300000, guid: a31b6ca32f341414abe6a065dd479576, type: 3}
+  - nameSound: FireSpot
+    clip: {fileID: 8300000, guid: 0c220efc2ea220b459d27ef0db40dd57, type: 3}
+  - nameSound: GreenExplosion
+    clip: {fileID: 8300000, guid: d31771cffa5ee8a4aa5cfbed3e9a91bb, type: 3}
+  - nameSound: RedExplosion
+    clip: {fileID: 8300000, guid: 1b87bd04893645346bfd78624845836c, type: 3}
+  - nameSound: Spider Silk
+    clip: {fileID: 8300000, guid: 5b2801e7f3312c245a00a7deabb0cb8d, type: 3}
   MusicSource: {fileID: 1157027108}
   SFXSource: {fileID: 352069102}
   MagicBookSoundSource: {fileID: 1128246975}
   SpawnDummySource: {fileID: 538952553}
   AudioSourcePrefab: {fileID: 959240466892136611, guid: 386c8713afb40cc46a73f4af9397ab5f, type: 3}
-  coolDownPlaySFX: 0.2
+  coolDownPlaySFX: 0.35
 --- !u!4 &1320287452
 Transform:
   m_ObjectHideFlags: 0
@@ -2966,7 +2978,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 10.5
   timeToReSpawn: 1
-  timeToDummyDeath: 10
+  timeToDummyDeath: 15
   numberOfObjects: 50
   radiusOfSpawnDummy: 5.5
 --- !u!1 &1505116564

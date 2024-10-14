@@ -8,6 +8,8 @@ public class Dummy : AEnemy
     private float timeToDeath;
     private float countTimeToDeath;
 
+    public float DisplayTime => timeToDeath;
+
     protected override void Awake()
     {
         ID = id++;

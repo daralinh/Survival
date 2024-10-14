@@ -63,7 +63,7 @@ public class FireSpot : ABullet
         explosionDirection = capsuleCollider.direction;
 
         Collider2D[] objectsHit = Physics2D.OverlapCircleAll(transform.position, explosionRadius, LayerMask.GetMask(targetLayer.ToString()));
-
+        MusicManager.Instance.PlayBulletSFX(EMusic.BornFire);
         foreach (Collider2D _object in objectsHit)
         {
             AHpManager hpManager

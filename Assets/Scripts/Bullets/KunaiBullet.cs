@@ -20,6 +20,7 @@ public class KunaiBullet : ABullet
         moveDir = (_targetPosition - rb2D.position).normalized;
         targetLayer = _targetLayer;
         isShooting = true;
+        MusicManager.Instance.PlayBulletSFX(EMusic.Kunai);
         gameObject.SetActive(true);
         trailRenderer.emitting = true;
     }

@@ -31,6 +31,7 @@ public class Burn : ABullet
 
             if (countBurnTime >= (1 / burnSpeed))
             {
+                MusicManager.Instance.PlayBulletSFX(EMusic.FireSpot);
                 countBurnTime = 0;
                 AHpManager hpManager = target.GetComponent<AHpManager>();
                 hpManager.TakeDMG(dmg + UpgradeManager.Instance.BuffDMG, transform.position);

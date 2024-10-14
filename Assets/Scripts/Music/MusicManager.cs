@@ -53,6 +53,7 @@ public class MusicManager : Singleton<MusicManager>
     public void PlaySpawnDummySource(EMusic nameSound)
     {
         Sound _sound = Array.Find(SFXSounds, x => x.nameSound == nameSound.ToString());
+        SpawnDummySource.loop = true;
         SpawnDummySource.clip = _sound.clip;
         SpawnDummySource.Play();
     }

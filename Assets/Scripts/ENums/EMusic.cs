@@ -9,5 +9,11 @@ public enum EMusic
     OpenRedBook,
     FireBall,
     MarchingDummy,
-    LightningStrike
+    LightningStrike,
+    Kunai,
+    BornFire,
+    FireSpot,
+    GreenExplosion,
+    RedExplosion,
+    SpiderSilk
 }

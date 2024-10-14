@@ -38,7 +38,7 @@ public class GreenExplosion : ABullet
         animator.SetTrigger(EAnimation.Shoot.ToString());
 
         Collider2D[] objectsHit = Physics2D.OverlapCircleAll(transform.position, explosionRadius, LayerMask.GetMask(_targetLayer.ToString()));
-
+        MusicManager.Instance.PlayBulletSFX(EMusic.GreenExplosion);
         foreach (Collider2D _object in objectsHit)
         {
             AHpManager hpManager
