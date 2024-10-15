@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Dummy : AEnemy
 {
@@ -43,14 +41,6 @@ public class Dummy : AEnemy
         countTimeToDeath = 0;
 
         base.Born(_position);
-        if (_position.x < transform.position.x)
-        {
-            transform.rotation = Quaternion.Euler(0, -180, 0);
-        }
-        else
-        {
-            transform.rotation = Quaternion.Euler(0, 0, 0);
-        }
     }
 
     protected override void OnDrawGizmosSelected()
@@ -68,6 +58,19 @@ public class Dummy : AEnemy
         }
 
         base.Update();
+    }
+
+    protected override void FixedUpdate()
+    {
+        if (transform.position.x < PlayerController.Instance.transform.position.x)
+        {
+            transform.rotation = Quaternion.Euler(0, -180, 0);
+        }
+        else
+        {
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
+        base.FixedUpdate();
     }
 
     // Move State
