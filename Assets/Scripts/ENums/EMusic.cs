@@ -15,5 +15,6 @@ public enum EMusic
     FireSpot,
     GreenExplosion,
     RedExplosion,
-    SpiderSilk
+    SpiderSilk,
+    FireStorm
 }

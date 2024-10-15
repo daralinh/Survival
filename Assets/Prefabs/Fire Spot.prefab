@@ -187,4 +187,4 @@ MonoBehaviour:
   originSpeed: 0
   timeToHide: 3
   explosionRadius: 0.85
-  attackSpeed: 4
+  attackSpeed: 3

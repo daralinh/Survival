@@ -21,6 +21,7 @@ public class FireStorm : ABullet
         targetLayer = _targetLayer;
         isShooting = true;
         gameObject.SetActive(true);
+        MusicManager.Instance.PlayBulletSFX(EMusic.FireStorm);
         animator.SetTrigger(EAnimation.Shoot.ToString());
     }
 

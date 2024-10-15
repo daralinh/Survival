@@ -48,8 +48,8 @@ public abstract class AEnemy : MonoBehaviour
         hpManager = GetComponent<EnemyHpManager>();
 
         spriteRenderer.spriteSortPoint = SpriteSortPoint.Pivot;
+        rb2D.bodyType = RigidbodyType2D.Kinematic;
         rb2D.freezeRotation = true;
-        rb2D.gravityScale = 0;
         rb2D.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
         capsuleCollider2D.isTrigger = true;
 

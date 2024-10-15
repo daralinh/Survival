@@ -50,6 +50,7 @@ public class MagicBook : MonoBehaviour
 
     public void OpenBlueBook()
     {
+        MusicManager.Instance.SpawnDummySource.Pause();
         CursorManager.Instance.SetCursor2();
         MusicManager.Instance.PlayMagicBookSound(EMusic.OpenBlueBook);
         originalTimeScale = Time.timeScale;
@@ -62,6 +63,7 @@ public class MagicBook : MonoBehaviour
 
     public void OpenRedBook()
     {
+        MusicManager.Instance.SpawnDummySource.Pause();
         CursorManager.Instance.SetCursor2();
         MusicManager.Instance.PlayMagicBookSound(EMusic.OpenRedBook);
         originalTimeScale = Time.timeScale;
@@ -131,6 +133,7 @@ public class MagicBook : MonoBehaviour
 
         Time.timeScale = originalTimeScale;
         CursorManager.Instance.SetCursor1();
+        MusicManager.Instance.SpawnDummySource.Play();
     }
 
     private IEnumerator PlayOpenBlueAnimUIHanlder()

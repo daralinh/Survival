@@ -63,7 +63,7 @@ public class FireSpot : ABullet
         explosionDirection = capsuleCollider.direction;
 
         Collider2D[] objectsHit = Physics2D.OverlapCircleAll(transform.position, explosionRadius, LayerMask.GetMask(targetLayer.ToString()));
-        MusicManager.Instance.PlayBulletSFX(EMusic.BornFire);
+
         foreach (Collider2D _object in objectsHit)
         {
             AHpManager hpManager
@@ -71,7 +71,7 @@ public class FireSpot : ABullet
 
             if (hpManager != null)
             {
-                hpManager.TakeDMG(+UpgradeManager.Instance.BuffDMG, transform.position);
+                hpManager.TakeDMG((targetLayer == ELayer.Enemy) ? dmg + UpgradeManager.Instance.BuffDMG : dmg, transform.position);
                 //PoolingBullet.Instance.ShootBurn(hpManager.gameObject);
             }
         }
@@ -84,6 +84,7 @@ public class FireSpot : ABullet
         targetLayer = _targetLayer;
         isShooting = true;
         gameObject.SetActive(true);
+        MusicManager.Instance.PlayBulletSFX(EMusic.BornFire);
         animator.SetTrigger(EAnimation.Shoot.ToString());
     }
 

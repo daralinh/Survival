@@ -27,6 +27,7 @@ public class Dummy : AEnemy
         rb2D.gravityScale = 0;
         rb2D.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
         rb2D.velocity = Vector2.zero;
+        rb2D.bodyType = RigidbodyType2D.Kinematic;
         rb2D.isKinematic = true;
         capsuleCollider2D.isTrigger = false;
 

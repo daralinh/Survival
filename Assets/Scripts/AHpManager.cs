@@ -46,7 +46,6 @@ public abstract class AHpManager : MonoBehaviour
     public virtual void HealFullHp()
     {
         currentHp = originHp;
-        PoolingTMP.Instance.SpawnTMP($"+{originHp}", transform.position, EColor.Red);
         flashSprite.BackToOriginMaterial();
     }
 

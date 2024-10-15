@@ -34,7 +34,7 @@ public class UpgradeManager : Singleton<UpgradeManager>
     public void TakeExp(int _valueExp)
     {
         currentExp += _valueExp;
-        PoolingTMP.Instance.SpawnTMP($"{_valueExp}", transform.position, EColor.Blue);
+        PoolingTMP.Instance.SpawnTMP($"{_valueExp}", PlayerController.Instance.transform.position, EColor.Blue);
         //Debug.Log($"{expbar.slider.value}/{expbar.slider.maxValue}");
         if (currentExp >= expToUpgrade)
         {

@@ -7,6 +7,6 @@
 
     public override string GetContent()
     {
-        return "Tăng 7 sát thương từ đòn đánh";
+        return "Tăng 7 sát thương";
     }
 }
