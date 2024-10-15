@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PoolingEnemy : Singleton<PoolingEnemy>
@@ -246,6 +247,14 @@ public class PoolingEnemy : Singleton<PoolingEnemy>
                 }
                 break;
 
+            case BanditNecromancer _banditNecromancer:
+                if (!banditNecromancerQueue.Contains(_banditNecromancer))
+                {
+                    SpawnEnemyAroundPlayer.Instance.CurrentNumberBanditNecromancer--;
+                    banditNecromancerQueue.Enqueue(_banditNecromancer);
+                }
+
+                break;
             default:
                 break;
         }

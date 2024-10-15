@@ -61,7 +61,11 @@ public class SpawnEnemyAroundPlayer : Singleton<SpawnEnemyAroundPlayer>
 
     public void Spawn()
     {
-        PoolingEnemy.Instance.SpawnEnemy(ETag.Bat, GetRandomPositionAroundCenter());
+        if (LevelManager.Instance.CurrentLv > 3)
+        {
+            PoolingEnemy.Instance.SpawnEnemy(ETag.Bat, GetRandomPositionAroundCenter());
+        }
+
         PoolingEnemy.Instance.SpawnEnemy(ETag.Doc, GetRandomPositionAroundCenter());
         PoolingEnemy.Instance.SpawnEnemy(ETag.PumpkinDude, GetRandomPositionAroundCenter());
         PoolingEnemy.Instance.SpawnEnemy(ETag.BanditNecromancer, GetRandomPositionAroundCenter());

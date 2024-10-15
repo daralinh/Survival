@@ -28,6 +28,7 @@ public abstract class AHpManager : MonoBehaviour
         }
 
         currentHp = Mathf.Max(0, currentHp - dmg);
+        PoolingTMP.Instance.SpawnTMP($"-{dmg}", transform.position, EColor.White);
     }
 
     public bool IsFullHp()
@@ -38,18 +39,21 @@ public abstract class AHpManager : MonoBehaviour
     public virtual void BuffOriginHp(float _valueToBuff)
     {
         originHp = Mathf.Max(_valueToBuff + originHp, originHp);
+        PoolingTMP.Instance.SpawnTMP($"+{originHp}", transform.position, EColor.Purple);
         Heal(_valueToBuff);
     }
 
     public virtual void HealFullHp()
     {
         currentHp = originHp;
+        PoolingTMP.Instance.SpawnTMP($"+{originHp}", transform.position, EColor.Red);
         flashSprite.BackToOriginMaterial();
     }
 
     public virtual void Heal(float _valueToHeal)
     {
         currentHp = Mathf.Min(currentHp + _valueToHeal, originHp);
+        PoolingTMP.Instance.SpawnTMP($"+{_valueToHeal}", transform.position, EColor.Red);
         flashSprite.BackToOriginMaterial();
     }
 

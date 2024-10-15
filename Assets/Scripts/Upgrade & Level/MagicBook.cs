@@ -97,7 +97,6 @@ public class MagicBook : MonoBehaviour
 
     public void ClickOnLeft()
     {
-        Time.timeScale = originalTimeScale;
         HideButton();
         leftUpgrade.Active();
         CloseBook();
@@ -105,7 +104,6 @@ public class MagicBook : MonoBehaviour
 
     public void ClickOnRight()
     {
-        Time.timeScale = originalTimeScale;
         HideButton();
         rightUpgrade.Active();
         CloseBook();
@@ -131,10 +129,11 @@ public class MagicBook : MonoBehaviour
             StartCoroutine(PlayCloseRedAnimUIHanlder());
         }
 
+        Time.timeScale = originalTimeScale;
         CursorManager.Instance.SetCursor1();
     }
 
-    IEnumerator PlayOpenBlueAnimUIHanlder()
+    private IEnumerator PlayOpenBlueAnimUIHanlder()
     {
         yield return new WaitForSecondsRealtime(0.5f);
 
@@ -148,7 +147,7 @@ public class MagicBook : MonoBehaviour
         ShowButton();
     }
 
-    IEnumerator PlayOpenRedAnimUIHanlder()
+    private IEnumerator PlayOpenRedAnimUIHanlder()
     {
         yield return new WaitForSecondsRealtime(0.5f);
 
@@ -162,7 +161,7 @@ public class MagicBook : MonoBehaviour
         ShowButton();
     }
 
-    IEnumerator PlayCloseBlueAnimUIHanlder()
+    private IEnumerator PlayCloseBlueAnimUIHanlder()
     {
         for (int i = blueSpriteArray.Length - 1; i >= 0; i--)
         {
@@ -171,11 +170,12 @@ public class MagicBook : MonoBehaviour
             yield return new WaitForSecondsRealtime(speedSlide);
         }
 
+        image.sprite = null;
         gameObject.SetActive(false);
-        yield return new WaitForSecondsRealtime(1f);
+        yield return new WaitForSecondsRealtime(1.5f);
     }
 
-    IEnumerator PlayCloseRedAnimUIHanlder()
+    private IEnumerator PlayCloseRedAnimUIHanlder()
     {
         for (int i = redSpriteArray.Length - 1; i >= 0; i--)
         {
@@ -184,8 +184,9 @@ public class MagicBook : MonoBehaviour
             yield return new WaitForSecondsRealtime(speedSlide);
         }
 
+        image.sprite = null;
         gameObject.SetActive(false);
-        yield return new WaitForSecondsRealtime(1f);
+        yield return new WaitForSecondsRealtime(1.5f);
     }
 
     private void SetPivotBySprite(Sprite _sprite)

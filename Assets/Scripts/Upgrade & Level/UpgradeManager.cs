@@ -22,7 +22,7 @@ public class UpgradeManager : Singleton<UpgradeManager>
         expbar.SetMaxValue(expToUpgrade);
         currentExp = 0;
         expbar.SetCurrentValue(0);
-        countToOpenBook = 0;
+        countToOpenBook = 2;
        // Debug.Log($"{expbar.slider.value}/{expbar.slider.maxValue}");
     }
 
@@ -34,6 +34,7 @@ public class UpgradeManager : Singleton<UpgradeManager>
     public void TakeExp(int _valueExp)
     {
         currentExp += _valueExp;
+        PoolingTMP.Instance.SpawnTMP($"{_valueExp}", transform.position, EColor.Blue);
         //Debug.Log($"{expbar.slider.value}/{expbar.slider.maxValue}");
         if (currentExp >= expToUpgrade)
         {
@@ -44,6 +45,11 @@ public class UpgradeManager : Singleton<UpgradeManager>
 
         expbar.SetCurrentValue(currentExp);
     }
+
+    public void RedBookUpgrade()
+    {
+        magicBook.OpenRedBook();
+    } 
 
     public void Upgrade()
     {
