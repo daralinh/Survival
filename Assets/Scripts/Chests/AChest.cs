@@ -7,10 +7,13 @@ using UnityEngine;
 
 public abstract class AChest : MonoBehaviour
 {
+    [SerializeField] public float displayTime;
     protected SpriteRenderer spriteRenderer;
     protected Animator animator;
     protected Rigidbody2D rb2D;
     protected CircleCollider2D circleCollider2D;
+
+    private float countDisplayTime;
 
     protected virtual void Awake()
     {
@@ -31,10 +34,20 @@ public abstract class AChest : MonoBehaviour
     public virtual void Born(Vector2 _positionToBorn)
     {
         transform.position = _positionToBorn;
-
+        countDisplayTime = 0;
         gameObject.SetActive(true);
         circleCollider2D.enabled = true;
         spriteRenderer.flipX = (transform.position.x < PlayerController.Instance.transform.position.x) ? true : false;
+    }
+
+    public void FixedUpdate()
+    {
+        countDisplayTime += Time.fixedDeltaTime;
+        if (countDisplayTime >= displayTime)
+        {
+            countDisplayTime = 0;
+            BackToPool();
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collider2D)

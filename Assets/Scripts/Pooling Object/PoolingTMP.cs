@@ -6,6 +6,7 @@ public class PoolingTMP : Singleton<PoolingTMP>
 {
     [SerializeField] private TMP tmpPrefab;
     [SerializeField] public Canvas canvas;
+    [SerializeField] private int maxQuantity;
     
     private Queue<TMP> tmpQueue = new Queue<TMP>();
     private List<Color> tmpColors = new List<Color>();
@@ -30,8 +31,14 @@ public class PoolingTMP : Singleton<PoolingTMP>
 
     public void SpawnTMP(string _content, Vector2 _position, EColor _color)
     {
+        if (maxQuantity < 1)
+        {
+            return;
+        }
+
         if (tmpQueue.Count == 0)
         {
+            maxQuantity--;
             tmpQueue.Enqueue(Instantiate(tmpPrefab, canvas.transform));
         }
 

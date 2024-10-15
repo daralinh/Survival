@@ -489,6 +489,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tmpPrefab: {fileID: 498543665430741992, guid: 2a9c4841f6cc7ab4ab921bf8cac33c66, type: 3}
   canvas: {fileID: 1867882522}
+  maxQuantity: 30
 --- !u!4 &158619754
 Transform:
   m_ObjectHideFlags: 0
