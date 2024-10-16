@@ -26,7 +26,6 @@ public class Silk : ABullet
     public override void StartShooting(Transform source, Vector2 targetPosition, ELayer _targetLayer)
     {
         speed = originSpeed;
-        MusicManager.Instance.PlayBulletSFX(EMusic.SpiderSilk);
         base.StartShooting(source, targetPosition, _targetLayer);
         FlipFollowTarget(targetPosition);
         animator.SetBool(EAnimation.Shoot.ToString(), true);

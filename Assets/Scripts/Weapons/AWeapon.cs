@@ -16,6 +16,7 @@ public abstract class AWeapon : MonoBehaviour
 
     protected virtual void Awake()
     {
+        gameObject.layer = LayerMask.NameToLayer("Weapon");
         spriteRenderer = GetComponent<SpriteRenderer>(); 
 
         spriteRenderer.spriteSortPoint = SpriteSortPoint.Pivot;

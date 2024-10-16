@@ -7,6 +7,6 @@
 
     public override string GetContent()
     {
-        return "Tăng 75% tốc độ đánh";
+        return "Tăng 0.75 tốc độ đánh";
     }
 }

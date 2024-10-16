@@ -1,7 +1,6 @@
 using System.Collections;
 using UnityEngine;
 
-[RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(CircleCollider2D))]
@@ -18,7 +17,6 @@ public abstract class AItem : MonoBehaviour
     protected SpriteRenderer spriteRenderer;
     protected Rigidbody2D rb2D;
     protected CircleCollider2D circleCollider2D;
-    protected Animator animator;
 
     protected bool isMoving;
     protected float countDisplayTime;
@@ -29,11 +27,10 @@ public abstract class AItem : MonoBehaviour
     protected virtual void Awake()
     {
         ID = id++;
-
+        gameObject.layer = LayerMask.NameToLayer("Item");
         spriteRenderer = GetComponent<SpriteRenderer>();
         rb2D = GetComponent<Rigidbody2D>();
         circleCollider2D = GetComponent<CircleCollider2D>();
-        animator = GetComponent<Animator>();
 
         spriteRenderer.spriteSortPoint = SpriteSortPoint.Pivot;
         spriteRenderer.sortingOrder = 1;
@@ -75,7 +72,6 @@ public abstract class AItem : MonoBehaviour
         if (countDisplayTime >= displayTime)
         {
             isMoving = false;
-            animator.SetTrigger(EAnimation.Idle.ToString());
             gameObject.SetActive(false);
             PoolingItem.Instance.BackToPool(this);
         }
@@ -93,7 +89,6 @@ public abstract class AItem : MonoBehaviour
     protected virtual void MoveToPlayer()
     {
         circleCollider2D.enabled = false;
-        animator.SetTrigger(EAnimation.Run.ToString());
         isMoving = true;
     }
 
@@ -105,7 +100,6 @@ public abstract class AItem : MonoBehaviour
     protected virtual void BackToBool()
     {
         isMoving = false;
-        animator.SetTrigger(EAnimation.Idle.ToString());
         gameObject.SetActive(false);
         PoolingItem.Instance.BackToPool(this);
         UpgradeManager.Instance.TakeExp(exp);

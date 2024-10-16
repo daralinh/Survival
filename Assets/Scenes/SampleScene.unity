@@ -624,7 +624,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tmpPrefab: {fileID: 498543665430741992, guid: 2a9c4841f6cc7ab4ab921bf8cac33c66, type: 3}
   canvas: {fileID: 1867882522}
-  maxQuantity: 25
+  maxQuantity: 17
 --- !u!4 &158619754
 Transform:
   m_ObjectHideFlags: 0
@@ -2264,7 +2264,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -785, y: 414.67606}
+  m_AnchoredPosition: {x: -755, y: 394}
   m_SizeDelta: {x: 42.2, y: 42.48}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &588743350
@@ -2520,6 +2520,7 @@ GameObject:
   - component: {fileID: 617735424}
   - component: {fileID: 617735423}
   - component: {fileID: 617735422}
+  - component: {fileID: 617735426}
   m_Layer: 5
   m_Name: Left Button (Legacy)
   m_TagString: Untagged
@@ -2641,6 +2642,19 @@ RectTransform:
   m_AnchoredPosition: {x: -175.1346, y: 2.6285}
   m_SizeDelta: {x: 247.8687, y: 394.2418}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &617735426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 617735421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2c37303992b0b647abbd80026bbfda5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tmp: {fileID: 284334222}
 --- !u!1 &665183925
 GameObject:
   m_ObjectHideFlags: 0
@@ -2937,7 +2951,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 742005024}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: ResetGame
+        m_MethodName: ButtonResetGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4400,7 +4414,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4c27fc5ddb071d40ac78f7be50cc265, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  originHp: 1000000
+  originHp: 150
   healthBar: {fileID: 100023821}
 --- !u!114 &991578814
 MonoBehaviour:
@@ -5216,7 +5230,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 273.4696, y: -144.46027}
+  m_AnchoredPosition: {x: 263.01855, y: -137.25739}
   m_SizeDelta: {x: 662.36, y: 593.29004}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1226852105
@@ -5336,10 +5350,8 @@ MonoBehaviour:
   - {fileID: 1308108795, guid: aa3dcf97760128b4db2d272007318d65, type: 3}
   - {fileID: -1472010419, guid: aa3dcf97760128b4db2d272007318d65, type: 3}
   speedSlide: 0.1
-  leftButton: {fileID: 617735422}
-  rightButton: {fileID: 1689592670}
-  leftText: {fileID: 284334222}
-  rightText: {fileID: 1454864256}
+  leftButton: {fileID: 617735426}
+  rightButton: {fileID: 1689592673}
 --- !u!114 &1227910049
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5701,8 +5713,6 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: d31771cffa5ee8a4aa5cfbed3e9a91bb, type: 3}
   - nameSound: RedExplosion
     clip: {fileID: 8300000, guid: 1b87bd04893645346bfd78624845836c, type: 3}
-  - nameSound: SpiderSilk
-    clip: {fileID: 8300000, guid: 5b2801e7f3312c245a00a7deabb0cb8d, type: 3}
   - nameSound: FireStorm
     clip: {fileID: 8300000, guid: 7966d800124501b4aae3d9d430398ae1, type: 3}
   - nameSound: OpenChest
@@ -5716,7 +5726,7 @@ MonoBehaviour:
   ChestSource: {fileID: 2110056713}
   PlayerWeaponSource: {fileID: 814567096}
   AudioSourcePrefab: {fileID: 959240466892136611, guid: 386c8713afb40cc46a73f4af9397ab5f, type: 3}
-  maxQuantity: 40
+  maxQuantity: 30
   coolDownPlaySFX: 0.35
   coolDownPlayChestSource: 0.35
   coolDownPlayerWeaponSource: 0.35
@@ -5795,8 +5805,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bce6e218fd3239e49ba5c6f9af30b71f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resetButton: {fileID: 712133554}
-  exitButton: {fileID: 922712769}
+  resetButton: {fileID: 1551841952}
+  exitButton: {fileID: 1864715741}
   textMeshProUGUI: {fileID: 665183927}
 --- !u!114 &1334205451
 MonoBehaviour:
@@ -5883,11 +5893,11 @@ MonoBehaviour:
   lv1: 23000000140000000f0000000000000000000000000000000000000000000000
   lv2: 2d00000019000000190000000a00000000000000000000000000000000000000
   lv3: 410000002300000023000000140000000a000000000000000000000000000000
-  lv4: 5a0000002d0000002d0000001e00000014000000000000000000000000000000
-  lv5: 6e000000370000002d00000028000000230000001e0000000000000000000000
-  lv6: 82000000370000002d000000370000001900000028000000190000000a000000
-  lv7: 82000000370000002d000000370000002d0000002d0000003200000014000000
-  lv8: 960000004b0000004b0000004b0000003c00000046000000410000002d000000
+  lv4: 4b0000002d0000002d0000001e00000014000000000000000000000000000000
+  lv5: 55000000370000002d00000028000000230000001e0000000000000000000000
+  lv6: 550000002d0000002d000000320000001900000028000000190000000a000000
+  lv7: 550000002d0000002d000000320000002d0000002d0000003200000014000000
+  lv8: 550000001e0000001e000000320000003c00000046000000410000001e000000
   currentLv: 0
 --- !u!4 &1396157862 stripped
 Transform:
@@ -5938,8 +5948,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 436b73caa072d554e9b4f13af0a9d317, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 10.5
-  timeToReSpawn: 1
+  radius: 10.4
+  timeToReSpawn: 1.2
   timeToDummyDeath: 13
   numberOfObjects: 45
   radiusOfSpawnDummy: 5.5
@@ -6210,7 +6220,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 742005024}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: ResetGame
+        m_MethodName: ButtonResetGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6514,6 +6524,7 @@ GameObject:
   - component: {fileID: 1689592672}
   - component: {fileID: 1689592671}
   - component: {fileID: 1689592670}
+  - component: {fileID: 1689592673}
   m_Layer: 5
   m_Name: Right Button (Legacy)
   m_TagString: Untagged
@@ -6635,6 +6646,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1689592668}
   m_CullTransparentMesh: 1
+--- !u!114 &1689592673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1689592668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2c37303992b0b647abbd80026bbfda5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tmp: {fileID: 1454864256}
 --- !u!1 &1714667973
 GameObject:
   m_ObjectHideFlags: 0
@@ -6881,7 +6905,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -714, y: 366}
+  m_AnchoredPosition: {x: -681, y: 359}
   m_SizeDelta: {x: 32, y: 32}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1787043043

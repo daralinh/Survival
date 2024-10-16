@@ -244,5 +244,5 @@ MonoBehaviour:
   attackSpeed: 0.2
   attackRange: 0.63
   coolDownSkill: 7
-  numberOfBatToSpawn: 5
+  numberOfBatToSpawn: 4
   radiusSkill: 1

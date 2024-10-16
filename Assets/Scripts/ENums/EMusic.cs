@@ -15,7 +15,6 @@ public enum EMusic
     FireSpot,
     GreenExplosion,
     RedExplosion,
-    SpiderSilk,
     FireStorm,
     OpenChest,
     CannonC

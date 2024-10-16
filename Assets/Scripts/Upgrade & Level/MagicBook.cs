@@ -11,10 +11,8 @@ public class MagicBook : MonoBehaviour
     public Sprite[] blueSpriteArray;
     public Sprite[] redSpriteArray;
     public float speedSlide;
-    public Button leftButton;
-    public Button rightButton;
-    public Text leftText;
-    public Text rightText;
+    public ButtonForMagicBook leftButton;
+    public ButtonForMagicBook rightButton;
 
     public List<AUpgrade> normalUpgradeList = new List<AUpgrade>();
     public List<AUpgrade> specialUpgradeList = new List<AUpgrade>();
@@ -23,11 +21,16 @@ public class MagicBook : MonoBehaviour
     private AUpgrade leftUpgrade;
     private AUpgrade rightUpgrade;
     private float originalTimeScale;
+    private Text leftText;
+    private Text rightText;
 
     private void Awake()
     {
         isBlue = true;
         rectTransform = image.GetComponent<RectTransform>();
+
+        leftText = leftButton.tmp;
+        rightText = rightButton.tmp;
 
         normalUpgradeList.Add(new IncAttackSpeedUpgrade());
         normalUpgradeList.Add(new IncDMGUpgrade());
@@ -51,7 +54,7 @@ public class MagicBook : MonoBehaviour
     public void OpenBlueBook()
     {
         MusicManager.Instance.SpawnDummySource.Pause();
-        CursorManager.Instance.SetCursor2();
+        //CursorManager.Instance.SetCursor2();
         MusicManager.Instance.PlayMagicBookSound(EMusic.OpenBlueBook);
         originalTimeScale = Time.timeScale;
         Time.timeScale = 0;
@@ -64,7 +67,7 @@ public class MagicBook : MonoBehaviour
     public void OpenRedBook()
     {
         MusicManager.Instance.SpawnDummySource.Pause();
-        CursorManager.Instance.SetCursor2();
+        //CursorManager.Instance.SetCursor2();
         MusicManager.Instance.PlayMagicBookSound(EMusic.OpenRedBook);
         originalTimeScale = Time.timeScale;
         Time.timeScale = 0;

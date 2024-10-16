@@ -44,8 +44,8 @@ public class SpawnEnemyAroundPlayer : Singleton<SpawnEnemyAroundPlayer>
 
         if (countTime >= timeToReSpawn)
         {
-            Spawn();
             countTime = 0;
+            Spawn();
         }
     }
 
@@ -66,14 +66,20 @@ public class SpawnEnemyAroundPlayer : Singleton<SpawnEnemyAroundPlayer>
             PoolingEnemy.Instance.SpawnEnemy(ETag.Doc, GetRandomPositionAroundCenter());
         }
 
+        if (LevelManager.Instance.CurrentLv > 5)
+        {
+            PoolingEnemy.Instance.SpawnEnemy(ETag.BanditNecromancer, GetRandomPositionAroundCenter());
+            PoolingEnemy.Instance.SpawnEnemy(ETag.MiniSpider, GetRandomPositionAroundCenter());
+            PoolingEnemy.Instance.SpawnEnemy(ETag.Witch, GetRandomPositionAroundCenter());
+            PoolingEnemy.Instance.SpawnEnemy(ETag.Minotaur, GetRandomPositionAroundCenter());
+            PoolingEnemy.Instance.SpawnEnemy(ETag.PinkSnake, GetRandomPositionAroundCenter());
+            return;
+        }
+
+        PoolingEnemy.Instance.SpawnEnemy(ETag.BanditNecromancer, GetRandomPositionAroundCenter());
         PoolingEnemy.Instance.SpawnEnemy(ETag.PumpkinDude, GetRandomPositionAroundCenter());
-        PoolingEnemy.Instance.SpawnEnemy(ETag.Bat, GetRandomPositionAroundCenter());
-        PoolingEnemy.Instance.SpawnEnemy(ETag.BanditNecromancer, GetRandomPositionAroundCenter());
-        PoolingEnemy.Instance.SpawnEnemy(ETag.BanditNecromancer, GetRandomPositionAroundCenter());
+        PoolingEnemy.Instance.SpawnEnemy(ETag.Doc, GetRandomPositionAroundCenter());
         PoolingEnemy.Instance.SpawnEnemy(ETag.PinkSnake, GetRandomPositionAroundCenter());
-        PoolingEnemy.Instance.SpawnEnemy(ETag.MiniSpider, GetRandomPositionAroundCenter());
-        PoolingEnemy.Instance.SpawnEnemy(ETag.Witch, GetRandomPositionAroundCenter());
-        PoolingEnemy.Instance.SpawnEnemy(ETag.Minotaur, GetRandomPositionAroundCenter());
     }
 
     public void SpawnDummy()

@@ -36,6 +36,16 @@ public class MusicManager : Singleton<MusicManager>
         PlayMusic(EMusic.Theme1);
     }
 
+    public void ResetAllAudioSource()
+    {
+        MusicSource.Stop();
+        MagicBookSoundSource.Stop();
+        SpawnDummySource.Stop();
+        PlayerWeaponSource.Stop();
+        ChestSource.Stop();
+        SFXSource.Stop();
+    }
+
     public void PlayMusic(EMusic nameSound)
     {
         Sound _sound = Array.Find(MusicSounds, x => x.nameSound == nameSound.ToString());

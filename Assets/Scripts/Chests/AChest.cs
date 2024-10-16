@@ -17,6 +17,7 @@ public abstract class AChest : MonoBehaviour
 
     protected virtual void Awake()
     {
+        gameObject.layer = LayerMask.NameToLayer("Chest");
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         rb2D = GetComponent<Rigidbody2D>();
