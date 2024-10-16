@@ -35,6 +35,8 @@ public class PlayerHpManager : AHpManager
     {
         currentHp = Mathf.Max(0, currentHp - dmg);
 
+        healthBar.SetCurrentValue((int)currentHp);
+
         if (currentHp == 0)
         {
             GameManager.Instance.LoseGame();
