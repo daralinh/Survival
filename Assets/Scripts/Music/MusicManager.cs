@@ -9,13 +9,17 @@ public class MusicManager : Singleton<MusicManager>
     public AudioMixerGroup sfxMixerGroup;
     public AudioMixerGroup backgroundMixerGroup;
     public Sound[] MusicSounds, SFXSounds;
-    public AudioSource MusicSource, SFXSource, MagicBookSoundSource, SpawnDummySource;
+    public AudioSource MusicSource, SFXSource, MagicBookSoundSource, SpawnDummySource, ChestSource, PlayerWeaponSource;
     public AudioSource AudioSourcePrefab;
     [SerializeField] private int maxQuantity;
 
     public float coolDownPlaySFX;
+    public float coolDownPlayChestSource;
+    public float coolDownPlayerWeaponSource;
 
-    private float lastTimePlaySFX;
+    private float lastTimePlaySFX = 0;
+    private float lastTimePlayChestSource = 0;
+    private float lastTimePlayerWeaponSource = 0;
     private Queue<AudioSource> BulletAudioSourceQueue = new Queue<AudioSource>();
 
     protected override void Awake()
@@ -46,9 +50,23 @@ public class MusicManager : Singleton<MusicManager>
             return;
         }
 
+        lastTimePlaySFX = Time.time;
         Sound _sound = Array.Find(SFXSounds, x => x.nameSound == nameSound.ToString());
         SFXSource.clip = _sound.clip;
         SFXSource.Play();
+    }
+
+    public void PlayPlayerWeapon(EMusic nameSound)
+    {
+        if (Time.time - lastTimePlayerWeaponSource < coolDownPlayerWeaponSource)
+        {
+            return;
+        }
+
+        lastTimePlayerWeaponSource = Time.time;
+        Sound _sound = Array.Find(SFXSounds, x => x.nameSound == nameSound.ToString());
+        PlayerWeaponSource.clip = _sound.clip;
+        PlayerWeaponSource.Play();
     }
 
     public void PlayMagicBookSound(EMusic nameSound)
@@ -56,6 +74,19 @@ public class MusicManager : Singleton<MusicManager>
         Sound _sound = Array.Find(SFXSounds, x => x.nameSound == nameSound.ToString());
         MagicBookSoundSource.clip = _sound.clip;
         MagicBookSoundSource.Play();
+    }
+
+    public void PlayChestSource(EMusic nameSound)
+    {
+        if (Time.time - lastTimePlayChestSource < coolDownPlayChestSource)
+        {
+            return;
+        }
+
+        lastTimePlayChestSource = Time.time;
+        Sound _sound = Array.Find(SFXSounds, x => x.nameSound == nameSound.ToString());
+        ChestSource.clip = _sound.clip;
+        ChestSource.Play();
     }
 
     public void PlaySpawnDummySource(EMusic nameSound)

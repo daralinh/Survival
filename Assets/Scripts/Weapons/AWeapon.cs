@@ -30,8 +30,14 @@ public abstract class AWeapon : MonoBehaviour
 
         if (!isShooting && (Input.GetMouseButtonDown(0) || Input.GetMouseButton(0)))
         {
+            PlaySFXWhenShoot();
             StartCoroutine(Shooting());
         }
+    }
+
+    protected virtual void PlaySFXWhenShoot()
+    {
+
     }
 
     protected virtual IEnumerator Shooting()

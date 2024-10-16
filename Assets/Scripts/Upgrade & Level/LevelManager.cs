@@ -81,7 +81,7 @@ public class LevelManager : Singleton<LevelManager>
     {
         if (++currentLv > 8)
         {
-            Debug.Log("kklddf");
+            //Debug.Log("win");
             GameManager.Instance.WinGame();
         }
 

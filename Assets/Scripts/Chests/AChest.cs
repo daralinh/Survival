@@ -60,6 +60,7 @@ public abstract class AChest : MonoBehaviour
 
     protected virtual void OpenChest()
     {
+        MusicManager.Instance.PlayChestSource(EMusic.OpenChest);
         animator.SetTrigger(EAnimation.Open.ToString());
         circleCollider2D.enabled = false;
     }

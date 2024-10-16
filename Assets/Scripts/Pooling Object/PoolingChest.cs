@@ -7,6 +7,7 @@ public class PoolingChest : Singleton<PoolingChest>
     [SerializeField] private int rateDropGoldChest;
     [SerializeField] private NormalChest normalChestPrefab;
     [SerializeField] private GoldChest goldChestPrefab;
+    [SerializeField] private int maxQuantity;
 
     private Queue<NormalChest> normalChestQueue = new Queue<NormalChest>();
     private Queue<GoldChest> goldChestQueue = new Queue<GoldChest>();
@@ -20,6 +21,7 @@ public class PoolingChest : Singleton<PoolingChest>
     {
         if (normalChestQueue.Count == 0)
         {
+            maxQuantity--;
             NormalChest _newNormalChest = Instantiate(normalChestPrefab, _positionToSpawn, Quaternion.identity);
             normalChestQueue.Enqueue(_newNormalChest);
         }
@@ -31,6 +33,7 @@ public class PoolingChest : Singleton<PoolingChest>
     {
         if (normalChestQueue.Count == 0)
         {
+            maxQuantity--;
             NormalChest _newNormalChest = Instantiate(normalChestPrefab, _positionToSpawn, Quaternion.identity);
             normalChestQueue.Enqueue(_newNormalChest);
         }
@@ -45,6 +48,7 @@ public class PoolingChest : Singleton<PoolingChest>
             case NormalChest normalChest:
                 if (!normalChestQueue.Contains(normalChest))
                 {
+                    maxQuantity++;
                     normalChestQueue.Enqueue(normalChest);
                 }
 
@@ -52,6 +56,7 @@ public class PoolingChest : Singleton<PoolingChest>
             case GoldChest goldChest:
                 if (!goldChestQueue.Contains(goldChest))
                 {
+                    maxQuantity++;
                     goldChestQueue.Enqueue(goldChest);
                 }
 

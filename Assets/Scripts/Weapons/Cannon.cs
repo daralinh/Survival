@@ -12,6 +12,11 @@ public class Cannon : AWeapon
         animator = GetComponent<Animator>();
     }
 
+    protected override void PlaySFXWhenShoot()
+    {
+        MusicManager.Instance.PlayPlayerWeapon(EMusic.CannonC);
+    }
+
     protected override IEnumerator Shooting()
     {
         isShooting = true;

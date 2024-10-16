@@ -34,6 +34,9 @@ public class GameManager : Singleton<GameManager>
 
     public void ResetGame()
     {
+        NumberDeathEnemies = 0;
+        DeathEnemiesText.text = "0";
+
         Singleton<PlayerController>.ResetInstance();
         Singleton<LevelManager>.ResetInstance();
         Singleton<UpgradeManager>.ResetInstance();
@@ -43,7 +46,7 @@ public class GameManager : Singleton<GameManager>
         Singleton<PoolingItem>.ResetInstance();
         Singleton<SpawnEnemyAroundPlayer>.ResetInstance();
         Singleton<SpellManager>.ResetInstance();
-        Singleton<GameManager>.ResetInstance();
+        Singleton<MusicManager>.ResetInstance();
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
