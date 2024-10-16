@@ -21,6 +21,14 @@ public class SettingManager : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         SetAlpha(fadedAlpha);
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Open();
+        }
+    }
+
     public void Open()
     {
         originTime = Time.timeScale;
