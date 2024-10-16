@@ -8,6 +8,7 @@ public class PoolingItem : Singleton<PoolingItem>
     [SerializeField] private BlueGem blueGemPrefab;
     [SerializeField] private BloodBottle bloodBottlePrefab;
     [SerializeField] private PurpleMedicine purpleMedicinePrefab;
+    [SerializeField] private int maxQuantity;
 
     private Queue<BlueGem> blueGemQueue = new Queue<BlueGem>();
     private Queue<BloodBottle> bloodBottleQueue = new Queue<BloodBottle>();
@@ -20,8 +21,14 @@ public class PoolingItem : Singleton<PoolingItem>
 
     public void SpawnBlueGem(Vector2 _positionToSpawn)
     {
+        if (maxQuantity < 1)
+        {
+            return;
+        }
+
         if (blueGemQueue.Count == 0)
         {
+            maxQuantity--;
             BlueGem _newBlueGem = Instantiate(blueGemPrefab, _positionToSpawn, Quaternion.identity);
             blueGemQueue.Enqueue(_newBlueGem);
         }
@@ -31,8 +38,14 @@ public class PoolingItem : Singleton<PoolingItem>
 
     public void SpawnBloodBottle(Vector2 _positionToSpawn)
     {
+        if (maxQuantity < 1)
+        {
+            return;
+        }
+
         if (bloodBottleQueue.Count == 0)
         {
+            maxQuantity--;
             BloodBottle _newBloodBottle = Instantiate(bloodBottlePrefab, _positionToSpawn, Quaternion.identity);
             bloodBottleQueue.Enqueue(_newBloodBottle);
         }
@@ -42,8 +55,14 @@ public class PoolingItem : Singleton<PoolingItem>
 
     public void SpawnPurpleMedicine(Vector2 _positionToSpawn)
     {
+        if (maxQuantity < 1)
+        {
+            return;
+        }
+
         if (purpleMedicineQueue.Count == 0)
         {
+            maxQuantity--;
             PurpleMedicine _newPurpleMedicine = Instantiate(purpleMedicinePrefab, _positionToSpawn, Quaternion.identity);
             purpleMedicineQueue.Enqueue(_newPurpleMedicine);
         }
@@ -56,24 +75,20 @@ public class PoolingItem : Singleton<PoolingItem>
         switch (_item)
         {
             case BlueGem _blueGem:
-                if (!(blueGemQueue.Contains(_blueGem)))
-                {
-                    blueGemQueue.Enqueue(_blueGem);
-                }
+                maxQuantity++;
+                blueGemQueue.Enqueue(_blueGem);
                 return;
 
             case BloodBottle _bloodBottle:
-                if (!bloodBottleQueue.Contains(_bloodBottle))
-                {
-                    bloodBottleQueue.Enqueue(_bloodBottle);
-                }
+                maxQuantity++;
+                bloodBottleQueue.Enqueue(_bloodBottle);
+                
                 return;
 
             case PurpleMedicine _purpleMedicine:
-                if (!purpleMedicineQueue.Contains(_purpleMedicine))
-                {
-                    purpleMedicineQueue.Enqueue(_purpleMedicine);
-                }
+                maxQuantity++;
+                purpleMedicineQueue.Enqueue(_purpleMedicine);
+                
                 return;
 
             default:

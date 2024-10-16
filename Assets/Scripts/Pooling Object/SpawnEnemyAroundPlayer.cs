@@ -61,38 +61,19 @@ public class SpawnEnemyAroundPlayer : Singleton<SpawnEnemyAroundPlayer>
 
     public void Spawn()
     {
-        if (LevelManager.Instance.CurrentLv < 4)
+        if (LevelManager.Instance.CurrentLv < 2)
         {
             PoolingEnemy.Instance.SpawnEnemy(ETag.Doc, GetRandomPositionAroundCenter());
-            PoolingEnemy.Instance.SpawnEnemy(ETag.PumpkinDude, GetRandomPositionAroundCenter());
-            PoolingEnemy.Instance.SpawnEnemy(ETag.Bat, GetRandomPositionAroundCenter());
-            return;
         }
 
-        if (LevelManager.Instance.CurrentLv < 6)
-        {
-            PoolingEnemy.Instance.SpawnEnemy(ETag.BanditNecromancer, GetRandomPositionAroundCenter());
-            PoolingEnemy.Instance.SpawnEnemy(ETag.PinkSnake, GetRandomPositionAroundCenter());
-            PoolingEnemy.Instance.SpawnEnemy(ETag.MiniSpider, GetRandomPositionAroundCenter());
-            return;
-        }
-
+        PoolingEnemy.Instance.SpawnEnemy(ETag.PumpkinDude, GetRandomPositionAroundCenter());
+        PoolingEnemy.Instance.SpawnEnemy(ETag.Bat, GetRandomPositionAroundCenter());
+        PoolingEnemy.Instance.SpawnEnemy(ETag.BanditNecromancer, GetRandomPositionAroundCenter());
         PoolingEnemy.Instance.SpawnEnemy(ETag.BanditNecromancer, GetRandomPositionAroundCenter());
         PoolingEnemy.Instance.SpawnEnemy(ETag.PinkSnake, GetRandomPositionAroundCenter());
         PoolingEnemy.Instance.SpawnEnemy(ETag.MiniSpider, GetRandomPositionAroundCenter());
         PoolingEnemy.Instance.SpawnEnemy(ETag.Witch, GetRandomPositionAroundCenter());
-
-        if (LevelManager.Instance.CurrentLv == 7)
-        {
-            return;
-        }
-        
         PoolingEnemy.Instance.SpawnEnemy(ETag.Minotaur, GetRandomPositionAroundCenter());
-
-        if (LevelManager.Instance.CurrentLv == 9)
-        {
-
-        }
     }
 
     public void SpawnDummy()

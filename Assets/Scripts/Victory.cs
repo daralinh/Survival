@@ -15,6 +15,7 @@ public class Victory : MonoBehaviour
 
     public void Born()
     {
+        Time.timeScale = 0;
         gameObject.SetActive(true);
         textMeshProUGUI.text = GameManager.Instance.NumberDeathEnemies.ToString();
     }

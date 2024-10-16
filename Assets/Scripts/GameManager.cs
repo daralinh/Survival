@@ -24,7 +24,6 @@ public class GameManager : Singleton<GameManager>
 
     public void WinGame()
     {
-        Time.timeScale = 0;
         Victory.Born();
     }
 
@@ -35,6 +34,17 @@ public class GameManager : Singleton<GameManager>
 
     public void ResetGame()
     {
+        Singleton<PlayerController>.ResetInstance();
+        Singleton<LevelManager>.ResetInstance();
+        Singleton<UpgradeManager>.ResetInstance();
+        Singleton<PoolingChest>.ResetInstance();
+        Singleton<SpawnInCircle>.ResetInstance();
+        Singleton<PoolingBullet>.ResetInstance();
+        Singleton<PoolingItem>.ResetInstance();
+        Singleton<SpawnEnemyAroundPlayer>.ResetInstance();
+        Singleton<SpellManager>.ResetInstance();
+        Singleton<GameManager>.ResetInstance();
+
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 

@@ -28,16 +28,10 @@ public class LevelManager : Singleton<LevelManager>
     {
         countTimeToUpLv += Time.fixedDeltaTime;
 
-        if (currentLv == 8)
-        {
-            gameObject.SetActive(false);
-            return;
-        }
-
         if (countTimeToUpLv >= 60)
         {
             SpawnEnemyAroundPlayer.Instance.SpawnDummy();
-            currentLv++;
+            LevelUp();
            // Debug.Log(currentLv);
             countTimeToUpLv = 0;
         }
@@ -87,6 +81,7 @@ public class LevelManager : Singleton<LevelManager>
     {
         if (++currentLv > 8)
         {
+            Debug.Log("kklddf");
             GameManager.Instance.WinGame();
         }
 

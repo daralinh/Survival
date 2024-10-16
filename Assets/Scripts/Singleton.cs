@@ -18,4 +18,9 @@ public class Singleton<T> : MonoBehaviour where T : Singleton<T>
 
         DontDestroyOnLoad(gameObject);
     }
+
+    public static void ResetInstance()
+    {
+        instance = null;
+    }
 }

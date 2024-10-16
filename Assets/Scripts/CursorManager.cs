@@ -12,6 +12,6 @@ public class CursorManager : Singleton<CursorManager>
 
     public void SetCursor2()
     {
-        Cursor.SetCursor(mouseIcon1, Vector2.zero, CursorMode.ForceSoftware);
+        Cursor.SetCursor(mouseIcon2, Vector2.zero, CursorMode.ForceSoftware);
     }
 }

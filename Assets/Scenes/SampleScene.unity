@@ -231,6 +231,7 @@ MonoBehaviour:
   blueGemPrefab: {fileID: 3264990112806448766, guid: d01f50d4718fc2245a69ee633527b448, type: 3}
   bloodBottlePrefab: {fileID: 7397060963376417539, guid: f1c9b5bad381ff74b8c84c26ccbf77dc, type: 3}
   purpleMedicinePrefab: {fileID: 5657050332610204347, guid: c132bf90b1451d34091578dbe20cb2bb, type: 3}
+  maxQuantity: 40
 --- !u!4 &24355933
 Transform:
   m_ObjectHideFlags: 0
@@ -623,7 +624,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tmpPrefab: {fileID: 498543665430741992, guid: 2a9c4841f6cc7ab4ab921bf8cac33c66, type: 3}
   canvas: {fileID: 1867882522}
-  maxQuantity: 30
+  maxQuantity: 25
 --- !u!4 &158619754
 Transform:
   m_ObjectHideFlags: 0
@@ -4270,7 +4271,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4c27fc5ddb071d40ac78f7be50cc265, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  originHp: 100
+  originHp: 1000000
   healthBar: {fileID: 100023821}
 --- !u!114 &991578814
 MonoBehaviour:
@@ -5580,7 +5581,7 @@ MonoBehaviour:
   MagicBookSoundSource: {fileID: 1128246975}
   SpawnDummySource: {fileID: 538952553}
   AudioSourcePrefab: {fileID: 959240466892136611, guid: 386c8713afb40cc46a73f4af9397ab5f, type: 3}
-  maxQuantity: 35
+  maxQuantity: 40
   coolDownPlaySFX: 0.35
 --- !u!4 &1320287452
 Transform:
@@ -7524,7 +7525,7 @@ GameObject:
   - component: {fileID: 1906604176}
   - component: {fileID: 1906604177}
   m_Layer: 0
-  m_Name: Change Cursor
+  m_Name: CursorManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
