@@ -85,7 +85,11 @@ public class LevelManager : Singleton<LevelManager>
 
     public void LevelUp()
     {
-        currentLv = Math.Min(++currentLv, 8);
+        if (++currentLv > 8)
+        {
+            GameManager.Instance.WinGame();
+        }
+
         UpgradeManager.Instance.Upgrade();
     }
 

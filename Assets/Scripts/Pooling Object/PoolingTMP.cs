@@ -53,6 +53,7 @@ public class PoolingTMP : Singleton<PoolingTMP>
             return;
         }
 
+        maxQuantity++;
         tmpQueue.Enqueue(_oldTMP);
     }
 

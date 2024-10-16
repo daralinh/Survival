@@ -184,5 +184,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dmg: 15
-  originSpeed: 1.5
+  originSpeed: 2
   timeToHide: 5

@@ -192,71 +192,49 @@ public class PoolingEnemy : Singleton<PoolingEnemy>
         switch (oldEnemy)
         {
             case Minotaur _minotaur:
-                if (!minotaurQueue.Contains(_minotaur))
-                {
-                    SpawnEnemyAroundPlayer.Instance.CurrentNumberMinotaur--;
-                    minotaurQueue.Enqueue(_minotaur);
-                }
+                minotaurQueue.Enqueue(_minotaur);
+                SpawnEnemyAroundPlayer.Instance.CurrentNumberMinotaur--;
                 break;
 
             case PinkSnake _pinkSnake:
-                if (!pinkSnakesQueue.Contains(_pinkSnake))
-                {
-                    SpawnEnemyAroundPlayer.Instance.CurrentNumberPinkSnake--;
-                    pinkSnakesQueue.Enqueue(_pinkSnake);
-                }
+                pinkSnakesQueue.Enqueue(_pinkSnake);
+                SpawnEnemyAroundPlayer.Instance.CurrentNumberPinkSnake--;
                 break;
 
             case Witch _witch:
-                if (!witchQueue.Contains(_witch))
-                {
-                    SpawnEnemyAroundPlayer.Instance.CurrentNumberWitch--;
-                    witchQueue.Enqueue(_witch);
-                }
+                witchQueue.Enqueue(_witch);
+                SpawnEnemyAroundPlayer.Instance.CurrentNumberWitch--;
                 break;
 
             case MiniSpider _miniSpider:
-                if (!miniSpiderQueue.Contains(_miniSpider))
-                {
-                    SpawnEnemyAroundPlayer.Instance.CurrentNumberMiniSpider--;
-                    miniSpiderQueue.Enqueue(_miniSpider);
-                }
+                miniSpiderQueue.Enqueue(_miniSpider);
+                SpawnEnemyAroundPlayer.Instance.CurrentNumberMiniSpider--;
                 break;
 
             case PumpkinDude _pumpkinDude:
-                if (!pumpkinDudeQueue.Contains(_pumpkinDude))
-                {
-                    SpawnEnemyAroundPlayer.Instance.CurrentNumberPumpkinDude--;
-                    pumpkinDudeQueue.Enqueue(_pumpkinDude);
-                }
+                pumpkinDudeQueue.Enqueue(_pumpkinDude);
+                SpawnEnemyAroundPlayer.Instance.CurrentNumberPumpkinDude--;
                 break;
 
             case Doc _doc:
-                if (!docQueue.Contains(_doc))
-                {
-                    SpawnEnemyAroundPlayer.Instance.CurrentNumberDoc--;
-                    docQueue.Enqueue(_doc);
-                }
+                docQueue.Enqueue(_doc);
+                SpawnEnemyAroundPlayer.Instance.CurrentNumberDoc--;
                 break;
 
             case Bat _bat:
-                if (!batQueue.Contains(_bat))
-                {
-                    SpawnEnemyAroundPlayer.Instance.CurrentNumberBat--;
-                    batQueue.Enqueue(_bat);
-                }
+                batQueue.Enqueue(_bat);
+                SpawnEnemyAroundPlayer.Instance.CurrentNumberBat--;
                 break;
 
             case BanditNecromancer _banditNecromancer:
-                if (!banditNecromancerQueue.Contains(_banditNecromancer))
-                {
-                    SpawnEnemyAroundPlayer.Instance.CurrentNumberBanditNecromancer--;
-                    banditNecromancerQueue.Enqueue(_banditNecromancer);
-                }
-
+                banditNecromancerQueue.Enqueue(_banditNecromancer);
+                SpawnEnemyAroundPlayer.Instance.CurrentNumberBanditNecromancer--;
                 break;
+
             default:
                 break;
         }
+
+        GameManager.Instance.IncNumberDeathEnemies();
     }
 }

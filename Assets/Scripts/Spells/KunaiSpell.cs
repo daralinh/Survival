@@ -11,7 +11,7 @@ public class KunaiSpell : ASpell
                 Physics2D.OverlapCircleAll(transform.position, attackRange, LayerMask.GetMask(ELayer.Enemy.ToString()));
 
         countNumberShootInPerAttack = 0;
-
+        MusicManager.Instance.PlayBulletSFX(EMusic.Kunai);
         foreach (Collider2D _object in objectsHit)
         {
             //Debug.Log("Shoot");

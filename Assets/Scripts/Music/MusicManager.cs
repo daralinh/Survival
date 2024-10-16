@@ -2,12 +2,16 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class MusicManager : Singleton<MusicManager>
 {
+    public AudioMixerGroup sfxMixerGroup;
+    public AudioMixerGroup backgroundMixerGroup;
     public Sound[] MusicSounds, SFXSounds;
     public AudioSource MusicSource, SFXSource, MagicBookSoundSource, SpawnDummySource;
     public AudioSource AudioSourcePrefab;
+    [SerializeField] private int maxQuantity;
 
     public float coolDownPlaySFX;
 
@@ -17,6 +21,10 @@ public class MusicManager : Singleton<MusicManager>
     protected override void Awake()
     {
         base.Awake();
+        SFXSource.outputAudioMixerGroup = sfxMixerGroup;
+        SpawnDummySource.outputAudioMixerGroup = sfxMixerGroup;
+        MusicSource.outputAudioMixerGroup = backgroundMixerGroup;
+        SpawnDummySource.outputAudioMixerGroup = sfxMixerGroup;
     }
 
     private void Start()
@@ -60,8 +68,14 @@ public class MusicManager : Singleton<MusicManager>
 
     public void PlayBulletSFX(EMusic nameSound)
     {
+        if (maxQuantity < 1)
+        {
+            return;
+        }
+
         if (BulletAudioSourceQueue.Count == 0)
         {
+            maxQuantity--;
             BulletAudioSourceQueue.Enqueue(Instantiate(AudioSourcePrefab, transform.position ,Quaternion.identity));
         }
 
@@ -77,5 +91,6 @@ public class MusicManager : Singleton<MusicManager>
         _audioSource.Stop();
         _audioSource.clip = null;
         BulletAudioSourceQueue.Enqueue(_audioSource);
+        maxQuantity++;
     }
 }

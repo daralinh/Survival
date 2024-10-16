@@ -186,7 +186,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   exp: 10
   speed: 3.5
-  displayTime: 60
+  displayTime: 45
   trailRenderer: {fileID: 8176268375941606745}
 --- !u!1001 &2135637678928580229
 PrefabInstance:

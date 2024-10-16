@@ -33,7 +33,14 @@ public class PlayerHpManager : AHpManager
 
     public override void TakeDMG(float dmg, Vector2 sourceDMG)
     {
-        base.TakeDMG(dmg, sourceDMG);
+        if (currentHp == 0)
+        {
+            GameManager.Instance.LoseGame();
+            return;
+        }
+
+        currentHp = Mathf.Max(0, currentHp - dmg);
+        PoolingTMP.Instance.SpawnTMP($"-{dmg}", transform.position, EColor.White);
 
         healthBar.SetCurrentValue((int)currentHp);
         knockBack.GetKnockBack(sourceDMG, 0.5f);
