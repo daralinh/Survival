@@ -18,7 +18,7 @@ public class Lose : MonoBehaviour
         Time.timeScale = 0;
         gameObject.SetActive(true);
 
-        MusicManager.Instance.PlayMusic(EMusic.Victory);
+        MusicManager.Instance.PlayNotification(EMusic.Lose);
         textMeshProUGUI.text = GameManager.Instance.NumberDeathEnemies.ToString();
     }
 }

@@ -24,6 +24,8 @@ public class MagicBook : MonoBehaviour
     private Text leftText;
     private Text rightText;
 
+    private Coroutine coroutine;
+
     private void Awake()
     {
         isBlue = true;
@@ -66,7 +68,13 @@ public class MagicBook : MonoBehaviour
         isBlue = true;
         gameObject.SetActive(true);
         image.sprite = blueSpriteArray[0];
-        StartCoroutine(PlayOpenBlueAnimUIHanlder());
+
+        if (coroutine != null)
+        {
+            StopCoroutine(coroutine);
+        }
+
+        coroutine = StartCoroutine(PlayOpenBlueAnimUIHanlder());
     }
 
     public void OpenRedBook()
@@ -84,7 +92,13 @@ public class MagicBook : MonoBehaviour
         isBlue = false;
         gameObject.SetActive(true);
         image.sprite = redSpriteArray[0];
-        StartCoroutine(PlayOpenRedAnimUIHanlder());
+
+        if (coroutine != null)
+        {
+            StopCoroutine(coroutine);
+        }
+
+        coroutine = StartCoroutine(PlayOpenRedAnimUIHanlder());
     }
 
     private void ShowButton()
@@ -137,11 +151,21 @@ public class MagicBook : MonoBehaviour
 
         if (isBlue)
         {
-            StartCoroutine(PlayCloseBlueAnimUIHanlder());
+            if (coroutine != null)
+            {
+                StopCoroutine(coroutine);
+            }
+
+            coroutine = StartCoroutine(PlayCloseBlueAnimUIHanlder());
         }
         else
         {
-            StartCoroutine(PlayCloseRedAnimUIHanlder());
+            if (coroutine != null)
+            {
+                StopCoroutine(coroutine);
+            }
+
+            coroutine = StartCoroutine(PlayCloseRedAnimUIHanlder());
         }
 
         Time.timeScale = originalTimeScale;

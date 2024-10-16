@@ -183,7 +183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5eb9882211029164c9e653fc91fa93c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dmg: 0
+  dmg: 50
   originSpeed: 5
   timeToHide: 2.75
   bindTime: 2.1

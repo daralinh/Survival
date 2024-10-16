@@ -9,7 +9,7 @@ public class MusicManager : Singleton<MusicManager>
     public AudioMixerGroup sfxMixerGroup;
     public AudioMixerGroup backgroundMixerGroup;
     public Sound[] MusicSounds, SFXSounds;
-    public AudioSource MusicSource, SFXSource, MagicBookSoundSource, SpawnDummySource, ChestSource, PlayerWeaponSource;
+    public AudioSource MusicSource, SFXSource, MagicBookSoundSource, SpawnDummySource, ChestSource, PlayerWeaponSource ,NotificationSource;
     public AudioSource AudioSourcePrefab;
     [SerializeField] private int maxQuantity;
 
@@ -64,6 +64,14 @@ public class MusicManager : Singleton<MusicManager>
         Sound _sound = Array.Find(SFXSounds, x => x.nameSound == nameSound.ToString());
         SFXSource.clip = _sound.clip;
         SFXSource.Play();
+    }
+
+    public void PlayNotification(EMusic nameSound)
+    {
+        Sound _sound = Array.Find(SFXSounds, x => x.nameSound == nameSound.ToString());
+        if (_sound == null) Debug.Log("null sound");
+        NotificationSource.clip = _sound.clip;
+        NotificationSource.Play();
     }
 
     public void PlayPlayerWeapon(EMusic nameSound)

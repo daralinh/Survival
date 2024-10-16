@@ -1,5 +1,8 @@
 using System;
+using System.Collections;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LevelManager : Singleton<LevelManager>
 {
@@ -12,8 +15,11 @@ public class LevelManager : Singleton<LevelManager>
     [SerializeField] private int[] lv6;
     [SerializeField] private int[] lv7;
 
+    [SerializeField] private TextMeshProUGUI tmp;
+    [SerializeField] private Slider sliderLv;
     [SerializeField] private int currentLv;
     private float countTimeToUpLv;
+    private Coroutine coroutine;
 
     public int CurrentLv => currentLv;
     public int[,] MaxNumberMonsterPerLevel { get; private set; }
@@ -21,19 +27,7 @@ public class LevelManager : Singleton<LevelManager>
     protected override void Awake()
     {
         base.Awake();
-    }
-
-    private void FixedUpdate()
-    {
-        countTimeToUpLv += Time.fixedDeltaTime;
-
-        if (countTimeToUpLv >= 60)
-        {
-            SpawnEnemyAroundPlayer.Instance.SpawnDummy();
-            LevelUp();
-           // Debug.Log(currentLv);
-            countTimeToUpLv = 0;
-        }
+        sliderLv.SetValueWithoutNotify(0f);
     }
 
     void Start()
@@ -71,13 +65,52 @@ public class LevelManager : Singleton<LevelManager>
         {
             MaxNumberMonsterPerLevel[7, i] = lv7[i];
         }
+
+        if (coroutine != null)
+        {
+            StopCoroutine(coroutine);
+        }
+
+        coroutine = StartCoroutine(StartTimerHanler());
+    }
+
+    private void StarCountTime()
+    {
+        if (coroutine != null)
+        {
+            StopCoroutine(coroutine);
+        }
+
+        coroutine = StartCoroutine(StartTimerHanler());
+    }
+
+    private IEnumerator StartTimerHanler()
+    {
+        int maxValue = 60;
+
+        while (maxValue > 0)
+        {
+            tmp.text = $"{--maxValue}";
+            yield return new WaitForSeconds(1f);
+
+            if (maxValue == 0)
+            {
+                LevelUp();
+                maxValue = 60;
+            }
+        }
     }
 
     public void LevelUp()
     {
+        SpawnEnemyAroundPlayer.Instance.SpawnDummy();
+
+        sliderLv.value = currentLv;
+
         if (++currentLv > 7)
         {
-            Debug.Log("win");
+            StopCoroutine(coroutine);
+            //Debug.Log("win");
             GameManager.Instance.WinGame();
         }
 

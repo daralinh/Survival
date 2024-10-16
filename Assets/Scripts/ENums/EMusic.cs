@@ -18,5 +18,6 @@ public enum EMusic
     FireStorm,
     OpenChest,
     CannonC,
-    Victory
+    Victory,
+    Lose
 }
