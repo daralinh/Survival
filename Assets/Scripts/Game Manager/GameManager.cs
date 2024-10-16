@@ -52,6 +52,7 @@ public class GameManager : Singleton<GameManager>
     {
         StartGameButton.gameObject.SetActive(false);
         Time.timeScale = originTime;
+        CursorManager.Instance.SetCursor1();
     }
 
     public void ButtonResetGame()

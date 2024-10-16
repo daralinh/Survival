@@ -32,16 +32,19 @@ public class SettingManager : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     {
         UIImage.gameObject.SetActive(false);
         Time.timeScale = originTime;
+        CursorManager.Instance.SetCursor1();
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
         SetAlpha(fullAlpha);
+        CursorManager.Instance.SetCursor2();
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         SetAlpha(fadedAlpha);
+        CursorManager.Instance.SetCursor1();
     }
 
     private void SetAlpha(float alpha)

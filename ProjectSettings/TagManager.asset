@@ -40,9 +40,9 @@ TagManager:
   - Enemy
   - Player
   - Bullet
-  - 
-  - 
-  - 
+  - Chest
+  - Item
+  - Weapon
   - 
   - 
   - 
