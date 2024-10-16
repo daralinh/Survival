@@ -11,7 +11,6 @@ public class LevelManager : Singleton<LevelManager>
     [SerializeField] private int[] lv5;
     [SerializeField] private int[] lv6;
     [SerializeField] private int[] lv7;
-    [SerializeField] private int[] lv8;
 
     [SerializeField] private int currentLv;
     private float countTimeToUpLv;
@@ -47,6 +46,7 @@ public class LevelManager : Singleton<LevelManager>
         {
             MaxNumberMonsterPerLevel[1, i] = lv1[i];
         }
+
         for (int i = 0; i < 8; i++)
         {
             MaxNumberMonsterPerLevel[2, i] = lv2[i];
@@ -71,15 +71,11 @@ public class LevelManager : Singleton<LevelManager>
         {
             MaxNumberMonsterPerLevel[7, i] = lv7[i];
         }
-        for (int i = 0; i < 8; i++)
-        {
-            MaxNumberMonsterPerLevel[8, i] = lv8[i];
-        }
     }
 
     public void LevelUp()
     {
-        if (++currentLv > 8)
+        if (++currentLv > 7)
         {
             Debug.Log("win");
             GameManager.Instance.WinGame();

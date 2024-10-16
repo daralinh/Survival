@@ -12,9 +12,9 @@ public class Minotaur : AEnemy
 
     // Attack
 
-    public override void ExitAttackState()
+    public override void EnterAttackState()
     {
         PlayerController.Instance.HpManager.TakeDMG(dmg, transform.position);
-        base.ExitAttackState();
+        base.EnterAttackState();
     }
 }

@@ -53,6 +53,11 @@ public class MagicBook : MonoBehaviour
 
     public void OpenBlueBook()
     {
+        if (GameManager.Instance.IsLose || GameManager.Instance.IsVictory)
+        {
+            return;
+        }
+
         MusicManager.Instance.SpawnDummySource.Pause();
         //CursorManager.Instance.SetCursor2();
         MusicManager.Instance.PlayMagicBookSound(EMusic.OpenBlueBook);
@@ -66,6 +71,11 @@ public class MagicBook : MonoBehaviour
 
     public void OpenRedBook()
     {
+        if (GameManager.Instance.IsLose || GameManager.Instance.IsVictory)
+        {
+            return;
+        }
+
         MusicManager.Instance.SpawnDummySource.Pause();
         //CursorManager.Instance.SetCursor2();
         MusicManager.Instance.PlayMagicBookSound(EMusic.OpenRedBook);

@@ -44,6 +44,13 @@ public abstract class AChest : MonoBehaviour
     public void FixedUpdate()
     {
         countDisplayTime += Time.fixedDeltaTime;
+
+        if (Vector2.Distance(PlayerController.Instance.transform.position, transform.position) > 12)
+        {
+            BackToPool();
+            return;
+        }
+
         if (countDisplayTime >= displayTime)
         {
             countDisplayTime = 0;

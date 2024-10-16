@@ -164,7 +164,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dmg: 20
   originSpeed: 8
-  timeToHide: 3
+  timeToHide: 2.5
   trailRenderer: {fileID: 8138715669703425325}
 --- !u!1 &7924954393408035352
 GameObject:

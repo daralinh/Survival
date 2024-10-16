@@ -7,14 +7,28 @@ public class GameManager : Singleton<GameManager>
     public Victory Victory;
     public Lose Lose;
     public TextMeshProUGUI DeathEnemiesText;
+    public Button StartGameButton;
 
     public int NumberDeathEnemies { get; private set; }
+
+    public bool IsVictory { get; private set; }
+    public bool IsLose { get; private set; }
+
+    private float originTime;
 
     protected override void Awake()
     {
         base.Awake();
         NumberDeathEnemies = 0;
         DeathEnemiesText.text = "0";
+        StartGameButton.gameObject.SetActive(true);
+    }
+
+    private void Start()
+    {
+        StartGameButton.gameObject.SetActive(true);
+        originTime = Time.timeScale;
+        Time.timeScale = 0;
     }
 
     public void IncNumberDeathEnemies()
@@ -24,12 +38,20 @@ public class GameManager : Singleton<GameManager>
 
     public void WinGame()
     {
+        IsVictory = true;
         Victory.Born();
     }
 
     public void LoseGame()
     {
+        IsLose = false;
         Lose.Born();
+    }
+
+    public void ButtonStartGame()
+    {
+        StartGameButton.gameObject.SetActive(false);
+        Time.timeScale = originTime;
     }
 
     public void ButtonResetGame()

@@ -15,8 +15,11 @@ public class Victory : MonoBehaviour
 
     public void Born()
     {
-        gameObject.SetActive(true);
+        MusicManager.Instance.ResetAllAudioSource();
         Time.timeScale = 0;
+        gameObject.SetActive(true);
+
+        MusicManager.Instance.PlayMusic(EMusic.Victory);
         textMeshProUGUI.text = GameManager.Instance.NumberDeathEnemies.ToString();
     }
 }

@@ -17,5 +17,6 @@ public enum EMusic
     RedExplosion,
     FireStorm,
     OpenChest,
-    CannonC
+    CannonC,
+    Victory
 }

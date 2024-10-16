@@ -14,10 +14,10 @@ public class PlayerController : Singleton<PlayerController>
     [SerializeField] private float buffSpeedWhenDash;
     [SerializeField] private float dashTime;
     [SerializeField] private float coolDownDash;
-    [SerializeField] private TrailRenderer trailRenderer;
+    //[SerializeField] private TrailRenderer trailRenderer;
     private float currentSpeed;
     private Vector2 moveDir;
-    private bool isDashing;
+    //private bool isDashing;
     private bool isFacingLeft;
     private bool canChangeSpeed;
     private Coroutine coroutineTakeDMG;
@@ -56,9 +56,9 @@ public class PlayerController : Singleton<PlayerController>
         rb2D.bodyType = RigidbodyType2D.Kinematic;
         rb2D.freezeRotation = true;
         rb2D.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
-        trailRenderer.emitting = false;
+        //trailRenderer.emitting = false;
 
-        isDashing = false;
+        //isDashing = false;
         canChangeSpeed = true;
 
         currentState = moveState;
@@ -149,7 +149,7 @@ public class PlayerController : Singleton<PlayerController>
         if (moveDir != Vector2.zero)
         {
             animator.SetTrigger(EAnimation.Run.ToString());
-            GetInputDash();
+            //GetInputDash();
         }
         else
         {
@@ -163,7 +163,7 @@ public class PlayerController : Singleton<PlayerController>
     }
 
     // Dash
-    private void GetInputDash()
+    /*private void GetInputDash()
     {
         if (Input.GetKey(KeyCode.LeftShift) && !isDashing)
         {
@@ -183,7 +183,7 @@ public class PlayerController : Singleton<PlayerController>
         yield return new WaitForSeconds(Mathf.Max(coolDownDash - dashTime, 2));
 
         isDashing = false;
-    }
+    }*/
 
     // Take DMG State
     public void TakeDMGHandler(Vector2 _sourceDMG)

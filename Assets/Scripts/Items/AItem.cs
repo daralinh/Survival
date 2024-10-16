@@ -20,6 +20,7 @@ public abstract class AItem : MonoBehaviour
 
     protected bool isMoving;
     protected float countDisplayTime;
+    protected float DistanceFromPlayer;
 
     public int ID { get; protected set; }
     public int Exp => exp; 
@@ -63,9 +64,12 @@ public abstract class AItem : MonoBehaviour
             rb2D.MovePosition(rb2D.position + moveDir * speed * Time.fixedDeltaTime);
         }
 
-        if (Vector2.Distance(PlayerController.Instance.transform.position, transform.position) <= 0.2)
+        DistanceFromPlayer = Vector2.Distance(PlayerController.Instance.transform.position, transform.position);
+
+        if (DistanceFromPlayer <= 0.2f || DistanceFromPlayer > 13f)
         {
             BackToBool();
+            return;
         }
 
         countDisplayTime += Time.fixedDeltaTime;
