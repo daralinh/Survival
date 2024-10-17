@@ -1,1 +1,1 @@
-Dự án game được phát triển trong 2 tháng rưỡi tự học Unity. Game được lấy cảm hứng từ "Vampire Survivors". Game được áp dụng Singleton, State Pattern; Object Pooler.
+Dự án game được phát triển trong 1 tháng. Game được lấy cảm hứng từ "Vampire Survivors". Game được áp dụng Singleton, State Pattern; Object Pooler.
