@@ -111,6 +111,7 @@ public class LevelManager : Singleton<LevelManager>
         {
             StopCoroutine(coroutine);
             //Debug.Log("win");
+            tmp.text = "GG!";
             GameManager.Instance.WinGame();
         }
 
