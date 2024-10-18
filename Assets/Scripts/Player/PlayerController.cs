@@ -52,6 +52,7 @@ public class PlayerController : Singleton<PlayerController>
         hpManager = GetComponent<PlayerHpManager>();
         effectManager = GetComponent<PlayerEffectManager>();
 
+        spriteRenderer.sortingOrder = 0;
         spriteRenderer.spriteSortPoint = SpriteSortPoint.Pivot;
         rb2D.bodyType = RigidbodyType2D.Kinematic;
         rb2D.freezeRotation = true;
@@ -221,5 +222,10 @@ public class PlayerController : Singleton<PlayerController>
     public void ExitTakeDMGState()
     {
         ChangeStateToMoveState();
+    }
+
+    public void HideSelf()
+    {
+        spriteRenderer.sortingOrder = -10000;
     }
 }

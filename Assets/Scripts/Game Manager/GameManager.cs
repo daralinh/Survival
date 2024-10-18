@@ -62,7 +62,7 @@ public class GameManager : Singleton<GameManager>
 
         MonoBehaviour[] allObjects = FindObjectsOfType<MonoBehaviour>();
         MusicManager.Instance.ResetAllAudioSource();
-        foreach (MonoBehaviour _gameObject in allObjects)
+        foreach (MonoBehaviour script in allObjects)
         {
             /*if (_gameObject.gameObject.layer == LayerMask.NameToLayer("Enemy")
                 || _gameObject.gameObject.layer == LayerMask.NameToLayer("Bullet")
@@ -71,7 +71,7 @@ public class GameManager : Singleton<GameManager>
             {
                 Destroy(_gameObject);
             }*/
-            Destroy(_gameObject);
+            Destroy(script.gameObject);
         }
 
         /*PlayerController.ResetInstance();

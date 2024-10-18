@@ -39,6 +39,7 @@ public class PlayerHpManager : AHpManager
 
         if (currentHp == 0)
         {
+            PlayerController.Instance.HideSelf();
             GameManager.Instance.LoseGame();
             return;
         }
