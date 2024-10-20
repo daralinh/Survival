@@ -4,6 +4,7 @@ using UnityEngine;
 public class KunaiBullet : ABullet
 {
     [SerializeField] private TrailRenderer trailRenderer;
+    private BezierMovement bezierMovement = new BezierMovement();
 
     protected override void Born()
     {
@@ -12,13 +13,31 @@ public class KunaiBullet : ABullet
         base.Born();
     }
 
+    protected override void FixedUpdate()
+    {
+        if (isShooting)
+        {
+            /*rb2D.MovePosition(rb2D.position + moveDir * speed * Time.fixedDeltaTime);
+
+            countTimeToHide += Time.fixedDeltaTime;*/
+            bezierMovement.MoveFollowCubicBezierPointFixedUpdate(transform, true);
+
+            if (countTimeToHide > timeToHide || bezierMovement.inTheEnd)
+            {
+                isShooting = false;
+                BackToPool();
+            }
+        }
+    }
+
     public override void StartShooting(Transform _source, Vector2 _targetPosition, ELayer _targetLayer)
     {
         sourceTransform = _source;
         gameObject.transform.position = _source.position;
-        FlipAndRotateFollowTarget(_targetPosition);
-        moveDir = (_targetPosition - rb2D.position).normalized;
+        //FlipAndRotateFollowTarget(_targetPosition);
+        //moveDir = (_targetPosition - rb2D.position).normalized;
         targetLayer = _targetLayer;
+        bezierMovement.Reset(transform.position, _targetPosition, speed);
         isShooting = true;
         gameObject.SetActive(true);
         trailRenderer.emitting = true;

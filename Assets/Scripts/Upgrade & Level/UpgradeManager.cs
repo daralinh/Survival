@@ -15,7 +15,6 @@ public class UpgradeManager : Singleton<UpgradeManager>
 
     private int currentExp;
     private int countToOpenBook;
-    private int countUpgrade;
 
     protected override void Awake()
     {
@@ -24,7 +23,6 @@ public class UpgradeManager : Singleton<UpgradeManager>
         currentExp = 0;
         expbar.SetCurrentValue(0);
         countToOpenBook = 2;
-        countUpgrade = 0;
        // Debug.Log($"{expbar.slider.value}/{expbar.slider.maxValue}");
     }
 
@@ -58,7 +56,7 @@ public class UpgradeManager : Singleton<UpgradeManager>
         expToUpgrade += step;
         expbar.SetMaxValue(expToUpgrade);
         expbar.SetCurrentValue(currentExp);
-        Debug.Log($"{countUpgrade}");
+       // Debug.Log($"{countUpgrade}");
         if (++countToOpenBook % 3 == 0)
         {
             magicBook.OpenRedBook();

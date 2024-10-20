@@ -34,7 +34,7 @@ public abstract class AItem : MonoBehaviour
         circleCollider2D = GetComponent<CircleCollider2D>();
 
         spriteRenderer.spriteSortPoint = SpriteSortPoint.Pivot;
-        spriteRenderer.sortingOrder = 1;
+        spriteRenderer.sortingOrder = 0;
         rb2D.freezeRotation = true;
         rb2D.gravityScale = 0;
         rb2D.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
