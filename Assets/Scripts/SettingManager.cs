@@ -31,15 +31,14 @@ public class SettingManager : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
     public void Open()
     {
-        originTime = Time.timeScale;
-        Time.timeScale = 0;
+        GameManager.Instance.Pause();
         UIImage.gameObject.SetActive(true);
     }
 
     public void Close()
     {
         UIImage.gameObject.SetActive(false);
-        Time.timeScale = originTime;
+        GameManager.Instance.Continuous();
         CursorManager.Instance.SetCursor1();
     }
 

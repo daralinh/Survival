@@ -163,7 +163,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dmg: 15
-  originSpeed: 1
+  originSpeed: 1.5
   timeToHide: 2
   trailRenderer: {fileID: 1257804566510319764}
 --- !u!1001 &9052272037452454728

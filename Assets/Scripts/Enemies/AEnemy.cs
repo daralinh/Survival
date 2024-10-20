@@ -16,7 +16,7 @@ public abstract class AEnemy : MonoBehaviour
     [SerializeField] protected float originSpeed;
     [SerializeField] protected float attackSpeed;
     [SerializeField] protected float attackRange;
-    protected float detectionRadius = 0.1f;
+    protected float detectionRadius = 0.07f;
     protected float currentSpeed;
     protected Vector2 moveDir;
     protected bool isFacingLeft;
@@ -119,7 +119,7 @@ public abstract class AEnemy : MonoBehaviour
 
         if (hit.collider != null && hit.collider.gameObject != gameObject)
         {
-            Debug.Log("hit is not null");
+            //Debug.Log("hit is not null");
             Vector2 directionToEnemy = (hit.collider.transform.position - transform.position).normalized;
 
             if (Mathf.Abs(directionToEnemy.x) > Mathf.Abs(directionToEnemy.y))

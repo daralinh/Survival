@@ -19,6 +19,8 @@ public class GameManager : Singleton<GameManager>
     protected override void Awake()
     {
         base.Awake();
+        IsLose = false;
+        IsVictory = false;
         NumberDeathEnemies = 0;
         DeathEnemiesText.text = "0";
         StartGameButton.gameObject.SetActive(true);
@@ -27,8 +29,7 @@ public class GameManager : Singleton<GameManager>
     private void Start()
     {
         StartGameButton.gameObject.SetActive(true);
-        originTime = Time.timeScale;
-        Time.timeScale = 0;
+        Pause();
     }
 
     public void IncNumberDeathEnemies()
@@ -39,19 +40,40 @@ public class GameManager : Singleton<GameManager>
     public void WinGame()
     {
         IsVictory = true;
+        Pause();
         Victory.Born();
+    }
+
+    public void Pause()
+    {
+        MusicManager.Instance.SpawnDummySource.Pause();
+
+        if (Time.timeScale == 0)
+        {
+            return;
+        }
+
+        originTime = Time.timeScale;
+        Time.timeScale = 0;
+    }
+
+    public void Continuous()
+    {
+        Time.timeScale = originTime;
+        MusicManager.Instance.SpawnDummySource.Play();
     }
 
     public void LoseGame()
     {
-        IsLose = false;
+        IsLose = true;
+        Pause();
         Lose.Born();
     }
 
     public void ButtonStartGame()
     {
         StartGameButton.gameObject.SetActive(false);
-        Time.timeScale = originTime;
+        GameManager.Instance.Continuous();
         CursorManager.Instance.SetCursor1();
     }
 

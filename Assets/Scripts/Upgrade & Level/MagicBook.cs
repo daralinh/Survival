@@ -60,11 +60,9 @@ public class MagicBook : MonoBehaviour
             return;
         }
 
-        MusicManager.Instance.SpawnDummySource.Pause();
         //CursorManager.Instance.SetCursor2();
         MusicManager.Instance.PlayMagicBookSound(EMusic.OpenBlueBook);
-        originalTimeScale = Time.timeScale;
-        Time.timeScale = 0;
+        GameManager.Instance.Pause();
         isBlue = true;
         gameObject.SetActive(true);
         image.sprite = blueSpriteArray[0];
@@ -84,11 +82,9 @@ public class MagicBook : MonoBehaviour
             return;
         }
 
-        MusicManager.Instance.SpawnDummySource.Pause();
         //CursorManager.Instance.SetCursor2();
         MusicManager.Instance.PlayMagicBookSound(EMusic.OpenRedBook);
-        originalTimeScale = Time.timeScale;
-        Time.timeScale = 0;
+        GameManager.Instance.Pause();
         isBlue = false;
         gameObject.SetActive(true);
         image.sprite = redSpriteArray[0];
@@ -168,9 +164,8 @@ public class MagicBook : MonoBehaviour
             coroutine = StartCoroutine(PlayCloseRedAnimUIHanlder());
         }
 
-        Time.timeScale = originalTimeScale;
+        GameManager.Instance.Continuous();
         CursorManager.Instance.SetCursor1();
-        MusicManager.Instance.SpawnDummySource.Play();
     }
 
     private IEnumerator PlayOpenBlueAnimUIHanlder()

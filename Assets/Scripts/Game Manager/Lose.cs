@@ -15,9 +15,7 @@ public class Lose : MonoBehaviour
     public void Born()
     {
         MusicManager.Instance.ResetAllAudioSource();
-        Time.timeScale = 0;
         gameObject.SetActive(true);
-
         MusicManager.Instance.PlayNotification(EMusic.Lose);
         textMeshProUGUI.text = GameManager.Instance.NumberDeathEnemies.ToString();
     }
