@@ -37,12 +37,12 @@ TagManager:
   - 
   - Water
   - UI
-  - Enemy
-  - Player
-  - Bullet
-  - Chest
   - Item
   - Weapon
+  - Chest
+  - Bullet
+  - Player
+  - Enemy
   - 
   - 
   - 

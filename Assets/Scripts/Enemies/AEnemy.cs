@@ -16,6 +16,7 @@ public abstract class AEnemy : MonoBehaviour
     [SerializeField] protected float originSpeed;
     [SerializeField] protected float attackSpeed;
     [SerializeField] protected float attackRange;
+    protected float detectionRadius = 0.1f;
     protected float currentSpeed;
     protected Vector2 moveDir;
     protected bool isFacingLeft;
@@ -84,6 +85,7 @@ public abstract class AEnemy : MonoBehaviour
     public void ChoosePlayerDirection()
     {
         moveDir = (PlayerController.Instance.transform.position - transform.position).normalized;
+        CalculateNewDirectionWhenOverlap();
     }
 
     public void FlipSpriteRenderFollowPlayer()
@@ -108,6 +110,33 @@ public abstract class AEnemy : MonoBehaviour
     protected void MoveFollowDirection()
     {
         rb2D.MovePosition(rb2D.position + moveDir * currentSpeed * Time.fixedDeltaTime);
+    }
+
+    // Overlap Handler
+    protected void CalculateNewDirectionWhenOverlap()
+    {
+        RaycastHit2D hit = Physics2D.CircleCast(transform.position, detectionRadius, Vector2.zero, gameObject.layer);
+
+        if (hit.collider != null && hit.collider.gameObject != gameObject)
+        {
+            Debug.Log("hit is not null");
+            Vector2 directionToEnemy = (hit.collider.transform.position - transform.position).normalized;
+
+            if (Mathf.Abs(directionToEnemy.x) > Mathf.Abs(directionToEnemy.y))
+            {
+                moveDir = new Vector2(-directionToEnemy.x, moveDir.y).normalized;
+            }
+            else
+            {
+                moveDir = new Vector2(moveDir.x, -directionToEnemy.y).normalized;
+            }
+
+            return;
+        }
+        else
+        {
+            return;
+        }
     }
 
     // Move State
@@ -197,7 +226,7 @@ public abstract class AEnemy : MonoBehaviour
     public virtual void EnterTakeDMGState()
     {
         animator.SetTrigger(EAnimation.TakeDMG.ToString());
-        hpManager.FlashSprite();
+       // hpManager.FlashSprite();
     }
 
     public virtual void ExitTakeDMGState()
