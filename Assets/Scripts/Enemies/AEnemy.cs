@@ -16,7 +16,7 @@ public abstract class AEnemy : MonoBehaviour
     [SerializeField] protected float originSpeed;
     [SerializeField] protected float attackSpeed;
     [SerializeField] protected float attackRange;
-    protected float detectionRadius = 0.07f;
+    protected float detectionRadius = 0.02f;
     protected float currentSpeed;
     protected Vector2 moveDir;
     protected bool isFacingLeft;
@@ -117,20 +117,10 @@ public abstract class AEnemy : MonoBehaviour
     {
         RaycastHit2D hit = Physics2D.CircleCast(transform.position, detectionRadius, Vector2.zero, gameObject.layer);
 
-        if (hit.collider != null && hit.collider.gameObject != gameObject)
+        if (hit.collider != null && hit.collider.gameObject.layer == gameObject.layer && hit.collider.gameObject != gameObject && hit.collider.gameObject.tag != ETag.Dummy.ToString())
         {
             //Debug.Log("hit is not null");
-            Vector2 directionToEnemy = (hit.collider.transform.position - transform.position).normalized;
-
-            if (Mathf.Abs(directionToEnemy.x) > Mathf.Abs(directionToEnemy.y))
-            {
-                moveDir = new Vector2(-directionToEnemy.x, moveDir.y).normalized;
-            }
-            else
-            {
-                moveDir = new Vector2(moveDir.x, -directionToEnemy.y).normalized;
-            }
-
+            moveDir = (transform.position - hit.collider.transform.position).normalized;
             return;
         }
         else
