@@ -31,6 +31,12 @@ public abstract class AHpManager : MonoBehaviour
         PoolingTMP.Instance.SpawnTMP($"-{dmg}", transform.position, EColor.White);
     }
 
+    public void SetOriginHp(float _value)
+    {
+        originHp = Mathf.Max(_value, 1);
+    }
+
+
     public bool IsFullHp()
     {
         return (currentHp == originHp) ? true : false;

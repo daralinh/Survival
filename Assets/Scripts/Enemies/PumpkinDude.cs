@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class PumpkinDude : AEnemy
 {
-    [SerializeField] private float timeToStopWhenTakeDMG;
     private Coroutine coroutineTakeDMG;
 
     protected override void Awake()
@@ -26,7 +25,7 @@ public class PumpkinDude : AEnemy
     // TakeDMG State
     public override void EnterTakeDMGState()
     {
-        hpManager.FlashSprite();
+       // hpManager.FlashSprite();
 
         if (coroutineTakeDMG != null)
         {
@@ -38,7 +37,7 @@ public class PumpkinDude : AEnemy
     }
     private IEnumerator Handler()
     {
-        yield return new WaitForSeconds(timeToStopWhenTakeDMG);
+        yield return new WaitForSeconds(0.15f);
         currentState.ExitState(this);
     }
 

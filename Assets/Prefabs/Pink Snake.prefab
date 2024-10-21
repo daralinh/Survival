@@ -239,8 +239,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b38bc3e0e41e7b54ea9eaa182965cd3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dmg: 20
-  originSpeed: 1
-  attackSpeed: 0.25
-  attackRange: 0.6
+  enemyData: {fileID: 11400000, guid: 5f30aa9112bcaa64d8e622eedb1d4075, type: 2}
   speedWhenAttack: 1.75

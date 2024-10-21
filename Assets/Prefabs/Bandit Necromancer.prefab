@@ -239,10 +239,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 112aaa1d552cfd74aa6a50e3580c9749, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dmg: 10
-  originSpeed: 0.6
-  attackSpeed: 0.2
-  attackRange: 0.63
+  enemyData: {fileID: 11400000, guid: 6b29e778f53e2f1458afa13f43bf30c8, type: 2}
   coolDownSkill: 7
   numberOfBatToSpawn: 4
   radiusSkill: 1

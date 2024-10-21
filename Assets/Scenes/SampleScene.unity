@@ -5389,10 +5389,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ac777bd345b4e448be456d160c17924, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  originMoveSpeed: 1.1
-  buffSpeedWhenDash: 12
-  dashTime: 0.1
-  coolDownDash: 12
+  playerData: {fileID: 11400000, guid: 53e2ef266fd48984eb5d1f0600a827dd, type: 2}
 --- !u!114 &991578813
 MonoBehaviour:
   m_ObjectHideFlags: 0

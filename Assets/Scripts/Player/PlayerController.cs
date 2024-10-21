@@ -10,11 +10,11 @@ using UnityEngine;
 
 public class PlayerController : Singleton<PlayerController>
 {
-    [SerializeField] private float originMoveSpeed;
-    [SerializeField] private float buffSpeedWhenDash;
+    private float originMoveSpeed;
+    /*[SerializeField] private float buffSpeedWhenDash;
     [SerializeField] private float dashTime;
     [SerializeField] private float coolDownDash;
-    //[SerializeField] private TrailRenderer trailRenderer;
+    [SerializeField] private TrailRenderer trailRenderer;*/
     private float currentSpeed;
     private Vector2 moveDir;
     //private bool isDashing;
@@ -22,10 +22,12 @@ public class PlayerController : Singleton<PlayerController>
     private bool canChangeSpeed;
     private Coroutine coroutineTakeDMG;
 
-    IStatePlayerController currentState;
-    MoveStatePlayerController moveState = new MoveStatePlayerController();
-    TakeDMGStatePlayerController takeDMGState = new TakeDMGStatePlayerController();
-    DeathStatePlayerController deathState = new DeathStatePlayerController();
+    public PlayerData playerData;
+
+    private IStatePlayerController currentState;
+    private MoveStatePlayerController moveState = new MoveStatePlayerController();
+    private TakeDMGStatePlayerController takeDMGState = new TakeDMGStatePlayerController();
+    private DeathStatePlayerController deathState = new DeathStatePlayerController();
 
     private Rigidbody2D rb2D;
     private SpriteRenderer spriteRenderer;
@@ -51,6 +53,9 @@ public class PlayerController : Singleton<PlayerController>
         capsuleCollider2D = GetComponent<CapsuleCollider2D>();
         hpManager = GetComponent<PlayerHpManager>();
         effectManager = GetComponent<PlayerEffectManager>();
+
+        hpManager.SetOriginHp(playerData.Stats.hp);
+        originMoveSpeed = playerData.Stats.speed;
 
         spriteRenderer.sortingOrder = 0;
         spriteRenderer.spriteSortPoint = SpriteSortPoint.Pivot;

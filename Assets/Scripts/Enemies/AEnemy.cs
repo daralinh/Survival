@@ -12,15 +12,17 @@ using UnityEngine;
 public abstract class AEnemy : MonoBehaviour
 {
     protected static int id = 0;
-    [SerializeField] protected float dmg;
-    [SerializeField] protected float originSpeed;
-    [SerializeField] protected float attackSpeed;
-    [SerializeField] protected float attackRange;
+    protected float dmg;
+    protected float originSpeed;
+    protected float attackSpeed;
+    protected float attackRange;
     protected float detectionRadius = 0.02f;
     protected float currentSpeed;
     protected Vector2 moveDir;
     protected bool isFacingLeft;
     protected float countAttackTime;
+
+    public EnemyData enemyData;
 
     protected IStateEnemy currentState;
     protected MoveStateEnemy moveState = new MoveStateEnemy();
@@ -47,6 +49,12 @@ public abstract class AEnemy : MonoBehaviour
         rb2D = GetComponent<Rigidbody2D>();
         capsuleCollider2D = GetComponent<CapsuleCollider2D>();
         hpManager = GetComponent<EnemyHpManager>();
+
+        dmg = enemyData.Stats.dmg;
+        originSpeed = enemyData.Stats.speed;
+        attackSpeed = enemyData.Stats.attackSpeed;
+        attackRange = enemyData.Stats.attackRange;
+        hpManager.SetOriginHp(enemyData.Stats.hp);
 
         spriteRenderer.spriteSortPoint = SpriteSortPoint.Pivot;
         rb2D.bodyType = RigidbodyType2D.Kinematic;

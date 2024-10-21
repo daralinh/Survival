@@ -187,10 +187,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01051a8505364684684b956550c7076b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dmg: 10
-  originSpeed: 0.85
-  attackSpeed: 0.5
-  attackRange: 0.35
+  enemyData: {fileID: 11400000, guid: a8b72b4a77947f84c995b214450202ba, type: 2}
   skillRange: 2.6
 --- !u!114 &8608462249778853024
 MonoBehaviour:

@@ -239,7 +239,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cbdbb5c796566848aac689331b76d29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dmg: 0
-  originSpeed: 0
-  attackSpeed: 0
-  attackRange: 0
+  enemyData: {fileID: 11400000, guid: 25de53bf05fd3e5468392d7deb9069c0, type: 2}
