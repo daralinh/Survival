@@ -3,9 +3,11 @@ using UnityEngine;
 
 public class FlashSprite : MonoBehaviour
 {
-    [SerializeField] private float timeFlashSprite;
-    [SerializeField] private Material whiteMaterial;
+    public FlashSpriteData flashSpriteData;
 
+    public float flashTime => flashSpriteData.Stats.flashTime;
+    public Material whiteMaterial => flashSpriteData.Stats.whiteMaterial;
+    
     private SpriteRenderer spriteRenderer;
     private Material originMaterial;
     private bool isFlashing;
@@ -13,7 +15,6 @@ public class FlashSprite : MonoBehaviour
 
     private void Awake()
     {
-        timeFlashSprite = Mathf.Max(timeFlashSprite, 0.1f);
         spriteRenderer = GetComponent<SpriteRenderer>();
         originMaterial = spriteRenderer.material;
         isFlashing = false;
@@ -42,7 +43,7 @@ public class FlashSprite : MonoBehaviour
     {
         isFlashing = true;
         spriteRenderer.material = whiteMaterial;
-        yield return new WaitForSeconds(timeFlashSprite);
+        yield return new WaitForSeconds(flashTime);
         spriteRenderer.material = originMaterial;
         isFlashing = false;
     }

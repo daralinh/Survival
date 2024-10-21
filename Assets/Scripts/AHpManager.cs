@@ -28,6 +28,7 @@ public abstract class AHpManager : MonoBehaviour
         }
 
         currentHp = Mathf.Max(0, currentHp - dmg);
+        flashSprite.Flash();
         PoolingTMP.Instance.SpawnTMP($"-{dmg}", transform.position, EColor.White);
     }
 

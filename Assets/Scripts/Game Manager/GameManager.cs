@@ -9,6 +9,8 @@ public class GameManager : Singleton<GameManager>
     public TextMeshProUGUI DeathEnemiesText;
     public Button StartGameButton;
 
+    public GameObject UIStart;
+
     public int NumberDeathEnemies { get; private set; }
 
     public bool IsVictory { get; private set; }
@@ -23,12 +25,11 @@ public class GameManager : Singleton<GameManager>
         IsVictory = false;
         NumberDeathEnemies = 0;
         DeathEnemiesText.text = "0";
-        StartGameButton.gameObject.SetActive(true);
     }
 
     private void Start()
     {
-        StartGameButton.gameObject.SetActive(true);
+        UIStart.gameObject.SetActive(true);
         Pause();
     }
 
@@ -72,7 +73,7 @@ public class GameManager : Singleton<GameManager>
 
     public void ButtonStartGame()
     {
-        StartGameButton.gameObject.SetActive(false);
+        UIStart.gameObject.SetActive(false);
         GameManager.Instance.Continuous();
         CursorManager.Instance.SetCursor1();
     }

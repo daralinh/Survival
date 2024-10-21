@@ -1,10 +1,9 @@
 fileFormatVersion: 2
-guid: a5dfdd7bc4279ba49b52e6858a8c8a2c
+guid: 44fbee7271c885d4d82ad5d5bc752d9d
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences:
-  - flashSpriteData: {fileID: 11400000, guid: b2f5168b84beace4fa742602237f3db8, type: 2}
+  defaultReferences: []
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
